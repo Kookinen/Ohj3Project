@@ -40,7 +40,7 @@ public class Parameters {
         int maxLength = longest+width+7;
         for(int i=0;i<size;i++){
             int mones = i;
-            System.out.format("# %"+width+"d | %-"+longest+"s #%n" , mones, names.get(mones));
+            System.out.format("# %"+width+"d | %-"+longest+"s #%n" , mones+1, names.get(mones));
             if(i==size-1){
                 printChar('#',maxLength);
                 printChar('\n',1);
