@@ -26,6 +26,7 @@ public class Currencies {
         while(true){
             System.out.print("Enter command: ");
             final String command = user.readLine();
+            System.out.println(command);
             String[] splitStr = command.split("\\s+");
             ArrayList<String> commands = new ArrayList<>(Arrays.asList(splitStr));
 
