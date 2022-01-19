@@ -38,7 +38,7 @@ public class Currencies {
                if(commands.get(0).equals("rate")){
                    Double amount = Double.parseDouble(c2);
                    rates.put(c1.toLowerCase(),amount);
-                   System.out.format("Stored the rate 1 EUR = %.3f %s %n", amount, c1.toUpperCase());
+                   System.out.format("Stored the rate 1 EUR = %.3f %s%n", amount, c1.toUpperCase());
                    
 
                } 
@@ -61,7 +61,7 @@ public class Currencies {
                 if(commands.get(0).equals("rates")){
                     System.out.println("Stored euro rates:");
                     for(Map.Entry<String, Double> entry: rates.entrySet()){
-                        System.out.format("%4s %.3f %n", entry.getKey().toUpperCase(), entry.getValue());
+                        System.out.format("  %s %.3f%n", entry.getKey().toUpperCase(), entry.getValue());
                     }
                 }
                 else if(commands.get(0).equals("quit")){
