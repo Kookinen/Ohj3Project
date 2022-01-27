@@ -115,6 +115,7 @@ public class StudentRegister {
             else if(order == "by code"){
                 ArrayList<String> courseCodes = new ArrayList<>();
                 ArrayList<Attainment> attains = attainments.get(studentNumber);
+                ArrayList<Attainment> attainsOrder = new ArrayList<>();
                 HashMap<String, Attainment> courseMap = new HashMap<>();
                 ArrayList<String> nameOrd = new ArrayList<>();
                 
@@ -122,11 +123,18 @@ public class StudentRegister {
                     courseCodes.add(attains.get(i).getCourseCode());
                 }
                 Collections.sort(courseCodes);
+                for(int i = 0; i<courseCodes.size(); i++){
+                    for(int j = 0; j<attains.size();j++){
+                        if(courseCodes.get(i).equals(attains.get(j).getCourseCode())){
+                            attainsOrder.add(attains.get(j));
+                        }
+                    }
+                }
                 
                 for(int i = 0; i<courseCodes.size(); i++){
                     for(int j = 0; j<courses.size();j++){
                         if(courseCodes.get(i).equals(courses.get(j).getCode())){
-                            courseMap.put(courses.get(j).getName(), attains.get(i));
+                            courseMap.put(courses.get(j).getName(), attainsOrder.get(i));
                             nameOrd.add(courses.get(j).getName());
                         }
                     }
