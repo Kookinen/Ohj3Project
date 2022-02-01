@@ -46,13 +46,13 @@ public class Dates {
         @Override
         public String toString(){
             if(getDiff()==1){
-                String wholeStr = String.format("%s %s -> %s %s: %d day",
+                String wholeStr = String.format("%s %s --> %s %s: %d day",
                         getWeekDay(start), getFin(start), getWeekDay(end), 
                         getFin(end), getDiff());
                 return wholeStr;
             }
             else{
-                String wholeStr = String.format("%s %s -> %s %s: %d days",
+                String wholeStr = String.format("%s %s --> %s %s: %d days",
                         getWeekDay(start), getFin(start), getWeekDay(end), 
                         getFin(end), getDiff());
                 return wholeStr;
@@ -118,7 +118,7 @@ public class Dates {
                     dateList.add(Integer.toString(year)+monthStr+dayStr);
                 }
                 else{
-                    System.out.println("The date "+s+" is illegal!");
+                    System.out.println("The date \""+s+"\" is illegal!");
                 }
             }
             else if(s.charAt(4)=='-'){
@@ -138,11 +138,11 @@ public class Dates {
                     dateList.add(Integer.toString(year)+monthStr+dayStr);
                 }
                 else{
-                    System.out.println("The date "+s+" is illegal!");
+                    System.out.println("The date \""+s+"\" is illegal!");
                 }
             }
             else{
-                System.out.println("The date "+s+" is illegal!");
+                System.out.println("The date \""+s+"\" is illegal!");
             }
             
         }
