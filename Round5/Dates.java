@@ -18,9 +18,9 @@ import java.util.Locale;
 public class Dates {
 
     public static class DateDiff {
-        String start;
-        String end;
-        int diff;
+        private String start;
+        private String end;
+        private int diff;
         private DateDiff(String start, String end){
             this.start=start;
             this.end=end;
