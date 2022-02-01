@@ -19,7 +19,7 @@ public class Date {
     static int monthDays(int month, int year) {
         int days = -1;
         if(1 <= month && month <= 12) {
-            // Ehdollinen operaattori kuin C-kielessä.
+            
             days = isLeapYear(year) ? mDays[month-1][1] : mDays[month-1][0];
         }
         return days;
