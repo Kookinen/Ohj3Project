@@ -38,7 +38,19 @@ public class DateTime extends Date{
         return second;
     }
     public String toString(){
-        String str = String.format(super.toString()+" %2d.%2d.%2d",hour,minute,second);
+        String strHour = Integer.toString(hour);
+        String strMinute = Integer.toString(minute);
+        String strSecond = Integer.toString(second);
+        if(strHour.length()==1){
+            strHour = "0"+strHour;
+        }
+        if(strMinute.length()==1){
+            strMinute = "0"+strMinute;
+        }
+        if(strSecond.length()==1){
+            strSecond = "0"+strSecond;
+        }
+        String str = String.format(super.toString()+" %2s.%2s.%2s",strHour,strMinute,strSecond);
         return str;
     }
 }

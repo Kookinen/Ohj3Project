@@ -50,7 +50,17 @@ public class Date {
         return day;
     }
     public String toString(){
-        String str = String.format("%2d.%2d.%d",day,month,year);
+        String strDay = Integer.toString(day);
+        String strMonth = Integer.toString(month);
+        String strYear = Integer.toString(year);
+        if(strDay.length()==1){
+            strDay = "0"+strDay;
+        }
+        if(strMonth.length()==1){
+            strDay = "0"+strDay;
+        }
+        
+        String str = String.format("%2s.%2s.%d",strDay,strMonth,year);
         return str;
     }
 }
