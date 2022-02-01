@@ -11,12 +11,12 @@ public class Date {
     private int year;
     private int month;
     private int day;
-    static boolean isLeapYear(int year) {
+    private static boolean isLeapYear(int year) {
         return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
     }
-    static int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31},
+    private static int[][] mDays = {{31, 31}, {28, 29}, {31, 31}, {30, 30}, {31, 31},
         {30, 30}, {31, 31}, {31, 31}, {30, 30}, {31, 31}, {30, 30}, {31, 31}};
-    static int monthDays(int month, int year) {
+    private static int monthDays(int month, int year) {
         int days = -1;
         if(1 <= month && month <= 12) {
             
@@ -24,7 +24,7 @@ public class Date {
         }
         return days;
     }
-    static boolean isLegalDate(int day, int month, int year) {
+    private static boolean isLegalDate(int day, int month, int year) {
         return (1 <= day) && (day <= monthDays(month, year));  
     }
     
