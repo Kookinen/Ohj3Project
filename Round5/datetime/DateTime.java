@@ -50,7 +50,7 @@ public class DateTime extends Date{
         if(strSecond.length()==1){
             strSecond = "0"+strSecond;
         }
-        String str = String.format(super.toString()+" %2s.%2s.%2s",strHour,strMinute,strSecond);
+        String str = String.format(super.toString()+" %2s:%2s:%2s",strHour,strMinute,strSecond);
         return str;
     }
 }

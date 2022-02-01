@@ -57,7 +57,7 @@ public class Date {
             strDay = "0"+strDay;
         }
         if(strMonth.length()==1){
-            strDay = "0"+strDay;
+            strMonth = "0"+strMonth;
         }
         
         String str = String.format("%2s.%2s.%d",strDay,strMonth,year);
