@@ -12,9 +12,12 @@ public class ComparisonTest {
       String line;
       while((line = file.readLine()) != null) {
         String[] studentCourseGrade = line.split(" ", 3);
+        
         attainments.add(new Attainment(studentCourseGrade[1],
                 studentCourseGrade[0], Integer.parseInt(studentCourseGrade[2])));
+        
       }
+      
     }
     System.out.format("Original order:%n%s%n", attainments);
     Collections.sort(attainments);
