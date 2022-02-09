@@ -36,6 +36,7 @@ public abstract class Node {
       sb.append("ObjectNode").append(NL);
       ObjectNode objNode = (ObjectNode) node;
       for(String name : objNode) {
+        
         sb.append(name).append(": ");
         printSimple(objNode.get(name), sb);
       }
@@ -44,6 +45,7 @@ public abstract class Node {
       sb.append("ArrayNode").append(NL);
       ArrayNode arrNode = (ArrayNode) node;
       for(Node aNode : arrNode) {
+        
         printSimple(aNode, sb);
       }
     }
@@ -53,10 +55,12 @@ public abstract class Node {
       String valStr = "null";
       if(valNode.isNumber()) {
         typeStr = "NumberValue";
+       
         valStr = numberToString(valNode.getNumber());
       }
       else if(valNode.isBoolean()) {
         typeStr = "BooleanValue";
+        
         valStr = Boolean.toString(valNode.getBoolean());
       }
       else if(valNode.isString()) {
