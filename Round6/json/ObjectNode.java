@@ -42,22 +42,21 @@ public class ObjectNode extends Node implements Iterable<String>{
     public Iterator<String> iterator() {
         Iterator<String> it = new Iterator<>(){
             private int currentIndex = 0;
-            private String nextStr = keyList.get(0);
+            private String nextStr;
             @Override
             public boolean hasNext(){
                 return currentIndex < keyList.size() && keyList.get(currentIndex)!= null;
             }
             @Override
             public String next(){
+                nextStr = keyList.get(currentIndex);
                 if(nextStr == null){
                     currentIndex = 0;
                     throw new NoSuchElementException("No more values");
                 }
                 else{
                     String item = keyList.get(currentIndex);
-                    if(currentIndex < keyList.size()-1){
-                        nextStr = keyList.get(currentIndex+1);
-                    }
+                    
                     currentIndex +=1;
                     return item;
                 }

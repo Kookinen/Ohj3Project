@@ -22,7 +22,7 @@ public class ArrayNode extends Node implements Iterable<Node>  {
     @Override
     public Iterator<Node> iterator() {
         Iterator<Node> it = new Iterator<>(){
-            private Node nextNode = list.get(0);
+            private Node nextNode;
             private int currentIndex = 0;
             @Override
             public boolean hasNext(){
@@ -30,15 +30,13 @@ public class ArrayNode extends Node implements Iterable<Node>  {
             }
             @Override
             public Node next(){
+                nextNode = list.get(currentIndex);
                 if(currentIndex == list.size()){
                     currentIndex = 0;
                     throw new NoSuchElementException("no more"); 
                 }
                 else{
                     Node item = nextNode;
-                    if(currentIndex<list.size()-1){
-                        nextNode = list.get(currentIndex+1);
-                    }
                     currentIndex+=1;
                     return item;
                 }
