@@ -35,16 +35,16 @@ public class MovieAnalytics2 {
         Map<String, Long> directors = movies.stream().collect(Collectors.groupingBy(m->new String(m.getDirector()), Collectors.counting()));
         directors.entrySet().stream().sorted((m1,m2)->m1.getKey().compareTo(m2.getKey())).
                 sorted((m1, m2)->Long.compare(m2.getValue(),m1.getValue())).limit(n).
-                forEach(s -> System.out.format("%s: %d movies%n", s.getKey(), s.getValue()));
+                peek(s -> System.out.format("%s: %d movies%n", s.getKey(), s.getValue())).collect(Collectors.toList());
     }
     public void printAverageDurationByGenre(){
         Map<String, Double> genres = movies.stream().collect(Collectors.groupingBy(m->new String(m.getGenre()), Collectors.averagingInt(m->m.getDuration())));
         genres.entrySet().stream().sorted((m1,m2)->m1.getKey().compareTo(m2.getKey())).sorted((m1,m2)->Double.compare(m1.getValue(),m2.getValue())).
-                forEach(s->System.out.format("%s: %.2f%n", s.getKey(),s.getValue()));
+                peek(s->System.out.format("%s: %.2f%n", s.getKey(),s.getValue())).collect(Collectors.toList());
     }
     public void printAverageScoreByGenre(){
         Map<String, Double> genres = movies.stream().collect(Collectors.groupingBy(m->new String(m.getGenre()), Collectors.averagingDouble(m->m.getScore())));
         genres.entrySet().stream().sorted((m1,m2)->m1.getKey().compareTo(m2.getKey())).sorted((m1,m2)->Double.compare(m2.getValue(),m1.getValue())).
-        forEach(s->System.out.format("%s: %.2f%n", s.getKey(),s.getValue()));
+        peek(s->System.out.format("%s: %.2f%n", s.getKey(),s.getValue())).collect(Collectors.toList());
     }
 }
