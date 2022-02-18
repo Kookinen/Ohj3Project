@@ -77,29 +77,34 @@ public abstract class Node {
         ObjectNode objNode = (ObjectNode) node;
         String rep = " ".repeat(depth*2);
         int counter = 0;
-       if(after){
-            sb.append("{").append(NL);
-       }
-       else{
-            sb.append(rep+"{").append(NL);
-       }
-       
-        for(String name : objNode) {
-        
-            sb.append(rep+"  \""+name+"\"").append(": ");
-            
-            printJson(objNode.get(name), sb, depth+1, true);
-
-            if(counter < objNode.size()-1){
-                sb.append(",").append(NL);
+        if(objNode.size()==0){
+            sb.append("{}");
+        }
+        else{
+            if(after){
+                sb.append("{").append(NL);
             }
             else{
-                sb.append(NL);
+                sb.append(rep+"{").append(NL);
             }
-            counter += 1;
+       
+            for(String name : objNode) {
         
-        }
-      sb.append(rep+"}");
+                sb.append(rep+"  \""+name+"\"").append(": ");
+            
+                printJson(objNode.get(name), sb, depth+1, true);
+
+                if(counter < objNode.size()-1){
+                    sb.append(",").append(NL);
+                }
+                else{
+                    sb.append(NL);
+                }
+                counter += 1;
+        
+            }
+            sb.append(rep+"}"); 
+        }   
     }
     else if(node.isArray()) {
       String rep = " ".repeat(depth*2);
