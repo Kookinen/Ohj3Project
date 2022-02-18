@@ -113,7 +113,7 @@ public abstract class Node {
          sb.append("[").append(NL); 
         for(Node aNode : arrNode) {
           printJson(aNode, sb, depth+1, false);
-          if(aNode.isObject() && counter < arrNode.size()-1){
+          if((aNode.isObject() || aNode.isValue())&& counter < arrNode.size()-1){
               sb.append(",").append(NL);
           }
           else{
