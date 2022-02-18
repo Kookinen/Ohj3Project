@@ -18,7 +18,9 @@ public abstract class Node {
   }
 
   public void printJson() {
-    throw new UnsupportedOperationException("printJson has not been implemented!");
+    StringBuilder sbj = new StringBuilder();
+    printJson(this,sbj,0, false);
+    System.out.print(sbj.toString());
   }
 
   private static final String NL = System.lineSeparator();
@@ -68,6 +70,81 @@ public abstract class Node {
         valStr = "\"" + valNode.getString() + "\"";
       }
       sb.append(String.format("%s(%s)%n", typeStr, valStr));
+    }
+  }
+  private void printJson(Node node, StringBuilder sb, int depth, boolean after) {
+    if(node.isObject()) {
+        ObjectNode objNode = (ObjectNode) node;
+        String rep = " ".repeat(depth*2);
+        int counter = 0;
+       if(after){
+            sb.append("{").append(NL);
+       }
+       else{
+            sb.append(rep+"{").append(NL);
+       }
+       
+        for(String name : objNode) {
+        
+            sb.append(rep+"  \""+name+"\"").append(": ");
+            
+            printJson(objNode.get(name), sb, depth+1, true);
+
+            if(counter < objNode.size()-1){
+                sb.append(",").append(NL);
+            }
+            else{
+                sb.append(NL);
+            }
+            counter += 1;
+        
+        }
+      sb.append(rep+"}");
+    }
+    else if(node.isArray()) {
+      String rep = " ".repeat(depth*2);
+      
+      int counter = 0;
+      ArrayNode arrNode = (ArrayNode) node;
+      if(arrNode.size()==0){
+         sb.append("[]"); 
+      }
+      else{
+         sb.append("[").append(NL); 
+        for(Node aNode : arrNode) {
+          printJson(aNode, sb, depth+1, false);
+          if(aNode.isObject() && counter < arrNode.size()-1){
+              sb.append(",").append(NL);
+          }
+          else{
+              sb.append(NL);    
+          }
+          counter +=1;
+        }
+        sb.append(rep+"]");
+      }
+    }
+    else if(node.isValue()) {
+      ValueNode valNode = (ValueNode) node;
+      String valStr = "null";
+      String rep = " ".repeat(depth*2);
+      if(valNode.isNumber()) {
+        if(after){
+            valStr = numberToString(valNode.getNumber());
+        }
+        else{
+            valStr = rep+numberToString(valNode.getNumber());
+        }
+        
+      }
+      else if(valNode.isBoolean()) {
+        
+        valStr = Boolean.toString(valNode.getBoolean());
+      }
+      else if(valNode.isString()) {
+        valStr = "\"" + valNode.getString() + "\"";
+      }
+      sb.append(String.format("%s",valStr));
     }
   }
 }
