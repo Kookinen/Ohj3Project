@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import org.apache.commons.compress.archivers.sevenz.*;
-import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
 
@@ -33,14 +32,35 @@ public class zipMain {
             SevenZArchiveEntry entry;
             while((entry = z.getNextEntry())!=null){
                 if(entry.getName().substring(entry.getName().length()-4).equals(".txt")){
-                    FileOutputStream out = new FileOutputStream(entry.getName());
+                    System.out.println(entry.getName());
                     byte[] content = new byte[(int)entry.getSize()];
                     z.read(content, 0, content.length);
-                    out.write(content);
                     String s = new String(content, StandardCharsets.UTF_8);
+                    String[] lines = s.split("\\r?\\n");
+                    int lineCount=1;
+                    for(String l:lines){
+                        boolean searching = true;
+                        String lowerLine = l.toLowerCase();
+                        if(lowerLine.contains(word.toLowerCase())){
+                            int startFrom = 0;
+                            String mod = l;
+                            while(searching){
+                                int index = lowerLine.indexOf(word.toLowerCase(),startFrom);
+                                if(index>=0){
+                                    mod = mod.substring(startFrom,index)+mod.substring(index,index+word.length()).toUpperCase()+mod.substring(index+word.length());
+                                    startFrom = index+word.length();
+                                }
+                                else{
+                                    searching = false;
+                                }
+                            }
+                            System.out.println(lineCount+": "+mod);
+                        }
+                        lineCount+=1;
+                    }
+                    System.out.println();
                     
-                    out.close();
-                    readTextFile(entry.getName(), word);
+                    
                     
                 }
                 
@@ -53,35 +73,5 @@ public class zipMain {
         catch(IOException e){
                System.out.print("erroro"); 
         }
-    }
-    public static void readTextFile(String filename, String word) throws FileNotFoundException, IOException{
-        System.out.println(filename);
-        String line = null;
-        int lineCount=1;
-        
-        var input = new BufferedReader(new FileReader(filename));
-        
-        while((line = input.readLine())!= null){
-            
-            boolean searching = true;
-            String lowerLine = line.toLowerCase();
-            if(lowerLine.contains(word.toLowerCase())){
-                int startFrom = 0;
-                String mod = "";
-                while(searching){
-                    int index = lowerLine.indexOf(word.toLowerCase(),startFrom);
-                    if(index>=0){
-                        mod = line.substring(startFrom,index)+line.substring(index,index+word.length()).toUpperCase()+line.substring(index+word.length());
-                        startFrom = index+word.length();
-                    }
-                    else{
-                        searching = false;
-                    }
-                }
-                System.out.println(lineCount+": "+mod);
-            }
-            lineCount+=1;
-        }
-        System.out.println();
     }
 }
