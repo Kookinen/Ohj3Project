@@ -47,7 +47,7 @@ public class zipMain {
                             while(searching){
                                 int index = lowerLine.indexOf(word.toLowerCase(),startFrom);
                                 if(index>=0){
-                                    mod = mod.substring(startFrom,index)+mod.substring(index,index+word.length()).toUpperCase()+mod.substring(index+word.length());
+                                    mod = mod.substring(0,index)+mod.substring(index,index+word.length()).toUpperCase()+mod.substring(index+word.length());
                                     startFrom = index+word.length();
                                 }
                                 else{
