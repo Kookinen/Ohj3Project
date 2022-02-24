@@ -36,24 +36,16 @@ public class CountryData {
             Element root = doc.getRootElement();
             Element data = root.getChild("data");
             List<Element> list = data.getChildren("record");
-            
             for(Element e:list){
-                
                 List<Element> fieldList = e.getChildren();
                 String countryName = "";
                 Double area = 0.0;
-                
-                for(Element field:fieldList){
-                    
+                for(Element field:fieldList){  
                     if(field.getAttributeValue("name").equals("Country or Area")){
-                        
                         countryName = field.getText();
-                        
                     }
                     else if(field.getAttributeValue("name").equals("Value")){
-                        
                         area = Double.parseDouble(field.getText());
-                        
                     }
                 }
                 areaMap.put(countryName, area);
@@ -121,13 +113,16 @@ public class CountryData {
             area.addContent(c.getArea().toString());
             Element population = new Element("population");
             population.addContent(c.getPopulation().toString());
-            Element gdp = new Element("gdp");
-            gdp.addContent(c.getGdp().toString());
             Element country = new Element("country");
             country.addContent(name);
             country.addContent(area);
             country.addContent(population);
-            country.addContent(gdp);
+            Element gdp = new Element("gdp");
+            if(c.getGdp()!=null){
+                gdp.addContent(c.getGdp().toString());
+                country.addContent(gdp);
+            }
+            
             counts.addContent(country);
         }
         Document countryBuild = new Document(counts);
