@@ -13,7 +13,7 @@ public class Country implements Comparable<Country>{
     private final String name;
     private final Double area;
     private final Long population;
-    private final Double gdp;
+    private Double gdp=0.0;
     public Country(String name, Double area, Long population, Double gdp){
         this.name = name;
         this.area = area;
