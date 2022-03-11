@@ -114,7 +114,7 @@ public class Standings {
      * empty Standing object and then calling 
      * {@link #readMatchData(java.lang.String) readMatchData(filename)}.
      * @param filename the name of the game data file to read.
-     * @throws IOException if there is a problem reading the
+     * @throws IOException if there is some kind of an IO error (e.g. if the specified file does not exist).
      */
     public Standings(String filename)throws IOException{
         standings = new HashMap<>();
