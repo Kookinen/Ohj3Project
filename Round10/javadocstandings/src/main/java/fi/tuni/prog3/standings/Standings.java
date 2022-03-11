@@ -51,6 +51,13 @@ public class Standings {
             TeamName = name;
         }
         /**
+         * Returns the name of the team.
+         * @return the name of the team.
+         */
+        public String getName(){
+            return TeamName;
+        }
+        /**
          * Returns the number of wins of the team.
          * @return the number of wins of the team.
          */
@@ -92,13 +99,7 @@ public class Standings {
         public int getPoints(){
             return Points;
         }
-        /**
-         * Returns the name of the team.
-         * @return the name of the team.
-         */
-        public String getName(){
-            return TeamName;
-        }
+        
     }
     
     private static HashMap<String, Team> standings;
