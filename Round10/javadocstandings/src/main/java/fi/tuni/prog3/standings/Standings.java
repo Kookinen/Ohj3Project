@@ -134,7 +134,7 @@ public class Standings {
      * @param filename the name of the game data file to read.
      * @throws IOException if there is some kind of an IO error (e.g. if the specified file does not exist).
      */
-    public static void readMatchData(String filename)throws IOException{
+    public void readMatchData(String filename)throws IOException{
         readFile(filename);
     }
     /**
@@ -145,7 +145,7 @@ public class Standings {
      * @param goalsB the number of goals socred by the second team.
      * @param teamNameB the name of the second ("away") team.
      */
-    public static void addMatchResult(String teamNameA, int goalsA, int goalsB, 
+    public void addMatchResult(String teamNameA, int goalsA, int goalsB, 
             String teamNameB){
         if(!standings.containsKey(teamNameA)){
                     Team x = new Team(teamNameA);
@@ -185,7 +185,7 @@ public class Standings {
      * @return a list of the teams in the same order as they would appear in a 
      * standings table.
      */
-    public static List<Team> getTeams(){
+    public List<Team> getTeams(){
         ArrayList<String> teams = new ArrayList<>(standings.keySet());
         ArrayList<Team> orderTeams = new ArrayList<>();
         
@@ -295,7 +295,7 @@ public class Standings {
      * Prints a formatted standings table to the provided output stream.
      * @param out the output stream to use when printing the standings table.
      */
-    public static void printStandings(PrintStream out){
+    public void printStandings(PrintStream out){
         List<Team> orderTeams = getTeams();
         int longest = 0;
         for(int i = 0;i<orderTeams.size();i++){
@@ -316,7 +316,7 @@ public class Standings {
     /**
      * @hidden 
      */
-    private static void readFile(String name)throws IOException{
+    private void readFile(String name)throws IOException{
         try(var input = new BufferedReader(new FileReader(name))){
             String line;
             while((line = input.readLine()) != null){
