@@ -9,11 +9,11 @@ public abstract class Node {
      */
     protected Node(){}
     /**
-     * Checks whether this node represents a JSON value.
-     * @return true if this node represent a JSON value, otherwise false.
+     * Checks whether this node represents a JSON object.
+     * @return true if this node represent a JSON object, otherwise false.
      */
-    public boolean isValue() {
-      return this instanceof ValueNode;
+    public boolean isObject() {
+      return this instanceof ObjectNode;
     }
     /**
      * Checks whether this node represents a JSON array.
@@ -23,10 +23,10 @@ public abstract class Node {
       return this instanceof ArrayNode;
     }
     /**
-     * Checks whether this node represents a JSON object.
-     * @return true if this node represent a JSON object, otherwise false.
+     * Checks whether this node represents a JSON value.
+     * @return true if this node represent a JSON value, otherwise false.
      */
-    public boolean isObject() {
-      return this instanceof ObjectNode;
+    public boolean isValue() {
+      return this instanceof ValueNode;
     }
 }

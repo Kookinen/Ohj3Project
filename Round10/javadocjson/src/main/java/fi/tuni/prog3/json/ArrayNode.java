@@ -16,7 +16,26 @@ public final class ArrayNode extends Node implements Iterable<Node>  {
     
     private ArrayList<Node> list; 
     
-    
+    /**
+     * Constructs an initially empty JSON array node.
+     */
+    public ArrayNode(){
+       list = new ArrayList<>();
+    }
+    /**
+     * Returns the number of JSON nodes stored in this JSON array.
+     * @return Returns the number of JSON nodes stored in this JSON array.
+     */
+    public int size(){
+        return list.size();
+    }
+    /**
+     * Adds a new JSON node to the end of this JSON array.
+     * @param node the new JSON node to be added.
+     */
+    public void add(Node node){
+        list.add(node);
+    }
     /**
      * Returns a Node iterator that iterates the JSON nodes stored in this JSON
      * array.
@@ -48,25 +67,4 @@ public final class ArrayNode extends Node implements Iterable<Node>  {
         };
         return it;
     }
-    /**
-     * Constructs an initially empty JSON array node.
-     */
-    public ArrayNode(){
-       list = new ArrayList<>();
-    }
-    /**
-     * Adds a new JSON node to the end of this JSON array.
-     * @param node the new JSON node to be added.
-     */
-    public void add(Node node){
-        list.add(node);
-    }
-    /**
-     * Returns the number of JSON nodes stored in this JSON array.
-     * @return Returns the number of JSON nodes stored in this JSON array.
-     */
-    public int size(){
-        return list.size();
-    }
-    
 }

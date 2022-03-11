@@ -42,18 +42,44 @@ public final class ValueNode extends Node{
         isStr = true;
     }
     /**
-     * Returns the stored value as a boolean value.
-     * @return the stored boolean value.
-     * @throws IllegalStateException if the stored value is not a boolean value.
+     * Checks whether this value node stores a number (double).
+     * @return true if this node stores a double value, otherwise false.
      */
-    public boolean getBoolean(){
-        try{
-            return bValue;
-        }
-        catch(IllegalStateException t){}
-        return bValue;
+    public boolean isNumber(){
+        return isDouble;
     }
     /**
+     * Checks whether this value node stores a boolean value.
+     * @return true if this node stores a boolean value, otherwise false.
+     */
+    public boolean isBoolean(){
+        return isBool;
+    }
+    /**
+     * Checks whether this value node stores a string.
+     * @return true if this node stores a string, otherwise false.
+     */
+    public boolean isString(){
+        if(isStr && sValue != null){
+            return isStr;
+        }
+        else{
+            return false;
+        }
+    }
+     /**
+     * Checks whether this value node stores null.
+     * @return true if this node stores null, otherwise false.
+     */
+    public boolean isNull(){
+        if(sValue == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+     /**
      * Returns the stored value as a number (double).
      * @return the stored number as a double value.
      * @throws IllegalStateException if the stored value is not a number.
@@ -68,16 +94,16 @@ public final class ValueNode extends Node{
         return dValue;
     }
     /**
-     * Returns the stored value as null.
-     * @return null.
-     * @throws IllegalStateException if the stored value is not null.
+     * Returns the stored value as a boolean value.
+     * @return the stored boolean value.
+     * @throws IllegalStateException if the stored value is not a boolean value.
      */
-    public Object getNull(){
+    public boolean getBoolean(){
         try{
-            return NullValue;
+            return bValue;
         }
         catch(IllegalStateException t){}
-        return NullValue;
+        return bValue;
     }
     /**
      * Returns the stored value as a string.
@@ -92,43 +118,15 @@ public final class ValueNode extends Node{
         return sValue;
     }
     /**
-     * Checks whether this value node stores a boolean value.
-     * @return true if this node stores a boolean value, otherwise false.
+     * Returns the stored value as null.
+     * @return null.
+     * @throws IllegalStateException if the stored value is not null.
      */
-    public boolean isBoolean(){
-        return isBool;
-    }
-    /**
-     * Checks whether this value node stores null.
-     * @return true if this node stores null, otherwise false.
-     */
-    public boolean isNull(){
-        if(sValue == null){
-            return true;
+    public Object getNull(){
+        try{
+            return NullValue;
         }
-        else{
-            return false;
-        }
+        catch(IllegalStateException t){}
+        return NullValue;
     }
-    /**
-     * Checks whether this value node stores a number (double).
-     * @return true if this node stores a double value, otherwise false.
-     */
-    public boolean isNumber(){
-        return isDouble;
-    }
-    /**
-     * Checks whether this value node stores a string.
-     * @return true if this node stores a string, otherwise false.
-     */
-    public boolean isString(){
-        if(isStr && sValue != null){
-            return isStr;
-        }
-        else{
-            return false;
-        }
-    }
-    
-    
 }
