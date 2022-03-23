@@ -39,8 +39,8 @@ public class OrderTest {
         String expMessage = "Illegal name or price!";
         String actualMessage1 = exception1.getMessage();
         String actualMessage2 = exception2.getMessage();
-        assertTrue(actualMessage1.contains(expMessage));
-        assertTrue(actualMessage2.contains(expMessage));
+        assertEquals(actualMessage1,expMessage);
+        assertEquals(actualMessage2,expMessage);
     }
     
     @Test
@@ -76,7 +76,7 @@ public class OrderTest {
     public void testOrderEntryException(){
         Order.Item item = new Order.Item("maito", 2.3);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> new Order.Entry(item, -2));
-        String expMessage = "Illegal count!";
+        String expMessage = "Illegal item unit count: -2";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expMessage));
     }
@@ -120,15 +120,15 @@ public class OrderTest {
         Order order = new Order();
         Order.Item item = new Order.Item("maito", 2);
         Exception exception = assertThrows(IllegalArgumentException.class, () -> order.addItems(item, -4));
-        String expMessage = "Illegal unit count!";
+        String expMessage = "Illegal item unit count: -4";
         String actualMessage1 = exception.getMessage();
-        assertTrue(actualMessage1.contains(expMessage));
+        assertEquals(actualMessage1,expMessage);
         Order.Item item2 = new Order.Item("maito", 3);
         order.addItems(item, 4);
         Exception exception2 = assertThrows(IllegalStateException.class, () -> order.addItems(item2, 4));
-        String expMessage2 = "Illegal price!";
+        String expMessage2 = "Illegal item price!";
         String actualMessage2 = exception2.getMessage();
-        assertTrue(actualMessage2.contains(expMessage2));
+        assertEquals(actualMessage2,expMessage2);
     }
     @Test
     public void testAddItemsName(){
@@ -147,11 +147,11 @@ public class OrderTest {
         order.addItems(item,4);
         String name = "maito";
         Exception exception = assertThrows(IllegalArgumentException.class, () -> order.addItems(name,-4));
-        String expMessage1 = "Illegal unit count!";
+        String expMessage1 = "Illegal item unit count: -4";
         String actualMessage1 = exception.getMessage();
         assertEquals(actualMessage1,expMessage1);
         Exception exception2 = assertThrows(NoSuchElementException.class, () -> order.addItems("kalja",4));
-        String expMessage2 = "No such entry with item!";
+        String expMessage2 = "No such entry: kalja";
         String actualMessage2 = exception2.getMessage();
         assertEquals(actualMessage2, expMessage2);
     }
@@ -221,16 +221,16 @@ public class OrderTest {
         Order.Item item = new Order.Item("maito", 2);
         order.addItems(item,4);
         Exception exception1 = assertThrows(IllegalArgumentException.class, () -> order.removeItems("maito", -4));
-        String expMessage1 = "Illegal unit count!";
+        String expMessage1 = "Illegal item unit count: -4";
         String actualMessage1 = exception1.getMessage();
         assertTrue(actualMessage1.contains(expMessage1));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> order.removeItems("maito", 5));
-        String expMessage2 = "Illegal unit count!";
+        String expMessage2 = "Illegal item unit count: 5";
         String actualMessage2 = exception2.getMessage();
         assertTrue(actualMessage2.contains(expMessage2));
         Exception exception3 = assertThrows(NoSuchElementException.class, () -> order.removeItems("kalja", 3));
         String expMessage3 = "No such element in List!";
         String actualMessage3 = exception3.getMessage();
-        assertTrue(actualMessage3.contains(expMessage3));
+        assertEquals(actualMessage3,expMessage3);
     }
 }
