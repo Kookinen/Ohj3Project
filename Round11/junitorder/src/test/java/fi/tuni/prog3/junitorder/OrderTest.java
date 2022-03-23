@@ -132,7 +132,7 @@ public class OrderTest {
         assertEquals(actualMessage2,expMessage2);
         Exception exception3 = assertThrows(IllegalArgumentException.class, () -> order.addItems(item, 0));
         String expMessage3 = "Illegal item unit count: 0";
-        String actualMessage3 = exception.getMessage();
+        String actualMessage3 = exception3.getMessage();
         assertEquals(actualMessage3,expMessage3);
     }
     @Test
