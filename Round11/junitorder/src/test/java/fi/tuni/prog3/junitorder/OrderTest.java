@@ -80,6 +80,10 @@ public class OrderTest {
         String expMessage = "Illegal item unit count: -2";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expMessage));
+        Exception exception2 = assertThrows(IllegalArgumentException.class, () -> new Order.Entry(item, 0));
+        String expMessage2 = "Illegal item unit count: 0";
+        String actualMessage2 = exception2.getMessage();
+        assertEquals(actualMessage2,expMessage2);
     }
     
     @Test
@@ -159,6 +163,10 @@ public class OrderTest {
         String expMessage2 = "The item was not found from the order!";
         String actualMessage2 = exception2.getMessage();
         assertEquals(actualMessage2, expMessage2);
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> order.addItems(name, 0));
+        String expMessage3 = "Illegal item unit count: 0";
+        String actualMessage3 = exception3.getMessage();
+        assertEquals(actualMessage3,expMessage3);
     }
     @Test
     public void testGetEntries(){
@@ -169,6 +177,7 @@ public class OrderTest {
         ArrayList<Order.Entry> expList = new ArrayList<>(Arrays.asList(entry));
         List<Order.Entry> actualList = order.getEntries();
         assertEquals(actualList.get(0).getItemName(), expList.get(0).getItemName());
+        assertEquals(actualList.get(0).getCount(), expList.get(0).getCount());
     }
     @Test
     public void testGetEntryCount(){
