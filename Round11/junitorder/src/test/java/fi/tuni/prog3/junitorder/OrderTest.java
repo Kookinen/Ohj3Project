@@ -46,7 +46,7 @@ public class OrderTest {
     @Test
     public void testOrderItemToString(){
         Order.Item item =  new Order.Item("maito", 2.3);
-        String expString = "Item(maito, 2,30)";
+        String expString = "Item(maito, 2.30)";
         String actual = item.toString();
         assertEquals(expString, actual);
     }
@@ -85,7 +85,7 @@ public class OrderTest {
     public void testOrderEntryToString(){
         Order.Item item = new Order.Item("maito", 2.3);
         Order.Entry entry = new Order.Entry(item, 4);
-        String exp = "4 units of Item(maito, 2,30)";
+        String exp = "4 units of Item(maito, 2.30)";
         String actual = entry.toString();
         assertEquals(exp, actual);
     }
@@ -153,7 +153,7 @@ public class OrderTest {
         Exception exception2 = assertThrows(NoSuchElementException.class, () -> order.addItems("kalja",4));
         String expMessage2 = "No such entry with item!";
         String actualMessage2 = exception2.getMessage();
-        assertTrue(actualMessage2.contains(expMessage2));
+        assertEquals(actualMessage2, expMessage2);
     }
     @Test
     public void testGetEntries(){
