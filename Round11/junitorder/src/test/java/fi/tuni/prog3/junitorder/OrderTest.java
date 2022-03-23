@@ -149,7 +149,7 @@ public class OrderTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> order.addItems(name,-4));
         String expMessage1 = "Illegal unit count!";
         String actualMessage1 = exception.getMessage();
-        assertTrue(actualMessage1.contains(expMessage1));
+        assertEquals(actualMessage1,expMessage1);
         Exception exception2 = assertThrows(NoSuchElementException.class, () -> order.addItems("kalja",4));
         String expMessage2 = "No such entry with item!";
         String actualMessage2 = exception2.getMessage();
