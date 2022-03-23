@@ -130,6 +130,10 @@ public class OrderTest {
         String expMessage2 = "The added item and an existing item have different prices!";
         String actualMessage2 = exception2.getMessage();
         assertEquals(actualMessage2,expMessage2);
+        Exception exception3 = assertThrows(IllegalArgumentException.class, () -> order.addItems(item, 0));
+        String expMessage3 = "Illegal item unit count: 0";
+        String actualMessage3 = exception.getMessage();
+        assertEquals(actualMessage3,expMessage3);
     }
     @Test
     public void testAddItemsName(){
