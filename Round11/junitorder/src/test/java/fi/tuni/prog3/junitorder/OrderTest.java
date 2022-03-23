@@ -238,4 +238,11 @@ public class OrderTest {
         String actualMessage3 = exception3.getMessage();
         assertEquals(actualMessage3,expMessage3);
     }
+    @Test
+    public void testOrder(){
+        Order order = new Order();
+        int expOrderSize = 0;
+        int actual  = order.getEntryCount();
+        assertEquals(expOrderSize, actual);
+    }
 }
