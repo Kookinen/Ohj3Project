@@ -36,7 +36,7 @@ public class OrderTest {
     public void testOrderItemException(){
         Exception exception1 = assertThrows(IllegalArgumentException.class, () -> new Order.Item("maito", -2));
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> new Order.Item(null, 2.3));
-        String expPriceMessage = "Illegal negative item price: -2";
+        String expPriceMessage = "Illegal negative item price: -2.0";
         String expNameMessage = "Illegal item name: null";
         String actualMessage1 = exception1.getMessage();
         String actualMessage2 = exception2.getMessage();
@@ -226,11 +226,11 @@ public class OrderTest {
         String actualMessage1 = exception1.getMessage();
         assertEquals(actualMessage1,expMessage1);
         Exception exception2 = assertThrows(IllegalArgumentException.class, () -> order.removeItems("maito", 5));
-        String expMessage2 = "Illegal item unit count: 5";
+        String expMessage2 = "Trying to remove 5 item units from 4 item units!";
         String actualMessage2 = exception2.getMessage();
         assertEquals(actualMessage2,expMessage2);
         Exception exception3 = assertThrows(NoSuchElementException.class, () -> order.removeItems("kalja", 3));
-        String expMessage3 = "No such element in List!";
+        String expMessage3 = "The item was not found from the order!";
         String actualMessage3 = exception3.getMessage();
         assertEquals(actualMessage3,expMessage3);
     }
