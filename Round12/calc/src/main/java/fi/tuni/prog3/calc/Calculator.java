@@ -112,7 +112,15 @@ public class Calculator extends Application{
                double a = Double.parseDouble(input1.getText());
                double b = Double.parseDouble(input2.getText());
                double r = a * b;
-               resLabel.setText(String.format("%.1f", r));
+               double remainder = r%b;
+               
+               if(remainder == 0){
+                   resLabel.setText(String.format("%.1f", r));
+               }
+               else{
+                   resLabel.setText(String.format("%.2f", r));
+               }
+               
            }
         });
         divButton.setOnAction(new EventHandler<ActionEvent>(){
