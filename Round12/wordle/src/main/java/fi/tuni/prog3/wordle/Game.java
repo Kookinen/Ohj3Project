@@ -56,7 +56,7 @@ public class Game {
                     lab.setFont(new Font("Helvetica", 30));
                     lab.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                     lab.setAlignment(Pos.CENTER);
-                    lab.setId(String.format("%d_%d", j, i));
+                    lab.setId(String.format("#%d_%d", j, i));
                     tile.getChildren().add(lab);
                     squares.add(lab);
                 }
