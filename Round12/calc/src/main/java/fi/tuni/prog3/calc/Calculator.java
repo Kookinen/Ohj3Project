@@ -52,7 +52,7 @@ public class Calculator extends Application{
         
         Label inputLabel2 = new Label("Second operand:");
         
-        inputLabel2.setId("labelOp1");
+        inputLabel2.setId("labelOp2");
         grid.add(inputLabel2, 0, 1);
         
         HBox buttons = new HBox(5);
@@ -93,7 +93,7 @@ public class Calculator extends Application{
                 double a = Double.parseDouble(input1.getText());
                 double b = Double.parseDouble(input2.getText());
                 double r = a + b;
-                resLabel.setText(String.format("%.2f", r));
+                resLabel.setText(String.format("%.1f", r));
             }
         });
         
@@ -103,7 +103,7 @@ public class Calculator extends Application{
                double a = Double.parseDouble(input1.getText());
                double b = Double.parseDouble(input2.getText());
                double r = a - b;
-               resLabel.setText(String.format("%.2f", r));
+               resLabel.setText(String.format("%.1f", r));
            }
         });
         mulButton.setOnAction(new EventHandler<ActionEvent>(){
@@ -121,7 +121,7 @@ public class Calculator extends Application{
                double a = Double.parseDouble(input1.getText());
                double b = Double.parseDouble(input2.getText());
                double r = a / b;
-               resLabel.setText(String.format("%.2f", r));
+               resLabel.setText(String.format("%.1f", r));
            }
         });
         
