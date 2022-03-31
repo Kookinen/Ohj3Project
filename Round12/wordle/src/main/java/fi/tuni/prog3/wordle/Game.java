@@ -5,9 +5,14 @@
 package fi.tuni.prog3.wordle;
 
 import java.util.ArrayList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -23,7 +28,7 @@ public class Game {
     private int rowIndex = 0;
     private TilePane tile;
     Boolean gameActive = false;
-    ArrayList<StackPane> squares;
+    ArrayList<Label> squares;
     String word;
     Label infoLabel;
     int rowAdd;
@@ -45,13 +50,15 @@ public class Game {
             
             for(int j = 0; j<6; j++){
                 for(int i = 0; i<word.length();i++){
-                    StackPane stack = new StackPane();
-                    Label lab = new Label("");
+                    Label lab = new Label();
+                    lab.setMinHeight(50);
+                    lab.setMinWidth(50);
                     lab.setFont(new Font("Helvetica", 30));
+                    lab.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+                    lab.setAlignment(Pos.CENTER);
                     lab.setId(String.format("%d_%d", j, i));
-                    stack.getChildren().addAll(new Rectangle(50,50,Color.GREY), lab);
-                    tile.getChildren().add(stack);
-                    squares.add(stack);
+                    tile.getChildren().add(lab);
+                    squares.add(lab);
                 }
             }
             
@@ -80,8 +87,7 @@ public class Game {
                     if(k.getCode().equals(KeyCode.BACK_SPACE)){
                         if(index+rowAdd != 0+rowAdd){
                             index--;
-                            Label l = (Label) squares.get(index+rowAdd).getChildren().get(1);
-                            l.setText("");
+                            squares.get(index+rowAdd).setText("");
                         }
                     }
                     else if(k.getCode().equals(KeyCode.ENTER)){
@@ -112,8 +118,7 @@ public class Game {
                             if(index+rowAdd != word.length()+rowAdd){
                             String key = k.getText();
                             
-                            Label l = (Label) squares.get(index+rowAdd).getChildren().get(1);
-                            l.setText(key.toUpperCase());
+                            squares.get(index+rowAdd).setText(key.toUpperCase());
                             index ++;
                             }
                         } 
@@ -129,10 +134,9 @@ public class Game {
             ArrayList<Integer> correctPlaces = new ArrayList<>();
             ArrayList<Integer> correctChars = new ArrayList<>();
             for(int i= 0;i<word.length();i++){
-                Rectangle r = (Rectangle) squares.get(i+rowAdd).getChildren().get(0);
-                r.setFill(Color.GREY);
-                Label l = (Label) squares.get(i+rowAdd).getChildren().get(1);
-                l.setTextFill(Color.WHITE);
+                Label l =  squares.get(i+rowAdd);
+                l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
+                squares.get(i+rowAdd).setTextFill(Color.WHITE);
                 String s = l.getText();
                 if(word.toUpperCase().contains(s.toUpperCase())){
                     correctChars.add(i);
@@ -143,16 +147,14 @@ public class Game {
             }
             
             for(int i=0;i<correctChars.size();i++){
-                Rectangle r = (Rectangle) squares.get(correctChars.get(i)+rowAdd).getChildren().get(0);
-                r.setFill(Color.ORANGE);
-                Label l = (Label) squares.get(correctChars.get(i)+rowAdd).getChildren().get(1);
-                l.setTextFill(Color.WHITE);
+                Label l = squares.get(correctChars.get(i)+rowAdd);
+                l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+                squares.get(correctChars.get(i)+rowAdd).setTextFill(Color.WHITE);
             }
             for(int i=0;i<correctPlaces.size();i++){
-                Rectangle r = (Rectangle) squares.get(correctPlaces.get(i)+rowAdd).getChildren().get(0);
-                r.setFill(Color.GREEN);
-                Label l = (Label) squares.get(correctPlaces.get(i)+rowAdd).getChildren().get(1);
-                l.setTextFill(Color.WHITE);
+                Label l = squares.get(correctPlaces.get(i)+rowAdd);
+                l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+                squares.get(correctPlaces.get(i)+rowAdd).setTextFill(Color.WHITE);
             }
             return correctPlaces.size() == word.length();
     }

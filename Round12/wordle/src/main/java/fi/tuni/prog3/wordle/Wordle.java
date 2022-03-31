@@ -13,6 +13,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +24,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -56,6 +58,8 @@ public class Wordle extends Application {
     infoLabel.setTextFill(Color.WHITE);
     infoLabel.setId("infoBox");
     grid.add(infoLabel, 1, 0,2,1);
+    
+    
     
     startGame.setOnAction(new EventHandler<ActionEvent>(){
         @Override
@@ -100,6 +104,8 @@ public class Wordle extends Application {
         }
         return words;
     }
+
+    
 
     
 }
