@@ -39,6 +39,7 @@ public class Wordle extends Application {
     @Override
     public void start(Stage stage) throws IOException{
     ArrayList<String> wordlist = getWords();
+    word = wordlist.get(wordIndex);
     
     stage.setTitle("Wordle");
     GridPane grid = new GridPane();
@@ -58,20 +59,27 @@ public class Wordle extends Application {
     infoLabel.setId("infoBox");
     grid.add(infoLabel, 1, 0,2,1);
     
+    game = new Game(word, infoLabel);
+    grid.add(game.addTileToGrid(),0,1,2,1);
+    GridPane.setHalignment(game.addTileToGrid(),HPos.CENTER);
+    
+    
     
     
     startGame.setOnAction(new EventHandler<ActionEvent>(){
         @Override
         public void handle(ActionEvent e){
-            infoLabel.setText("");
+            wordIndex += 1; 
             word = wordlist.get(wordIndex);
+            infoLabel.setText("");
+            
             if(grid.getChildren().size()>2){
                 grid.getChildren().remove(2);
             }
             game = new Game(word, infoLabel);
             grid.add(game.addTileToGrid(),0,1,2,1);
             GridPane.setHalignment(game.addTileToGrid(),HPos.CENTER);
-            wordIndex += 1; 
+            
         }
     });
     
