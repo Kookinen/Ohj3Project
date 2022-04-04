@@ -7,13 +7,12 @@ package fi.tuni.prog3.wordle;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,9 +23,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+
 
 /**
  *
@@ -47,6 +45,7 @@ public class Wordle extends Application {
     Scene scene = new Scene(grid, 500, 500);
     grid.setBackground(new Background(new BackgroundFill(Color.rgb(30,30,30), CornerRadii.EMPTY, Insets.EMPTY)));
     stage.setScene(scene);
+    grid.setVgap(5);
     
     
     Button startGame = new Button("Start new game");
@@ -70,7 +69,8 @@ public class Wordle extends Application {
                 grid.getChildren().remove(2);
             }
             game = new Game(word, infoLabel);
-            grid.add(game.addTileToGrid(),1,1);
+            grid.add(game.addTileToGrid(),0,1,2,1);
+            GridPane.setHalignment(game.addTileToGrid(),HPos.CENTER);
             wordIndex += 1; 
         }
     });

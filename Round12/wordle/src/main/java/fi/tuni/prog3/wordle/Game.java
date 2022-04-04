@@ -13,10 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 /**
@@ -33,6 +31,9 @@ public class Game {
     Label infoLabel;
     int rowAdd;
     
+    /*
+      Luodaan pelilauta
+    */
     Game(String word, Label infoLabel){
             
             squares = new ArrayList<>();
@@ -48,91 +49,74 @@ public class Game {
             tile.setHgap(5);
             tile.setVgap(5);
             
-            for(int j = 0; j<6; j++){
-                for(int i = 0; i<word.length();i++){
+            for(int i = 0; i<6; i++){
+                for(int j = 0; j<word.length();j++){
                     Label lab = new Label();
                     lab.setMinHeight(50);
                     lab.setMinWidth(50);
                     lab.setFont(new Font("Helvetica", 30));
                     lab.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
                     lab.setAlignment(Pos.CENTER);
-                    lab.setId(String.format("#%d_%d", j, i));
+                    lab.setId(String.format("%d_%d", i, j));
                     tile.getChildren().add(lab);
                     squares.add(lab);
                 }
-            }
-            
-            
-            
-            
-            
+            }       
     }
     public TilePane addTileToGrid(){
         return tile;
     }
-    public Boolean gameActive(){
-        return gameActive;
-    }
     public void setGameActive(Boolean active){
         gameActive = active;
     }
-    public ArrayList getSquares(){
-        return squares;
-    }
+    
+    
+    /*
+      yleinen näppäimistön painallustarkastus
+    */
     public void HandleKey(KeyEvent k){
         rowAdd = rowIndex*word.length();
         if(gameActive){
-            
-                    infoLabel.setText("");
-                    if(k.getCode().equals(KeyCode.BACK_SPACE)){
-                        if(index+rowAdd != 0+rowAdd){
-                            index--;
-                            squares.get(index+rowAdd).setText("");
-                        }
-                    }
-                    else if(k.getCode().equals(KeyCode.ENTER)){
-                        if(index+rowAdd != word.length()+rowAdd){
-                            infoLabel.setText("Give a complete word before "
-                                           + "pressing Enter!");
-                        }
-                        else{
-                            if(checkWord()){
-                                infoLabel.setText("Congratulations, you won!");
-                                setGameActive(false);
-                            }
-                            else{
-                                if(rowIndex == 5){
-                                    infoLabel.setText("Game over, you lost!");
-                                    setGameActive(false);
-                                }
-                                else{
-                                    rowIndex++;
-                                    index=0;
-                                }
-                                
-                            }
-                        }
-                    }
-                    else{
-                        if(!k.getText().equals("")){
-                            if(index+rowAdd != word.length()+rowAdd){
-                            String key = k.getText();
-                            
-                            squares.get(index+rowAdd).setText(key.toUpperCase());
-                            index ++;
-                            }
-                        } 
-                    }
-                    k.consume();
+            infoLabel.setText("");
+            if(k.getCode().equals(KeyCode.BACK_SPACE) && index+rowAdd != 0+rowAdd){
+                index--;
+                squares.get(index+rowAdd).setText("");
             }
-                    else{
-                        k.consume();
-                    }
+            else if(k.getCode().equals(KeyCode.ENTER)){
+                if(index+rowAdd != word.length()+rowAdd){
+                    infoLabel.setText("Give a complete word before "
+                                           + "pressing Enter!");
+                }
+                else if(checkWord()){
+                    infoLabel.setText("Congratulations, you won!");
+                    setGameActive(false);
+                }
+                else if(rowIndex == 5){
+                    infoLabel.setText("Game over, you lost!");
+                    setGameActive(false);
+                }
+                else{
+                    rowIndex++;
+                    index=0;
+                }
+                                
+            } 
+            else if(!k.getText().equals("") && index+rowAdd != word.length()+rowAdd){
+                String key = k.getText();
+                squares.get(index+rowAdd).setText(key.toUpperCase());
+                index ++;
+            }
+        }
+        k.consume();
     }
+    /*
+      sanan tarkistus ja ruudun väritys
+    */
     public Boolean checkWord(){
             rowAdd = rowIndex*word.length();
             ArrayList<Integer> correctPlaces = new ArrayList<>();
             ArrayList<Integer> correctChars = new ArrayList<>();
+            
             for(int i= 0;i<word.length();i++){
                 Label l =  squares.get(i+rowAdd);
                 l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -151,6 +135,7 @@ public class Game {
                 l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
                 squares.get(correctChars.get(i)+rowAdd).setTextFill(Color.WHITE);
             }
+            
             for(int i=0;i<correctPlaces.size();i++){
                 Label l = squares.get(correctPlaces.get(i)+rowAdd);
                 l.backgroundProperty().setValue(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
