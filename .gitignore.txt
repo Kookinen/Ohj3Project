@@ -1,6 +1,0 @@
-Ohj3/*/build-*
-Ohj3/*/*.o
-Ohj3/*/local_configurations.py
-Ohj3/*/html/
-Ohj3/*/!build*.py
-Ohj3/*/*.txt
