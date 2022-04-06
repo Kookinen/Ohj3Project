@@ -1,9 +1,3 @@
-# Programming 3 project template
+Tämä on henkilökohtainen kurssitietovarastosi harjoitustehtävien tekemistä varten. Liitä https://course-gitlab.tuni.fi/comp.cs.140-ohjelmointi-3_2021-2022/student_template_project paikalliseen tietovarastoosi remoteksi kurssin tarjoamia koodeja hakeaksesi.
 
-Make sure you have setup ssh-key for your GitLab account.
-
-Code will be published soon.
-
-Note! The .gitlab-ci.yml is offline at the moment.
-
-# You are allowed (and probably should) make changes to this file after you have started your project. :)
+This is your personal course repository for implementing exercise tasks. Add https://course-gitlab.tuni.fi/comp.cs.140-ohjelmointi-3_2021-2022/student_template_project as a remote to your local repository to fetch code provided by the course.
