@@ -5,17 +5,15 @@
 package fi.tuni.prog3.sisu;
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -24,27 +22,53 @@ public class sisu extends Application{
     
     @Override
     public void start(Stage stage){
-        BorderPane Bp = new BorderPane();
-        Scene scene = new Scene(Bp, 500, 500);
-        VBox logins = new VBox(5);
+        GridPane grid = new GridPane();
+        Scene login = new Scene(grid, 500, 500);
+        grid.setHgap(5);
+        grid.setVgap(5);
         
         Label logMessage = new Label("Log in using your credentials");
         logMessage.setMaxWidth(250);
         
-        
-        TextField userName = new TextField("Username");
+        Label usernameLabel = new Label("Username:");
+        TextField userName = new TextField();
         userName.setMaxWidth(150);
         
-        TextField studentNumber = new TextField("Student number");
+        Label studentNumberLabel = new Label("Student Number:");
+        TextField studentNumber = new TextField();
         studentNumber.setMaxWidth(150);
         
         Button logButton = new Button("Log in");
         logButton.setPrefWidth(150);
         
-        logins.getChildren().addAll(logMessage, userName, studentNumber, logButton);
+        grid.add(logMessage, 0, 0, 2, 1);
+        grid.add(usernameLabel, 0, 1);
+        grid.add(userName, 1, 1);
+        grid.add(studentNumberLabel, 0, 2);
+        grid.add(studentNumber, 1, 2);
+        grid.add(logButton, 1, 3);
+        grid.setAlignment(Pos.CENTER);
         
-        Bp.setCenter(logins);
-        stage.setScene(scene);
+        /*
+          välilehtiä varten vbox
+        */
+        VBox vbox = new VBox();
+        Scene mainScene = new Scene(vbox, 400, 400);
+        
+        logButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
+                    stage.setScene(mainScene);
+                    Student student = new Student(userName.getText(), studentNumber.getText());
+                    mainWindow main = new mainWindow();
+                    vbox.getChildren().add(main.getTabs());
+                }
+            }
+        });
+        
+        
+        stage.setScene(login);
         stage.setTitle("Sisu");
         stage.show();
 
