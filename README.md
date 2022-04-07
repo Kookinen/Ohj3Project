@@ -9,3 +9,4 @@ Ohjelma mahdollistaa oman tutkinto-ohjelman seuraamisen. Ohjelmasta voi valita o
 __Tekijät ja yhteystiedot:__
 
 Julius Juutilainen 292058 julius.juutilainen@tuni.fi
+Joni Koskinen H291631 joni.e.koskinen@tuni.fi
