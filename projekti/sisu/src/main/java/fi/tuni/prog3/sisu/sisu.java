@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
+
 package fi.tuni.prog3.sisu;
 
 import com.google.gson.*;
@@ -36,7 +33,7 @@ public class sisu extends Application{
     @Override
     public void start(Stage stage){
         try{
-            getJsonData();
+            getJsonData(1,"");
         }
         catch (MalformedURLException e){
             e.printStackTrace();
@@ -100,11 +97,20 @@ public class sisu extends Application{
         launch();
     }
 
-    private void getJsonData() throws MalformedURLException, IOException{
-        URL url = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
+    private void getJsonData(int urlId, String moduleGroupId) throws MalformedURLException, IOException{
+        URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"
                 + "-root-id&moduleType=DegreeProgramme&limit=1000");
-        HttpURLConnection c = (HttpURLConnection) url.openConnection();
+        URL urlTwo = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/by-group-id?groupId="+moduleGroupId+"&universityId=tuni-university-root-id"));
+
+        HttpURLConnection c = null;
+        if (urlId == 1){
+            c = (HttpURLConnection) urlOne.openConnection();
+        }
+        if (urlId == 2){
+            c = (HttpURLConnection) urlTwo.openConnection();
+        }
+
         String line;
         StringBuilder sb = new StringBuilder();
         c.setRequestMethod("GET");
