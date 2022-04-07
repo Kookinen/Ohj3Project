@@ -129,10 +129,11 @@ public class sisu extends Application{
         JsonArray arr = obj.getAsJsonArray("searchResults");
         Iterator<JsonElement> it = arr.iterator();
         while(it.hasNext()){
-            JsonElement id = it.next().getAsJsonObject().get("id");
-            JsonElement code = it.next().getAsJsonObject().get("code");
-            JsonElement lang = it.next().getAsJsonObject().get("lang");
-            JsonElement name = it.next().getAsJsonObject().get("name");
+            JsonObject jObject = it.next().getAsJsonObject();
+            JsonElement id = jObject.get("id");
+            JsonElement code = jObject.get("code");
+            JsonElement lang = jObject.get("lang");
+            JsonElement name = jObject.get("name");
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(), name.getAsString());
             degrees.put(name.getAsString(), deg);
