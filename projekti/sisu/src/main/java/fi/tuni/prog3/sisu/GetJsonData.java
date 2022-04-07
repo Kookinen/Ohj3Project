@@ -11,11 +11,16 @@ import java.io.IOException;
 
 public class GetJsonData {
 
-    public GetJsonData() throws MalformedURLException, IOException{
+    private int urlId;
+    private String moduleGroupId;
 
+    public GetJsonData(int urlId, String moduleGroupId) throws MalformedURLException, IOException{
+        this.urlId = urlId;
+        this.moduleGroupId = moduleGroupId;
     }
 
-    public static StringBuilder getJsonDataFromURL(int urlId, String moduleGroupId) throws MalformedURLException, IOException{
+    
+    public StringBuilder getJsonDataFromURL() throws MalformedURLException, IOException{
         URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"
                 + "-root-id&moduleType=DegreeProgramme&limit=1000");
