@@ -8,11 +8,12 @@ public class Degree {
     private int credits;
     
     
-    public Degree(String id, String code, String lang, String name){
+    public Degree(String id, String code, String lang, String name, int credits){
         this.id = id;
         this.code = code;
         this.lang = lang;
         this.name = name;
+        this.credits = credits;
     }
 
     public String getId(){
