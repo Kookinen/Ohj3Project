@@ -1,3 +1,11 @@
-Tämä on henkilökohtainen kurssitietovarastosi harjoitustehtävien tekemistä varten. Liitä https://course-gitlab.tuni.fi/comp.cs.140-ohjelmointi-3_2021-2022/student_template_project paikalliseen tietovarastoosi remoteksi kurssin tarjoamia koodeja hakeaksesi.
+**OHJ3 Harjoitustyö : Sisusta Selvää**
 
-This is your personal course repository for implementing exercise tasks. Add https://course-gitlab.tuni.fi/comp.cs.140-ohjelmointi-3_2021-2022/student_template_project as a remote to your local repository to fetch code provided by the course.
+__Lyhyesti:__
+Projekti toteuttaa ohjelman, jolla voi tutkia SISU:sta löytyviä tutkinto-ohjelmia. 
+
+__Kuvaus:__
+Ohjelma mahdollistaa oman tutkinto-ohjelman seuraamisen. Ohjelmasta voi valita oman tutkinto-ohjelman, tallentaa käydyt kurssit ja tarkastella oman tutkinto-ohjelman sisältöä. Ohjelma kysyy aloittaessa perustietoja ja sitä voi käyttää graafisen käyttöliittymän kautta.
+
+__Tekijät ja yhteystiedot:__
+
+Julius Juutilainen 292058 julius.juutilainen@tuni.fi
