@@ -32,14 +32,15 @@ public class sisu extends Application{
     
     @Override
     public void start(Stage stage){
-        try{
-            getJsonData(1,"");
+        try{ 
+            GetJsonData getJson_Degree = new GetJsonData(1, "");
+            StringBuilder sb = getJson_Degree.getJsonDataFromURL();
         }
-        catch (MalformedURLException e){
-            e.printStackTrace();
+        catch (MalformedURLException e2){
+            e2.printStackTrace();
         }
-        catch (IOException e){
-            e.printStackTrace();
+        catch (IOException e3){
+            e3.printStackTrace();
         }
         GridPane grid = new GridPane();
         Scene login = new Scene(grid, 500, 500);
@@ -97,38 +98,9 @@ public class sisu extends Application{
         launch();
     }
 
-    private void getJsonData(int urlId, String moduleGroupId) throws MalformedURLException, IOException{
-        URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
-                + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"
-                + "-root-id&moduleType=DegreeProgramme&limit=1000");
-        URL urlTwo = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/by-group-id?groupId="+moduleGroupId+"&universityId=tuni-university-root-id"));
-
-        HttpURLConnection c = null;
-        if (urlId == 1){
-            c = (HttpURLConnection) urlOne.openConnection();
-        }
-        if (urlId == 2){
-            c = (HttpURLConnection) urlTwo.openConnection();
-        }
-
-        String line;
-        StringBuilder sb = new StringBuilder();
-        c.setRequestMethod("GET");
-        c.setConnectTimeout(5000);
-        c.setReadTimeout(5000);
-        if(c.getResponseCode()<300){
-            BufferedReader read = new BufferedReader(new InputStreamReader(c.getInputStream()));
-            while((line = read.readLine()) != null){
-                sb.append(line);
-            }
-            read.close();
-        }
-        else{
-            System.out.println("Not works :(");
-        }
-        c.disconnect();
-        decodeJson(sb);
-    }
+    ////!!!!!!!!!!!!!!!!!!!!!!!
+    
+    
 
     private void decodeJson(StringBuilder sb) {
         JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
