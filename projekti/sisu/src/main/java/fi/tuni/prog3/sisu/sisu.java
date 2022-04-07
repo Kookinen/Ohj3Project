@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 
 public class sisu extends Application{
     
-    HashMap<String, Degree> degrees;
+    public HashMap<String, Degree> degrees = new HashMap<String, Degree>();
     
     @Override
     public void start(Stage stage){
