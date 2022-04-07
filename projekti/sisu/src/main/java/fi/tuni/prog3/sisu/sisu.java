@@ -28,6 +28,8 @@ import javafx.stage.Stage;
 
 
 public class sisu extends Application{
+
+    //Tämä rivi testaa tuleeko kaksi branchia...
     
     public HashMap<String, Degree> degrees = new HashMap<String, Degree>();
     
