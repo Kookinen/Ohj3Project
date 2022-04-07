@@ -134,9 +134,11 @@ public class sisu extends Application{
             JsonElement code = jObject.get("code");
             JsonElement lang = jObject.get("lang");
             JsonElement name = jObject.get("name");
+            JsonElement minCredit = jObject.getAsJsonArray("credit").get(0).getAsJsonObject();
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(), name.getAsString());
             degrees.put(name.getAsString(), deg);
+            
 
         }
                 
