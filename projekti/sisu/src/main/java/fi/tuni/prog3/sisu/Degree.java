@@ -41,5 +41,7 @@ public class Degree {
     public int getCredits(){
         return credits;
     }
+
+    //TODO: Lista Module-olioista jotka kuuluvat Degreeseen
     
 }
