@@ -1,5 +1,4 @@
-
-
+package fi.tuni.prog3.sisu;
 
 public class Degree {
     private String id;
