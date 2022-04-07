@@ -6,7 +6,7 @@ package fi.tuni.prog3.sisu;
 
 /**
  *
- * @author Joni
+ * @author Joni & Julius
  */
 public class Degree {
     private String id;
@@ -20,6 +20,22 @@ public class Degree {
         this.code = code;
         this.lang = lang;
         this.name = name;
+    }
+
+    public String getId(){
+        return id;
+    }
+
+    public String getCode(){
+        return code;
+    }
+
+    public String getLang(){
+        return lang;
+    }
+
+    public String getName(){
+        return name;
     }
     
 }
