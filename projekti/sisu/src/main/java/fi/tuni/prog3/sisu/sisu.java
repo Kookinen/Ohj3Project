@@ -134,6 +134,8 @@ public class sisu extends Application{
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(), name.getAsString());
             degrees.put(name.getAsString(), deg);
+            System.out.println(id + " " + code + " " + name);
+            break;
         }
                 
     }
