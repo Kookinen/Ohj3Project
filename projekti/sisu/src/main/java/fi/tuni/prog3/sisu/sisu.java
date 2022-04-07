@@ -138,7 +138,6 @@ public class sisu extends Application{
                     lang.getAsString(), name.getAsString());
             degrees.put(name.getAsString(), deg);
 
-            
         }
                 
     }
