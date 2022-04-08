@@ -35,12 +35,13 @@ public class sisu extends Application{
         try{ 
             GetJsonData getJson_Degree = new GetJsonData(1, "");
             StringBuilder sb = getJson_Degree.getJsonDataFromURL();
+            decodeJson(sb);
         }
-        catch (MalformedURLException e2){
+        catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        catch (IOException e2){
             e2.printStackTrace();
-        }
-        catch (IOException e3){
-            e3.printStackTrace();
         }
         GridPane grid = new GridPane();
         Scene login = new Scene(grid, 500, 500);
@@ -97,11 +98,7 @@ public class sisu extends Application{
     public static void main(String args[]) {
         launch();
     }
-
-    ////!!!!!!!!!!!!!!!!!!!!!!!
     
-    
-
     private void decodeJson(StringBuilder sb) {
         JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
         JsonArray arr = obj.getAsJsonArray("searchResults");
@@ -114,6 +111,7 @@ public class sisu extends Application{
             JsonElement groupId = jObject.get("groupId");
             JsonElement name = jObject.get("name");
             JsonElement minCredit = jObject.get("credits").getAsJsonObject().get("min");
+            //TODO: Maatuskan rakennus
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
             degrees.put(name.getAsString(), deg);
