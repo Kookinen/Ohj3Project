@@ -28,7 +28,7 @@ public class sisu extends Application{
 
     //Tämä rivi testaa tuleeko kaksi branchia...
     
-    public HashMap<String, Degree> degrees = new HashMap<String, Degree>();
+    public HashMap<String, Degree> degrees = new HashMap<>();
     
     @Override
     public void start(Stage stage){
@@ -112,9 +112,12 @@ public class sisu extends Application{
             JsonElement name = jObject.get("name");
             JsonElement minCredit = jObject.get("credits").getAsJsonObject().get("min");
             //TODO: Maatuskan rakennus
+            //TODO: moduleGroupId:t talteen että saa maatuskan sisällön kuntoon
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
             degrees.put(name.getAsString(), deg);
+
+            
         }        
     }
 }

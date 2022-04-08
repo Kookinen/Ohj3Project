@@ -24,14 +24,18 @@ public class GetJsonData {
         URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"
                 + "-root-id&moduleType=DegreeProgramme&limit=1000");
-        URL urlTwo = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/by-group-id?groupId="+moduleGroupId+"&universityId=tuni-university-root-id"));
+        URL urlTwo = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/"+moduleGroupId)); 
+        URL urlThree = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/by-group-id?groupId="+moduleGroupId+"&universityId=tuni-university-root-id"));
 
         HttpURLConnection c = null;
         if (urlId == 1){
             c = (HttpURLConnection) urlOne.openConnection();
         }
-        if (urlId == 2){
+        if(urlId == 2){
             c = (HttpURLConnection) urlTwo.openConnection();
+        }
+        if (urlId == 3){
+            c = (HttpURLConnection) urlThree.openConnection();
         }
 
         String line;
