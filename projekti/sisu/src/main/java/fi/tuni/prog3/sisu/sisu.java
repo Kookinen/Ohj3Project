@@ -73,7 +73,7 @@ public class sisu extends Application{
           välilehtiä varten vbox
         */
         VBox vbox = new VBox();
-        Scene mainScene = new Scene(vbox, 400, 400);
+        Scene mainScene = new Scene(vbox, 500, 500);
         
         logButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -81,7 +81,7 @@ public class sisu extends Application{
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
                     Student student = new Student(userName.getText(), studentNumber.getText());
-                    mainWindow main = new mainWindow();
+                    mainWindow main = new mainWindow(degrees);
                     vbox.getChildren().add(main.getTabs());
                 }
             }
@@ -114,7 +114,7 @@ public class sisu extends Application{
             //TODO: moduleGroupId:t talteen että saa maatuskan sisällön kuntoon
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
-            degrees.put(name.getAsString(), deg);
+            degrees.put(id.getAsString(), deg);
 
             
         }        
