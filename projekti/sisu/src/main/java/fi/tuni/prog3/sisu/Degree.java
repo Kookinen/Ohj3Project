@@ -116,6 +116,8 @@ public class Degree {
                     break;
                 case "ModuleRule":                    
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
+                    System.out.println(moduleGroupId);
+                    Module m = new Module(moduleGroupId); 
                     moduleGroupIds.add(moduleGroupId);
                     break;
                 default:
