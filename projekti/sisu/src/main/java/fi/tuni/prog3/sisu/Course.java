@@ -1,16 +1,24 @@
 package fi.tuni.prog3.sisu;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 public class Course {
     String id;
     //String groupId;
     String name;
     String code;
-    int credits;
+    int minCredits;
+    int maxCredits;
     //int gradeScaleId;
-    String outcomes;
+    String content;
 
-    public Course(String code){
-        this.code = code;
+    public Course(String id){
+        this.id = id;
+        getInfo();
     }
 
     public String getId(){
@@ -26,10 +34,48 @@ public class Course {
     }
 
     public int getTargetCredits(){
-        return credits;
+        return minCredits;
     }
 
-    public String getOutcomes(){
-        return outcomes;
+    public String getContent(){
+        return content;
+    }
+
+    private void getInfo() {
+        try{
+           
+            GetJsonData getJson_Module = new GetJsonData(4, id);
+            StringBuilder sb = getJson_Module.getJsonDataFromURL();
+            
+            JsonObject obj =  JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
+            this.minCredits = obj.getAsJsonObject("credits").getAsJsonPrimitive("min").getAsInt();
+            
+            
+            if(obj.getAsJsonObject("credits").get("max").isJsonNull()){
+                this.maxCredits = minCredits;
+            }
+            else{
+                this.maxCredits = obj.getAsJsonObject("credits").getAsJsonPrimitive("max").getAsInt();
+            }
+            
+            if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
+                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
+            }
+            
+            else{
+                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
+            }
+            this.code = obj.getAsJsonPrimitive("code").getAsString();
+            /*if(obj.getAsJsonObject("content").getAsJsonPrimitive("fi") == null){
+                this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("en").getAsString();
+            }
+            else{
+                this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("fi").getAsString();
+            }*/
+        }
+        catch (MalformedURLException e){
+        }
+        catch (IOException e2){
+        }       
     }
 }
