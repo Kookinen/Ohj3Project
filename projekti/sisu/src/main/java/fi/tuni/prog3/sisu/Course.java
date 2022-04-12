@@ -9,12 +9,8 @@ public class Course {
     //int gradeScaleId;
     String outcomes;
 
-    public Course(String id, String name, String code, int credits, String outcomes){
-        this.id = id;
-        this.name = name;
+    public Course(String code){
         this.code = code;
-        this.credits = credits;
-        this.outcomes = outcomes;
     }
 
     public String getId(){
