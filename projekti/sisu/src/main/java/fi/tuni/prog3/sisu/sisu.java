@@ -2,12 +2,12 @@
 package fi.tuni.prog3.sisu;
 
 import com.google.gson.*;
-import java.io.BufferedReader;
+//import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
+//import java.io.InputStreamReader;
+//import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+//import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import javafx.application.Application;
@@ -26,7 +26,6 @@ import javafx.stage.Stage;
 
 public class sisu extends Application{
 
-    //Tämä rivi testaa tuleeko kaksi branchia...
     
     public HashMap<String, Degree> degrees = new HashMap<>();
     

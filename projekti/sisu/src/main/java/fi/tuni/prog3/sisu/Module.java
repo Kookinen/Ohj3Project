@@ -60,9 +60,11 @@ public class Module {
                 sb = getJson_Module.getJsonDataFromURL();
                 obj =  JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
             }
+
             if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
             }
+            
             else{
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
