@@ -1,9 +1,8 @@
 package fi.tuni.prog3.sisu;
 
-import com.google.gson.JsonNull;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
 import java.io.IOException;
 import java.net.MalformedURLException;
 

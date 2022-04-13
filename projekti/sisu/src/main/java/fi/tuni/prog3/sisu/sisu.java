@@ -81,6 +81,7 @@ public class sisu extends Application{
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
                     Student student = new Student(userName.getText(), studentNumber.getText());
+                    student.saveStudent();
                     mainWindow main = new mainWindow(degrees);
                     vbox.getChildren().add(main.getTabs());
                 }
