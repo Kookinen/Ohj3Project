@@ -16,7 +16,7 @@ public class Degree {
     private String groupId; //Module löytyy tällä?
     private String name;
     private int credits;
-    HashMap<String, Module> moduleGroupIds;
+    HashMap<String, Module> modules;
 
     private StringBuilder sb; //Rakentimeen? ei kai
     
@@ -58,7 +58,7 @@ public class Degree {
     
     public HashMap getModules(){
         decodeJson();
-        return moduleGroupIds;
+        return modules;
     }
     
     //TODO: Fiksumpi toteutus? Tää on aika paska.
@@ -110,7 +110,7 @@ public class Degree {
         while(it.hasNext()){
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();
-            moduleGroupIds = new HashMap<>();
+            modules = new HashMap<>();
             switch (type) {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
@@ -118,7 +118,7 @@ public class Degree {
                 case "ModuleRule":                    
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
                     Module m = new Module(moduleGroupId); 
-                    moduleGroupIds.put(moduleGroupId, m);
+                    modules.put(moduleGroupId, m);
                     break;
                 default:
                     break;
