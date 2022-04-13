@@ -102,7 +102,9 @@ public class sisu extends Application{
             public void handle(ActionEvent e){
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
-                    stage.setMaximized(true);
+                    //stage.setMaximized(true);
+                    stage.setFullScreen(true);
+                    //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
                     Student student = new Student(userName.getText(), studentNumber.getText());
                     mainWindow main = new mainWindow();
                     vbox.getChildren().add(main.getTabs());
