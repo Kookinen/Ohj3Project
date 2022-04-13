@@ -57,8 +57,11 @@ public class mainWindow {
         hakuNappi.setOnAction((event) -> {
             searchId = input.getText();
             String name = degrees.get(searchId).getName();
+            degrees.get(searchId).getModules();
+            String id = degrees.get(searchId).moduleGroupIds.keySet().toArray()[0].toString();
+            String module = degrees.get(searchId).moduleGroupIds.get(id).getName();
 
-            output.setText(name);
+            output.setText(name+ " " + module);
         });
 
         

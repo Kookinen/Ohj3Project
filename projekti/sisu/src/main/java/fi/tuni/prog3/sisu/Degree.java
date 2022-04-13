@@ -3,11 +3,8 @@ package fi.tuni.prog3.sisu;
 import java.util.ArrayList;
 import java.net.MalformedURLException;
 import java.io.IOException;
-/*import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;*/
 import com.google.gson.*;
+import java.util.HashMap;
 import java.util.Iterator;
 
 
@@ -19,7 +16,7 @@ public class Degree {
     private String groupId; //Module löytyy tällä?
     private String name;
     private int credits;
-    ArrayList <String> moduleGroupIds;
+    HashMap<String, Module> moduleGroupIds;
 
     private StringBuilder sb; //Rakentimeen? ei kai
     
@@ -31,8 +28,8 @@ public class Degree {
         this.groupId = groupId;
         this.name = name;
         this.credits = credits;
-
-        decodeJson();
+        
+        
     }
 
     public String getId(){
@@ -58,7 +55,11 @@ public class Degree {
     public int getCredits(){
         return credits;
     }
-
+    
+    public HashMap getModules(){
+        decodeJson();
+        return moduleGroupIds;
+    }
     
     //TODO: Fiksumpi toteutus? Tää on aika paska.
     //TODO: Miten tämän saa suoritettua kun luokka initialisoidaan?
@@ -109,7 +110,7 @@ public class Degree {
         while(it.hasNext()){
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();
-            moduleGroupIds = new ArrayList<>();
+            moduleGroupIds = new HashMap<>();
             switch (type) {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
@@ -117,7 +118,7 @@ public class Degree {
                 case "ModuleRule":                    
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
                     Module m = new Module(moduleGroupId); 
-                    moduleGroupIds.add(moduleGroupId);
+                    moduleGroupIds.put(moduleGroupId, m);
                     break;
                 default:
                     break;

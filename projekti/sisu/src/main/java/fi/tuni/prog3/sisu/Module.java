@@ -70,14 +70,19 @@ public class Module {
                 case "GroupingModule":
                     break;
                 case "StudyModule":
-                    this.targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
-                    /*if(obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi") == null){
-                        this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("en").getAsString();
-                    }  
-                    else{
-                        this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi").getAsString();
+                    if(!obj.get("targetCredits").isJsonNull()){
+                        this.targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
                     }
-                    */
+                    
+                    if(!obj.get("outcomes").isJsonNull()){
+                        if(obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi") == null){
+                            this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("en").getAsString();
+                        }  
+                        else{
+                            this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi").getAsString();
+                        }
+                    }
+                    
             
                     break;
             }

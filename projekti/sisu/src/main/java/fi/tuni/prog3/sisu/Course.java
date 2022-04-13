@@ -1,5 +1,6 @@
 package fi.tuni.prog3.sisu;
 
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
@@ -66,12 +67,15 @@ public class Course {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
             this.code = obj.getAsJsonPrimitive("code").getAsString();
-            /*if(obj.getAsJsonObject("content").getAsJsonPrimitive("fi") == null){
-                this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("en").getAsString();
+            
+            if(!obj.get("content").isJsonNull()){
+                if(obj.getAsJsonObject("content").get("fi") == null){
+                    this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("en").getAsString();
+                }
+                else{
+                    this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("fi").getAsString();
+                }
             }
-            else{
-                this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("fi").getAsString();
-            }*/
         }
         catch (MalformedURLException e){
         }
