@@ -15,9 +15,11 @@ import java.util.Iterator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -91,12 +93,23 @@ public class sisu extends Application{
         */
         //Group root = new Group();
         VBox vbox = new VBox();
+        Parent root = new Parent(){};
 
-        //vbox.getChildren().add(root);
-        Scene mainScene = new Scene(vbox, 500, 500, Color.PURPLE);
+
+        try{
+            root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
+            System.out.print("UI-tiedosto löytyi!");
         
-        
-        
+        }
+        catch (IOException e3){
+            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
+        }
+        catch (NullPointerException e4){
+            System.out.print("UI-tiedostoa ei löydy!");
+        }
+
+        Scene mainScene = new Scene(root, 500, 500, Color.PURPLE);
+
         logButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
@@ -117,16 +130,17 @@ public class sisu extends Application{
                 }
             }
         });
-        
-        
+
         stage.setScene(login);
         stage.setTitle("Sisu");
         stage.show();
 
+        
+
     }
     
     public static void main(String args[]) {
-        launch(); //launch(args) ?
+        launch();
     }
     
     private void decodeJson(StringBuilder sb) {
