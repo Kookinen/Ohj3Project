@@ -39,9 +39,13 @@ public class Module {
     public String getOutcomes(){
         return outcomes;
     }
+    public HashMap getModules(){
+        return modules;
+    }
+    public HashMap getCourses(){
+        return courses;
+    }
     
-
-    //TODO: Lista Course-olioista jotka kuuluvat Moduleen
 
     private void decodeJson() {
         try{
@@ -59,12 +63,13 @@ public class Module {
             }
 
             if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
+                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString(); 
             }
             
             else{
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
+            
             
             switch(obj.getAsJsonPrimitive("type").getAsString()) {
                 case "GroupingModule":
@@ -129,6 +134,7 @@ public class Module {
                     break;
             }
         }
+        
     }
 }
 

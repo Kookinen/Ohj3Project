@@ -67,35 +67,31 @@ public class Degree {
     public void decodeJson() {
         try{ 
             GetJsonData getJson_Module = new GetJsonData(2, id);
-            StringBuilder sb = getJson_Module.getJsonDataFromURL();
+            StringBuilder sb = getJson_Module.getJsonDataFromURL();  
+            JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
             
-            
-            if(!sb.toString().equals("")){
-                
-                JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
-                //Peruskamat otetaan talteen
-                String id = obj.getAsJsonPrimitive("id").getAsString();
-                String moduleName = "";
-                if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                    moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
-                }
-                else{
-                    moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
-                }
-                int targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
-                
-                
-                // Rulet käydää läpi
-                JsonArray arr = null;
-                String rule = obj.getAsJsonObject("rule").get("type").getAsString();
-                if(rule.equals("CreditsRule")){
-                    arr = obj.getAsJsonObject("rule").getAsJsonObject("rule").getAsJsonArray("rules");
-                }
-                else if(rule.equals("CompositeRule")){
-                    arr = obj.getAsJsonObject("rule").getAsJsonArray("rules");
-                }
-                compositeRule(arr);            
+            //Peruskamat otetaan talteen
+            String id = obj.getAsJsonPrimitive("id").getAsString();
+            String moduleName = "";
+            if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
+                moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
             }
+            else{
+                moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
+            }
+            int targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
+                
+                
+            // Rulet käydää läpi
+            JsonArray arr = null;
+            String rule = obj.getAsJsonObject("rule").get("type").getAsString();
+            if(rule.equals("CreditsRule")){
+                arr = obj.getAsJsonObject("rule").getAsJsonObject("rule").getAsJsonArray("rules");
+            }
+            else if(rule.equals("CompositeRule")){
+                arr = obj.getAsJsonObject("rule").getAsJsonArray("rules");
+            }
+            compositeRule(arr);
         }
         catch (MalformedURLException e){
         }

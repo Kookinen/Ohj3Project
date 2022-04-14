@@ -17,24 +17,25 @@ public class GUITools {
 
     }
 
-    public static Node getImageAsNode(String filename) throws FileNotFoundException{
-
-        InputStream stream = new FileInputStream(filename);
-        Image image = new Image(stream);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
-        
-        return imageView;
-    }
-
     public static Image getImage(String filename) throws FileNotFoundException{
+
         InputStream stream = new FileInputStream(filename);
         Image image = new Image(stream);
 
         return image;
     }
 
+    public static Node getImageAsNode(String filename) throws FileNotFoundException{
+        
+        Image image = getImage(filename);
+        ImageView imageView = new ImageView();
+        imageView.setImage(image);
+        
+        return imageView;
+    }
+
     public RotateTransition spin(Node node){
+        
         RotateTransition rotateTransition = new RotateTransition(); 
         rotateTransition.setDuration(Duration.millis(1000));  
         rotateTransition.setNode(node);       

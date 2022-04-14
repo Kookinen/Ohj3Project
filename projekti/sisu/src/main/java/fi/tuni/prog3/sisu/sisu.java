@@ -102,14 +102,17 @@ public class sisu extends Application{
             public void handle(ActionEvent e){
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
-                    stage.setMaximized(true);
+                    //stage.setMaximized(true);
+                    stage.setFullScreen(true);
+                    //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
                     Student student = new Student(userName.getText(), studentNumber.getText());
-                    try {
+                    /*try {
                         student.saveStudent();
                     } catch (IOException ex) {
                         
                     }
-                    mainWindow main = new mainWindow();
+*/
+                    mainWindow main = new mainWindow(degrees);
                     vbox.getChildren().add(main.getTabs());
                 }
             }
@@ -138,8 +141,6 @@ public class sisu extends Application{
             JsonElement groupId = jObject.get("groupId");
             JsonElement name = jObject.get("name");
             JsonElement minCredit = jObject.get("credits").getAsJsonObject().get("min");
-            //TODO: Maatuskan rakennus
-            //TODO: moduleGroupId:t talteen että saa maatuskan sisällön kuntoon
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
             degrees.put(id.getAsString(), deg);
