@@ -2,6 +2,8 @@
 package fi.tuni.prog3.sisu;
 
 import com.google.gson.*;
+
+import java.io.FileNotFoundException;
 //import java.io.BufferedReader;
 import java.io.IOException;
 //import java.io.InputStreamReader;
@@ -14,12 +16,16 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -31,6 +37,7 @@ public class sisu extends Application{
     
     @Override
     public void start(Stage stage){
+
         try{ 
             GetJsonData getJson_Degree = new GetJsonData(1, "");
             StringBuilder sb = getJson_Degree.getJsonDataFromURL();
@@ -42,6 +49,16 @@ public class sisu extends Application{
         catch (IOException e2){
             e2.printStackTrace();
         }
+
+        try{
+            Image icon = GUITools.getImage("sisuTrans.PNG");
+            stage.getIcons().add(icon);
+            
+        }
+        catch (FileNotFoundException e){
+
+        }
+
         GridPane grid = new GridPane();
         Scene login = new Scene(grid, 500, 500);
         grid.setHgap(5);
@@ -72,17 +89,27 @@ public class sisu extends Application{
         /*
           välilehtiä varten vbox
         */
+        //Group root = new Group();
         VBox vbox = new VBox();
-        Scene mainScene = new Scene(vbox, 500, 500);
+
+        //vbox.getChildren().add(root);
+        Scene mainScene = new Scene(vbox, 500, 500, Color.PURPLE);
+        
+        
         
         logButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
+                    stage.setMaximized(true);
                     Student student = new Student(userName.getText(), studentNumber.getText());
-                    student.saveStudent();
-                    mainWindow main = new mainWindow(degrees);
+                    try {
+                        student.saveStudent();
+                    } catch (IOException ex) {
+                        
+                    }
+                    mainWindow main = new mainWindow();
                     vbox.getChildren().add(main.getTabs());
                 }
             }
@@ -96,7 +123,7 @@ public class sisu extends Application{
     }
     
     public static void main(String args[]) {
-        launch();
+        launch(); //launch(args) ?
     }
     
     private void decodeJson(StringBuilder sb) {
