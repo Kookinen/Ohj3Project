@@ -51,6 +51,7 @@ public class sisu extends Application{
         catch (IOException e2){
             e2.printStackTrace();
         }
+        
 
         try{
             Image icon = GUITools.getImage("sisuTrans.PNG");
@@ -160,6 +161,7 @@ public class sisu extends Application{
             degrees.put(id.getAsString(), deg);
 
             
-        }        
+        }
+        Controller.setDegrees(degrees);
     }
 }

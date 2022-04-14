@@ -10,7 +10,6 @@ import java.util.HashMap;
 public class PrintDegree {
     
         public PrintDegree(String degreeName, HashMap modules){
-            System.out.println(modules);
             System.out.println(degreeName);
             int depth = 1;
             printAll(modules, depth);
