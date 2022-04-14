@@ -22,11 +22,19 @@ public class Controller implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1){
 
         TreeItem<String> rootItem = new TreeItem<>("All and everything");
-        //String s = "test";
+        String s = "test";
 
         TreeItem<String> testItem = new TreeItem<>("TEST");
 
         rootItem.getChildren().add(testItem);
+        
+        TreeItem<String> item = new TreeItem<>();
+        for(int i = 0;i<10;i++){
+            String ii = Integer.toString(i);
+            item = new TreeItem<>(s+ii);
+            rootItem.getChildren().add(item);
+        }
+
         
 
         mainView.setRoot(rootItem);
@@ -37,13 +45,3 @@ public class Controller implements Initializable{
 
     }
 }
-
-
-/*
-            for(int i = 0;i<10;i++){
-            String ii = Integer.toString(i);
-            TreeItem<String> item = new TreeItem<>(s+" "+ii);
-
-            rootItem.getChildren().add(item);
-
-        }*/

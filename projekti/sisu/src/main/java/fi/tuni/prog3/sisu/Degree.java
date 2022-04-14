@@ -103,10 +103,10 @@ public class Degree {
 
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();
+        modules = new HashMap<>();
         while(it.hasNext()){
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();
-            modules = new HashMap<>();
             switch (type) {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
