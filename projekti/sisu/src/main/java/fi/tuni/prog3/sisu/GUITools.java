@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.util.Duration;
@@ -87,17 +88,22 @@ public class GUITools {
             @Override
             public void handle(KeyEvent k){
                 String s = cb.getEditor().getText();
-                if(s.length() >= 3){
-                    compare(s);
-                }
+                cb.getItems().clear();
+                
+                compare(s);
+               
             }
 
             private void compare(String s) {
+                
+                ArrayList<String> names = new ArrayList<>();
                 for(Degree d:degrees.values()){
-                    if(d.getName().substring(0, s.length()).compareToIgnoreCase(s)==0){
-                        
+                    if(d.getName().length() >= s.length() && d.getName().substring(0, s.length()).compareToIgnoreCase(s)==0){
+                        names.add(d.getName());
                     }
                 }
+                
+                cb.getItems().addAll(names);
             }
         });
     }
