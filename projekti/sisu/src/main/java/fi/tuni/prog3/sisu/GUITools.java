@@ -9,6 +9,7 @@ import java.util.HashMap;
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -76,6 +77,11 @@ public class GUITools {
                 printTree(mods, moduleItem);
             }
         }
+    }
+    
+    public static void setUpDegreeBox(ComboBox cb, HashMap<String, Degree> degrees){
+        cb.setEditable(true);
+        
     }
 
 }

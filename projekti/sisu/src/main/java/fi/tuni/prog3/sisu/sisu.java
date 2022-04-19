@@ -22,6 +22,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -67,8 +68,8 @@ public class sisu extends Application{
         grid.setHgap(5);
         grid.setVgap(5);
         
-        Label logMessage = new Label("Log in using your credentials");
-        logMessage.setMaxWidth(250);
+        Label logMessage = new Label("Log in using your credentials or register as a new user");
+        logMessage.setMaxWidth(300);
         
         Label usernameLabel = new Label("Username:");
         TextField userName = new TextField();
@@ -78,15 +79,23 @@ public class sisu extends Application{
         TextField studentNumber = new TextField();
         studentNumber.setMaxWidth(150);
         
+        Label degreeLabel = new Label("Select degree:");
+        ComboBox degreeBox = new ComboBox();
+        GUITools.setUpDegreeBox(degreeBox);
+        
+        
         Button logButton = new Button("Log in");
         logButton.setPrefWidth(150);
         
+        Button regButton = new Button("Register");
+        regButton.setPrefWidth(150);
+        
+        Button startButton = new Button("Register");
+        startButton.setPrefWidth(150);
+        
         grid.add(logMessage, 0, 0, 2, 1);
-        grid.add(usernameLabel, 0, 1);
-        grid.add(userName, 1, 1);
-        grid.add(studentNumberLabel, 0, 2);
-        grid.add(studentNumber, 1, 2);
-        grid.add(logButton, 1, 3);
+        grid.add(regButton, 0,1);
+        grid.add(logButton, 0, 2);
         grid.setAlignment(Pos.CENTER);
         
         /*
@@ -111,7 +120,7 @@ public class sisu extends Application{
 
         Scene mainScene = new Scene(root, 500, 500, Color.PURPLE);
 
-        logButton.setOnAction(new EventHandler<ActionEvent>(){
+        startButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
@@ -129,6 +138,40 @@ public class sisu extends Application{
                     mainWindow main = new mainWindow(degrees);
                     vbox.getChildren().add(main.getTabs());
                 }
+            }
+        });
+        regButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 4);
+                grid.add(degreeLabel, 0, 3);
+                grid.add(degreeBox, 1, 3);
+                
+            }
+        });
+        logButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                startButton.setText("Log in");
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 3);
+
+                //Student jsonista tietojen haku!!!
+                
             }
         });
 
