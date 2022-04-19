@@ -17,8 +17,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +26,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 
@@ -81,7 +78,7 @@ public class sisu extends Application{
         
         Label degreeLabel = new Label("Select degree:");
         ComboBox degreeBox = new ComboBox();
-        GUITools.setUpDegreeBox(degreeBox, degrees);
+        
         
         
         Button logButton = new Button("Log in");
@@ -146,7 +143,6 @@ public class sisu extends Application{
                 grid.getChildren().clear();
                 
                 
-                
                 grid.add(usernameLabel, 0, 1);
                 grid.add(userName, 1, 1);
                 grid.add(studentNumberLabel, 0, 2);
@@ -154,7 +150,8 @@ public class sisu extends Application{
                 grid.add(startButton, 1, 4);
                 grid.add(degreeLabel, 0, 3);
                 grid.add(degreeBox, 1, 3);
-                
+                GUITools.setUpDegreeBox(degreeBox, degrees);
+
             }
         });
         logButton.setOnAction(new EventHandler<ActionEvent>(){
@@ -201,7 +198,7 @@ public class sisu extends Application{
             JsonElement minCredit = jObject.get("credits").getAsJsonObject().get("min");
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
                     lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
-            degrees.put(id.getAsString(), deg);
+            degrees.put(name.getAsString(), deg);
 
             
         }

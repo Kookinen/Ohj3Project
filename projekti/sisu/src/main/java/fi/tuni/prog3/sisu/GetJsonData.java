@@ -1,12 +1,12 @@
 package fi.tuni.prog3.sisu;
 
-import com.google.gson.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.IOException;
+
 
 
 public class GetJsonData {
@@ -55,7 +55,7 @@ public class GetJsonData {
         c.setConnectTimeout(5000);
         c.setReadTimeout(5000);
         if(c.getResponseCode()<300){
-            BufferedReader read = new BufferedReader(new InputStreamReader(c.getInputStream()));
+            BufferedReader read = new BufferedReader(new InputStreamReader(c.getInputStream(), "UTF-8"));
             while((line = read.readLine()) != null){
                 sb.append(line);
             }

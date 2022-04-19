@@ -8,11 +8,14 @@ import java.util.HashMap;
 
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 
 public class GUITools {
     
@@ -51,7 +54,7 @@ public class GUITools {
     }
     
     public static TreeItem initializeTree(HashMap<String, Degree> degrees){
-        Degree deg = degrees.get("otm-d729cfc3-97ad-467f-86b7-b6729c496c82");
+        Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
         printTree(deg.getModules(), rootItem);
         return rootItem;
@@ -82,6 +85,23 @@ public class GUITools {
     public static void setUpDegreeBox(ComboBox cb, HashMap<String, Degree> degrees){
         cb.setEditable(true);
         
+        cb.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>(){
+            @Override
+            public void handle(KeyEvent k){
+                String s = cb.getEditor().getText();
+                if(s.length() >= 3){
+                    compare(s);
+                }
+            }
+
+            private void compare(String s) {
+                for(Degree d:degrees.values()){
+                    if(d.getName().substring(0, s.length()).compareToIgnoreCase(s)==0){
+                        
+                    }
+                }
+            }
+        });
     }
 
 }
