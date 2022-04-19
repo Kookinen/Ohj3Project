@@ -7,6 +7,7 @@ package fi.tuni.prog3.sisu;
 import java.util.HashMap;
 
 
+
 public class PrintDegree {
     
         public PrintDegree(String degreeName, HashMap modules){
