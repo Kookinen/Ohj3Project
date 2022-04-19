@@ -33,9 +33,9 @@ public class Controller implements Initializable{
     @FXML
     private TextFlow courseInfo = new TextFlow();
     @FXML
-    private static Text studentName = new Text();
+    private Text studentName = new Text();
     @FXML
-    private static Text studentNumber = new Text();
+    private Text studentNumber = new Text();
     @FXML
     private Button saveButton = new Button();
     @FXML
@@ -45,9 +45,12 @@ public class Controller implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1){
         //otettu vain yksittäinen degree.
         //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
+
         TreeItem rootItem = GUITools.initializeTree(degrees);
         mainView.setRoot(rootItem);
 
+        studentNumber.setText(student.getNumber());
+        studentName.setText(student.getName());
         
         
     }
@@ -63,8 +66,18 @@ public class Controller implements Initializable{
                System.out.println("Hello World");  
             } 
         }; 
-
         mainView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);*/
+    }
+
+    @FXML
+    public void save(){
+        System.out.println("Saving...");
+        try {
+            SaveProgress.saveStudent();
+
+        } catch (IOException ex) {
+            System.out.println("Couldn't save progress!");
+        }
     }
 
   
@@ -76,14 +89,5 @@ public class Controller implements Initializable{
 
     public static void setStudent(Student student){
         Controller.student = student;
-        
-        studentNumber.setText(student.getName());
-        studentName.setText(student.getNumber());
-        try {
-            SaveProgress.saveStudent(student);
-
-        } catch (IOException ex) {
-            System.out.print("Couldn't save progress!");
-        }
     }
 }

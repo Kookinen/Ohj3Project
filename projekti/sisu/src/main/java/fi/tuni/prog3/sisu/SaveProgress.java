@@ -14,12 +14,17 @@ public class SaveProgress {
 
     public SaveProgress(){}
 
-    public static void saveStudent(Student student)throws IOException{
+    //Not works :( wont write wont read wont do jack
+    public static void saveStudent() throws IOException{
 
-        Student studentToSave = new Student(student.getName(), student.getNumber());
-        Gson gson = new Gson();
-        Writer writer = new FileWriter("/student.json");
-        gson.toJson(studentToSave, writer);
+        File jsonFile = new File("src/java/resources/student.json");
+        
+        jsonFile.createNewFile();
+        //Student studentToSave = new Student(student.getName(), student.getNumber());
+        //Gson gson = new Gson();
+        FileWriter writer = new FileWriter(jsonFile);
+        //gson.toJson(studentToSave, writer);
+        writer.write("str");
         writer.close();
 
     }
