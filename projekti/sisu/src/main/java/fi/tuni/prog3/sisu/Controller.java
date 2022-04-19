@@ -1,5 +1,6 @@
 package fi.tuni.prog3.sisu;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -25,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 public class Controller implements Initializable{
     
     private static HashMap<String, Degree> degrees;
+    private static Student student;
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -46,8 +48,15 @@ public class Controller implements Initializable{
         TreeItem rootItem = GUITools.initializeTree(degrees);
         mainView.setRoot(rootItem);
 
-        studentNumber.setText("313");
-        studentName.setText("Aku Ankka");
+        studentNumber.setText(student.getName());
+        studentName.setText(student.getNumber());
+
+        try {
+            SaveProgress.saveStudent(student);
+
+        } catch (IOException ex) {
+            System.out.print("Couldn't save progress!");
+        }
     }
 
     @FXML
@@ -70,5 +79,9 @@ public class Controller implements Initializable{
 
     public static void setDegrees(HashMap degrees){
         Controller.degrees = degrees;
+    }
+
+    public static void setStudent(Student student){
+        Controller.student = student;
     }
 }

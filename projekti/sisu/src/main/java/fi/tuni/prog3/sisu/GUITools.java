@@ -19,9 +19,7 @@ import javafx.scene.input.KeyEvent;
 
 public class GUITools {
     
-    public GUITools(){
-
-    }
+    public GUITools(){}
 
     public static Image getImage(String filename) throws FileNotFoundException{
 
