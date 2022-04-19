@@ -3,8 +3,8 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.Controller">
    <children>
-      <TreeView fx:id="mainView" layoutX="14.0" layoutY="14.0" prefHeight="378.0" prefWidth="579.0" />
+      <TreeView fx:id="mainView" layoutX="14.0" layoutY="14.0" prefHeight="873.0" prefWidth="523.0" />
    </children>
 </AnchorPane>

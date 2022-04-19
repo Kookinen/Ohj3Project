@@ -109,7 +109,7 @@ public class sisu extends Application{
             System.out.print("UI-tiedostoa ei löydy!");
         }
 
-        Scene mainScene = new Scene(root, 500, 500, Color.PURPLE);
+        Scene mainScene = new Scene(root);
 
         logButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
