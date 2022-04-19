@@ -33,9 +33,9 @@ public class Controller implements Initializable{
     @FXML
     private TextFlow courseInfo = new TextFlow();
     @FXML
-    private Text studentName = new Text();
+    private static Text studentName = new Text();
     @FXML
-    private Text studentNumber = new Text();
+    private static Text studentNumber = new Text();
     @FXML
     private Button saveButton = new Button();
     @FXML
@@ -48,15 +48,8 @@ public class Controller implements Initializable{
         TreeItem rootItem = GUITools.initializeTree(degrees);
         mainView.setRoot(rootItem);
 
-        studentNumber.setText(student.getName());
-        studentName.setText(student.getNumber());
-
-        try {
-            SaveProgress.saveStudent(student);
-
-        } catch (IOException ex) {
-            System.out.print("Couldn't save progress!");
-        }
+        
+        
     }
 
     @FXML
@@ -83,5 +76,14 @@ public class Controller implements Initializable{
 
     public static void setStudent(Student student){
         Controller.student = student;
+        
+        studentNumber.setText(student.getName());
+        studentName.setText(student.getNumber());
+        try {
+            SaveProgress.saveStudent(student);
+
+        } catch (IOException ex) {
+            System.out.print("Couldn't save progress!");
+        }
     }
 }

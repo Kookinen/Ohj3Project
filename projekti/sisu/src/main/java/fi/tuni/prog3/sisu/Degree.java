@@ -112,17 +112,9 @@ public class Degree {
                     compositeRule(jObject.getAsJsonArray("rules"));
                     break;
                 case "ModuleRule":                    
-                    String moduleName = "";
-                    System.out.println("degree");
-                    if(jObject.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                       moduleName = jObject.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString(); 
-                    }
-                    else{
-                        moduleName = jObject.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
-                    }
-                    System.out.println("degree");
-                    Module m = new Module(moduleName); 
-                    modules.put(moduleName, m);
+                    String moduleGroupId = jObject.get("moduleGroupId").getAsString();
+                    Module m = new Module(moduleGroupId); 
+                    modules.put(m.getName(), m);
                     break;
                 default:
                     break;

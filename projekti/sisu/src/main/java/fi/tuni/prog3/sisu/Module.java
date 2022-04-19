@@ -120,28 +120,15 @@ public class Module {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
                     break;
-                case "ModuleRule":  
-                    String moduleName = "";
-                    if(jObject.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                       moduleName = jObject.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString(); 
-                    }
-                    else{
-                        moduleName = jObject.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
-                    }
-                    Module m = new Module(moduleName);
-                    modules.put(moduleName, m);
+                case "ModuleRule":                    
+                    String moduleGroupId = jObject.get("moduleGroupId").getAsString();
+                    Module m = new Module(moduleGroupId);
+                    modules.put(m.getName(), m);
                     break;
                 case "CourseUnitRule":
-                    String courseName = "";
-                    System.out.println("module");
-                    if(jObject.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                       courseName = jObject.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString(); 
-                    }
-                    else{
-                        courseName = jObject.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
-                    }
-                    Course c = new Course(courseName);
-                    courses.put(courseName, c);
+                    String courseId = jObject.get("courseUnitGroupId").getAsString();
+                    Course c = new Course(courseId);
+                    courses.put(c.getName(), c);
                     break;
                 default:
                     break;
