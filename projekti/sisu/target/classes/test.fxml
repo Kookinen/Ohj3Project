@@ -54,6 +54,7 @@
                            </font>
                         </Label>
                         <ComboBox editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
+                        <Button fx:id="loadButton" layoutX="1026.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
                      </children>
                   </AnchorPane>
             </content>

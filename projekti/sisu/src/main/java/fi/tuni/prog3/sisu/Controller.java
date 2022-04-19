@@ -1,5 +1,6 @@
 package fi.tuni.prog3.sisu;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -39,6 +40,8 @@ public class Controller implements Initializable{
     @FXML
     private Button saveButton = new Button();
     @FXML
+    private Button loadButton = new Button();
+    @FXML
     private TextField searchBar = new TextField();
 
     @Override
@@ -69,14 +72,31 @@ public class Controller implements Initializable{
         mainView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);*/
     }
 
+
     @FXML
     public void save(){
         System.out.println("Saving...");
         try {
-            SaveProgress.saveStudent();
+            SaveProgress.saveStudent(student);
 
         } catch (IOException ex) {
             System.out.println("Couldn't save progress!");
+        }
+    }
+
+    //TODO: Käyttäjä valitsee tiedoston mitä ladata itse?
+    @FXML
+    public void load(){
+        System.out.println("Loading...");
+
+        //Refresh-metodi?
+        try{
+            Controller.student = SaveProgress.loadStudent();
+            studentNumber.setText(student.getNumber());
+            studentName.setText(student.getName());
+        }
+        catch(FileNotFoundException e2){
+            System.out.println("File not found :(");
         }
     }
 
