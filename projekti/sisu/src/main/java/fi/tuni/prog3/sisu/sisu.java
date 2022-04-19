@@ -81,7 +81,7 @@ public class sisu extends Application{
         
         Label degreeLabel = new Label("Select degree:");
         ComboBox degreeBox = new ComboBox();
-        GUITools.setUpDegreeBox(degreeBox);
+        GUITools.setUpDegreeBox(degreeBox, degrees);
         
         
         Button logButton = new Button("Log in");
@@ -118,7 +118,7 @@ public class sisu extends Application{
             System.out.print("UI-tiedostoa ei löydy!");
         }
 
-        Scene mainScene = new Scene(root, 500, 500, Color.PURPLE);
+        Scene mainScene = new Scene(root);
 
         startButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -126,7 +126,7 @@ public class sisu extends Application{
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
                     stage.setScene(mainScene);
                     //stage.setMaximized(true);
-                    stage.setFullScreen(true);
+                    //stage.setFullScreen(true);
                     //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
                     Student student = new Student(userName.getText(), studentNumber.getText());
                     /*try {
