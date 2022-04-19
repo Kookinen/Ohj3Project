@@ -99,14 +99,14 @@ public class sisu extends Application{
 
         try{
             root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
-            System.out.print("UI-tiedosto löytyi!");
+            System.out.print("UI-tiedosto löytyi!\n");
         
         }
         catch (IOException e3){
             System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
         }
         catch (NullPointerException e4){
-            System.out.print("UI-tiedostoa ei löydy!");
+            System.out.print("UI-tiedostoa ei löydy!\n");
         }
 
         Scene mainScene = new Scene(root);
@@ -120,17 +120,15 @@ public class sisu extends Application{
                     //stage.setFullScreen(true);
                     //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
                     Student student = new Student(userName.getText(), studentNumber.getText());
-                    /*try {
-                        student.saveStudent();
-                    } catch (IOException ex) {
-                        
-                    }
-*/
+                    Controller.setStudent(student);
+
                     mainWindow main = new mainWindow(degrees);
                     vbox.getChildren().add(main.getTabs());
                 }
             }
         });
+
+        
 
         stage.setScene(login);
         stage.setTitle("Sisu");
@@ -163,5 +161,6 @@ public class sisu extends Application{
             
         }
         Controller.setDegrees(degrees);
+        
     }
 }

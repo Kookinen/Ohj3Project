@@ -8,7 +8,7 @@ import java.io.Writer;
 
 
 public class Student {
-    String name;
+    private String name;
     private String number;
     
     
@@ -24,13 +24,13 @@ public class Student {
     public String getNumber(){
         return number;
     }
-    //Not works
-    public void saveStudent()throws IOException{
-        Student student = new Student(name, number);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Writer writer = new FileWriter("student.json");
-        gson.toJson(student, writer);
+
+    @Override
+    public String toString(){
+        return String.format("%s%n %s%n",this.name,this.number);
     }
+    //Not works
+    
     
     
     

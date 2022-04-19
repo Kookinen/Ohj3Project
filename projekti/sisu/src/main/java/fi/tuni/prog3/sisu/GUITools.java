@@ -15,9 +15,7 @@ import javafx.scene.image.ImageView;
 
 public class GUITools {
     
-    public GUITools(){
-
-    }
+    public GUITools(){}
 
     public static Image getImage(String filename) throws FileNotFoundException{
 
