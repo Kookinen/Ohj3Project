@@ -54,8 +54,15 @@ public class GUITools {
 
     }
     
+<<<<<<< HEAD
     public static TreeItem<String> initializeTree(HashMap<String, Degree> degrees){
         Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
+||||||| 37b47b9
+    public static TreeItem initializeTree(HashMap<String, Degree> degrees){
+        Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
+=======
+    public static TreeItem initializeTree(Degree deg){
+>>>>>>> 0e9c884ce4aeb2f2124000721f4a5528edcf018d
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
         printTree(deg.getModules(), rootItem);
         return rootItem;
@@ -105,7 +112,7 @@ public class GUITools {
     
     public static void setUpDegreeBox(ComboBox cb, HashMap<String, Degree> degrees){
         cb.setEditable(true);
-        
+        cb.setPromptText("Hae tutkinnon nimellä...");
         cb.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>(){
             @Override
             public void handle(KeyEvent k){

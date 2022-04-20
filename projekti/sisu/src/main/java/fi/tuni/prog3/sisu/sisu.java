@@ -104,31 +104,45 @@ public class sisu extends Application{
 
 
         
-
+        
         startButton.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent e){
+                Student student = null;
+                boolean studentFound = false;
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
+                    if(startButton.getText().equals("Register") && !degreeBox.getEditor().getText().isEmpty()){
+                        student = new Student(userName.getText(), studentNumber.getText());
+                        studentFound = true;
+                    }
+                    else{
+                        try {
+                            student = SaveProgress.loadStudent();
+                            studentFound = true;
+                        } catch (FileNotFoundException ex) {}
+                    }
                     //stage.setMaximized(true);
                     //stage.setFullScreen(true);
                     //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
-                    Student student = new Student(userName.getText(), studentNumber.getText());
-                    Controller.setStudent(student);
-                    Parent root = new Parent(){};
-                    try{
-                        root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
-                        System.out.print("UI-tiedosto löytyi!\n");
-                    
+                    if(studentFound){                    
+                        Controller.setStudent(student);
+                        Controller.setDegree(degrees.get(degreeBox.getEditor().getText()));
+                        Parent root = new Parent(){};
+                        try{
+                            root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
+                            System.out.print("UI-tiedosto löytyi!\n");
+
+                        }
+                        catch (IOException e3){
+                            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
+                        }
+                        catch (NullPointerException e4){
+                            System.out.print("UI-tiedostoa ei löydy!\n");
+                        }
+
+                        Scene mainScene = new Scene(root);
+                        stage.setScene(mainScene);
                     }
-                    catch (IOException e3){
-                        System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
-                    }
-                    catch (NullPointerException e4){
-                        System.out.print("UI-tiedostoa ei löydy!\n");
-                    }
-            
-                    Scene mainScene = new Scene(root);
-                    stage.setScene(mainScene);
                 }
             }
         });
@@ -146,7 +160,7 @@ public class sisu extends Application{
                 grid.add(degreeLabel, 0, 3);
                 grid.add(degreeBox, 1, 3);
                 GUITools.setUpDegreeBox(degreeBox, degrees);
-
+                
             }
         });
         logButton.setOnAction(new EventHandler<ActionEvent>(){
