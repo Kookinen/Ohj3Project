@@ -37,6 +37,8 @@ public class Controller implements Initializable{
     private static Student student;
     private static Degree degree;
 
+    private static HashMap<String, Boolean> coursesDone;
+
     private static String selectedElement;
     //private static HashMap<String, Boolean> coursesDone;
     
@@ -66,6 +68,7 @@ public class Controller implements Initializable{
         allCourses = new HashMap<>();
         allModules = new HashMap<>();
         TreeItem<String> rootItem = GUITools.initializeTree(degree);
+        GUITools.setUpDegreeBox(searchBar, degrees);
         //selectableCourseList = GUITools.initializeCheckList(degrees);
 
         mainView.setRoot(rootItem);
@@ -97,15 +100,17 @@ public class Controller implements Initializable{
             setSelectedElement(name);
             
             Course c = searchCourse(name);
+            
             if(c!=null){
                 if(c.getContent()!=null){
                     courseInfo.getEngine().loadContent("");
                     courseInfo.getEngine().loadContent(c.getContent());              
                 }
-                else{
+                else if(c.getAdditional() != null){
                     courseInfo.getEngine().loadContent("");
-                    //courseInfo.getEngine().loadContent(c.getAdditional());
+                    courseInfo.getEngine().loadContent(c.getAdditional());
                 }
+                
                 
             }
             Module m = searchModule(splitString[0]);

@@ -16,6 +16,7 @@ public class Degree {
     private String groupId; //Module löytyy tällä?
     private String name;
     private int credits;
+    private String outcomes;
     HashMap<String, Module> modules;
 
     private StringBuilder sb; //Rakentimeen? ei kai
@@ -56,6 +57,10 @@ public class Degree {
         return credits;
     }
     
+    public String getOutcomes(){
+        return outcomes;
+    }
+    
     public HashMap getModules(){
         decodeJson();
         return modules;
@@ -78,6 +83,14 @@ public class Degree {
             }
             else{
                 moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
+            }
+            if(!obj.get("learningOutcomes").isJsonNull()){
+                if(obj.getAsJsonObject("learningOutcomes").get("fi") == null){
+                    this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("en").getAsString();
+                }
+                else{
+                    this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("fi").getAsString();
+                }
             }
             int targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
                 
