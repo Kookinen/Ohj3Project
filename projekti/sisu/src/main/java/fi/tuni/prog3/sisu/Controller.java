@@ -10,11 +10,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
@@ -43,13 +45,18 @@ public class Controller implements Initializable{
     private Button loadButton = new Button();
     @FXML
     private TextField searchBar = new TextField();
+    @FXML
+    private VBox selectableCourseList = new VBox();
+    @FXML
+    private CheckBox courseCheckBox = new CheckBox();
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         //otettu vain yksittäinen degree.
         //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
 
-        TreeItem rootItem = GUITools.initializeTree(degrees);
+        TreeItem<String> rootItem = GUITools.initializeTree(degrees);
+        //selectableCourseList = GUITools.initializeCheckList(degrees);
         mainView.setRoot(rootItem);
 
         studentNumber.setText(student.getNumber());
@@ -62,6 +69,7 @@ public class Controller implements Initializable{
     public void selectItem(){
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
         System.out.println(item.getValue());
+
 
         /*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
             @Override 

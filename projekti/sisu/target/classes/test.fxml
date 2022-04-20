@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.Controller">
    <children>
-      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="871.0" prefWidth="1101.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="15.0" layoutY="15.0" prefHeight="871.0" prefWidth="1101.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Opiskelija-info">
             <content>
@@ -55,6 +57,10 @@
                         </Label>
                         <ComboBox editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
                         <Button fx:id="loadButton" layoutX="1026.0" layoutY="42.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
+                        <VBox fx:id="selectableCourseList" layoutX="570.0" layoutY="415.0" prefHeight="96.0" prefWidth="511.0">
+                           <children>
+                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
+                           </children></VBox>
                      </children>
                   </AnchorPane>
             </content>

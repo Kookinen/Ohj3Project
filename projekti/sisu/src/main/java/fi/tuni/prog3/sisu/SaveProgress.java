@@ -26,6 +26,7 @@ public class SaveProgress {
     public SaveProgress(){}
 
     //TODO: saveStudentin ja loadStudentin json-tiedosto src/ kansioon. Tiedostopolku vaan 404.
+    //TODO: Virhetilanteiden estäminen (file exists, oikea formaatti ja kaikki muu)
     //! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi se toimii ei ole tiedossa.
 
     public static void saveStudent(Student student) throws IOException{
@@ -34,6 +35,9 @@ public class SaveProgress {
         Gson gson = new Gson();
 
         FileChooser fileChooser = new FileChooser();
+
+        //Jos käyttäjä haluaa luoda uuden tiedoston, joutuu hän nimeämään txt:n uudelleen.
+        //Siksi tässä on useita tiedostopäätteitä.
         fileChooser.getExtensionFilters().addAll(
             new ExtensionFilter("JSON Files", "*.json"),
             new ExtensionFilter("Text Files", "*.txt"),

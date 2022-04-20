@@ -12,11 +12,13 @@ import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.VBox;
 
 public class GUITools {
     
@@ -52,12 +54,32 @@ public class GUITools {
 
     }
     
-    public static TreeItem initializeTree(HashMap<String, Degree> degrees){
+    public static TreeItem<String> initializeTree(HashMap<String, Degree> degrees){
         Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
         printTree(deg.getModules(), rootItem);
         return rootItem;
     }
+
+    /*public static VBox initializeCheckList(HashMap<String, Degree> degrees){
+        
+        VBox checkBoxList = new VBox();
+        Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
+        HashMap<String, Module> modules = deg.getModules();
+
+        for(Module m:modules.values()){
+            CheckBox check = new CheckBox(m.getName());
+            checkBoxList.getChildren().add(check);
+            
+            HashMap<String, Course> courses = m.getCourses();
+            for(Course c:courses.values()){
+                CheckBox checkOneTwo = new CheckBox(c.getName());
+                checkBoxList.getChildren().add(checkOneTwo);
+            }
+        }
+
+        return checkBoxList;
+    }*/
     
     private static void printTree(HashMap<String, Module> modules, TreeItem root){
         TreeItem<String> moduleItem;
