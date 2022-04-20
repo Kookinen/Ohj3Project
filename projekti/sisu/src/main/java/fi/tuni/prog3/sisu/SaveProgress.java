@@ -29,9 +29,11 @@ public class SaveProgress {
     //TODO: Virhetilanteiden estäminen (file exists, oikea formaatti ja kaikki muu)
     //! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi se toimii ei ole tiedossa.
 
+
+    //! Jos Studentia muokataan voi olla, että pitää lisätä asioita...
     public static void saveStudent(Student student) throws IOException{
 
-        Student studentToSave = new Student(student.getName(), student.getNumber());
+        //Student studentToSave = new Student(student.getName(), student.getNumber());
         Gson gson = new Gson();
 
         FileChooser fileChooser = new FileChooser();
@@ -47,7 +49,7 @@ public class SaveProgress {
         //Jesus christ help us
         //File file = new File("student.json");
         FileWriter writer = new FileWriter(file);
-        gson.toJson(studentToSave, writer);
+        gson.toJson(student, writer);
         writer.close();
 
     }

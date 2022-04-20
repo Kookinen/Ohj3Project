@@ -11,7 +11,8 @@ import java.util.HashMap;
 public class Student {
     private String name;
     private String number;
-    HashMap<String, Boolean> coursesDone;
+    private String degree;
+    private HashMap<String, Boolean> coursesDone = new HashMap<>();
     
     
     public Student(String name, String number){
@@ -27,6 +28,14 @@ public class Student {
         return number;
     }
 
+    public String getDegree(){
+        return degree;
+    }
+
+    public void setDegree(String newDegree){
+        this.degree = newDegree;
+    }
+
     @Override
     public String toString(){
         return String.format("%s%n %s%n",this.name,this.number);
@@ -36,10 +45,10 @@ public class Student {
         return coursesDone;
     }
 
+    //Tarvitaanko delete vai voiko opiskelija vain lisätä kursseja
     public void addCoursesDone(String course, Boolean status){
-        coursesDone.put(course, status);
+        this.coursesDone.put(course, status);
     }
-
     //Not works
     
     

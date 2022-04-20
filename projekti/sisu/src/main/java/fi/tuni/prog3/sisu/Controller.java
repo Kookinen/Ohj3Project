@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -35,13 +36,9 @@ public class Controller implements Initializable{
     private static HashMap<String, Module> allModules;
     private static Student student;
     private static Degree degree;
-<<<<<<< HEAD
-    private static HashMap<String, Boolean> coursesDone;
-||||||| 423029c
-=======
 
-    
->>>>>>> f3d0a1ca0370f7890a9649c9cb5421285bf436c0
+    private static String selectedElement;
+    //private static HashMap<String, Boolean> coursesDone;
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -56,7 +53,7 @@ public class Controller implements Initializable{
     @FXML
     private Button loadButton = new Button();
     @FXML
-    private TextField searchBar = new TextField();
+    private ComboBox searchBar = new ComboBox<>();
     @FXML
     private VBox selectableCourseList = new VBox();
     @FXML
@@ -76,7 +73,7 @@ public class Controller implements Initializable{
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
 
-        coursesDone = student.getCoursesDone();
+        
         
         
     }
@@ -89,50 +86,63 @@ public class Controller implements Initializable{
             String[] splitString = courseHeader.split(" ");
             String[] courseName = Arrays.copyOf(splitString, splitString.length-1);
             StringBuilder sb = new StringBuilder();
+
+            
+
             for(String s : courseName){
                 sb.append(s).append(" ");
             }
+            sb.setLength(sb.length()-1);
             String name = sb.toString();
+            setSelectedElement(name);
             
-<<<<<<< HEAD
-            
-            
-
-            Course c = searchCourse(splitString[0]);
-||||||| 423029c
-            
-            Course c = searchCourse(splitString[0]);
-=======
-            Course c = searchCourse(name.substring(0, name.length()-1));
+            Course c = searchCourse(name);
             if(c!=null){
-                courseInfo.getEngine().loadContent("");
-                courseInfo.getEngine().loadContent(c.getContent());
+                if(c.getContent()!=null){
+                    courseInfo.getEngine().loadContent("");
+                    courseInfo.getEngine().loadContent(c.getContent());              
+                }
+                else{
+                    courseInfo.getEngine().loadContent("");
+                    //courseInfo.getEngine().loadContent(c.getAdditional());
+                }
+                
             }
             Module m = searchModule(splitString[0]);
             if(m!=null){
                 courseInfo.getEngine().loadContent("");
-                courseInfo.getEngine().loadContent(c.getContent());
+                courseInfo.getEngine().loadContent(m.getOutcomes());
+                
             }
->>>>>>> f3d0a1ca0370f7890a9649c9cb5421285bf436c0
+            if(name.equals(degree.getName())){
+                courseInfo.getEngine().loadContent("");
+                //courseInfo.getEngine().loadContent(degree.getOutcomes());
+                
+            }
 
-           
-            /*
-            courseInfo.getChildren().clear();
-            courseInfo.getChildren().add(new Text(c.getContent()));
-            */
+            //Checkboxin nollaus jos dataa ei tulekkaan
+            courseCheckBox.setSelected(false);
+
+            if(student.getCoursesDone().get(Controller.selectedElement) == null || student.getCoursesDone() == null){
+                student.addCoursesDone(Controller.selectedElement, courseCheckBox.isSelected());
+            }
+
+            //Checkboxin status haetaan
+            courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         }
-        
-
-
-        /*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
-            @Override 
-            public void handle(MouseEvent e) { 
-               System.out.println("Hello World");  
-            } 
-        }; 
-        mainView.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);*/
     }
 
+    @FXML
+    public void checkBoxOnClick(){
+
+        //TODO: Vain kurssit voi tallentaa ja checkbox näkyy vain kurssien kohdalla
+        student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
+        
+
+        //? tarpeellinen
+        courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
+        
+    }
 
     @FXML
     public void save(){
@@ -175,6 +185,11 @@ public class Controller implements Initializable{
     public static void setDegree(Degree degree){
         Controller.degree = degree;
     }
+
+    public static void setSelectedElement(String element){
+        Controller.selectedElement = element;
+    }
+
     public static void addCourses(Course c){
         allCourses.put(c.getName(), c);
     }

@@ -55,10 +55,10 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
+                        <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
                         <VBox fx:id="selectableCourseList" layoutX="570.0" layoutY="415.0" prefHeight="96.0" prefWidth="511.0">
                            <children>
-                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
+                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
                            </children></VBox>
                         <WebView fx:id="courseInfo" layoutX="551.0" layoutY="54.0" prefHeight="340.0" prefWidth="534.0" />
                      </children>

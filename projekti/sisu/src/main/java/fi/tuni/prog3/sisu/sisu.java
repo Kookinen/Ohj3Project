@@ -126,7 +126,9 @@ public class sisu extends Application{
                     //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
                     if(studentFound){                    
                         Controller.setStudent(student);
-                        Controller.setDegree(degrees.get(degreeBox.getEditor().getText()));
+                        Degree degree = degrees.get(degreeBox.getEditor().getText()); 
+                        Controller.setDegree(degree);
+                        student.setDegree(degree.getName());
                         Parent root = new Parent(){};
                         try{
                             root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
