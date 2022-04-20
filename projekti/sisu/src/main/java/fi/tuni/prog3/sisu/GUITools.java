@@ -121,14 +121,12 @@ public class GUITools {
             }
 
             private void compare(String s) {
-                
                 ArrayList<String> names = new ArrayList<>();
                 for(Degree d:degrees.values()){
                     if(d.getName().length() >= s.length() && d.getName().substring(0, s.length()).compareToIgnoreCase(s)==0){
                         names.add(d.getName());
                     }
                 }
-                
                 cb.getItems().addAll(names);
             }
         });

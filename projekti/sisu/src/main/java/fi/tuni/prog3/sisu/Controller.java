@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
@@ -51,7 +52,7 @@ public class Controller implements Initializable{
     @FXML
     private Button loadButton = new Button();
     @FXML
-    private TextField searchBar = new TextField();
+    private ComboBox searchBar = new ComboBox();
     @FXML
     private VBox selectableCourseList = new VBox();
     @FXML
@@ -64,6 +65,7 @@ public class Controller implements Initializable{
         allCourses = new HashMap<>();
         allModules = new HashMap<>();
         TreeItem<String> rootItem = GUITools.initializeTree(degree);
+        GUITools.setUpDegreeBox(searchBar, degrees);
         //selectableCourseList = GUITools.initializeCheckList(degrees);
 
         mainView.setRoot(rootItem);
@@ -89,13 +91,27 @@ public class Controller implements Initializable{
             
             Course c = searchCourse(name.substring(0, name.length()-1));
             if(c!=null){
-                courseInfo.getEngine().loadContent("");
-                courseInfo.getEngine().loadContent(c.getContent());
+                if(c.getContent()!=null){
+                    courseInfo.getEngine().loadContent("");
+                    courseInfo.getEngine().loadContent(c.getContent());              
+                }
+                else if(c.getAdditional() != null){
+                    courseInfo.getEngine().loadContent("");
+                    courseInfo.getEngine().loadContent(c.getAdditional());
+                }
+                
+                
             }
             Module m = searchModule(splitString[0]);
             if(m!=null){
                 courseInfo.getEngine().loadContent("");
-                courseInfo.getEngine().loadContent(c.getContent());
+                courseInfo.getEngine().loadContent(m.getOutcomes());
+                
+            }
+            if(name.substring(0,name.length()-1).equals(degree.getName())){
+                courseInfo.getEngine().loadContent("");
+                courseInfo.getEngine().loadContent(degree.getOutcomes());
+                
             }
 
            

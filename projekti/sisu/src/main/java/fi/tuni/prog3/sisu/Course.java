@@ -15,6 +15,7 @@ public class Course {
     int maxCredits;
     //int gradeScaleId;
     String content;
+    String additional;
 
     public Course(String id){
         this.id = id;
@@ -40,12 +41,16 @@ public class Course {
     public String getContent(){
         return content;
     }
+    public String getAdditional(){
+        return additional;
+    }
 
     private void getInfo() {
         try{
            
             GetJsonData getJson_Module = new GetJsonData(4, id);
             StringBuilder sb = getJson_Module.getJsonDataFromURL();
+            
             
             JsonObject obj =  JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
             this.minCredits = obj.getAsJsonObject("credits").getAsJsonPrimitive("min").getAsInt();
@@ -75,6 +80,15 @@ public class Course {
                     this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("fi").getAsString();
                 }
             }
+            if(!obj.get("additional").isJsonNull()){
+                if(obj.getAsJsonObject("additional").get("fi") == null){
+                    this.additional = obj.getAsJsonObject("additional").getAsJsonPrimitive("en").getAsString();
+                }
+                else{
+                    this.additional = obj.getAsJsonObject("additional").getAsJsonPrimitive("fi").getAsString();
+                }
+            }
+            
         }
         catch (MalformedURLException e){
         }
