@@ -32,6 +32,7 @@ public class Controller implements Initializable{
     private static HashMap<String, Degree> degrees;
     private static Student student;
     private static Degree degree;
+    private static HashMap<String, Boolean> coursesDone;
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -64,6 +65,8 @@ public class Controller implements Initializable{
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
+
+        coursesDone = student.getCoursesDone();
         
         
     }
@@ -76,6 +79,8 @@ public class Controller implements Initializable{
             String[] splitString = courseHeader.split(" ");
             
             
+            
+
             Course c = searchCourse(splitString[0]);
 
             courseInfo.getEngine().loadContent("");
