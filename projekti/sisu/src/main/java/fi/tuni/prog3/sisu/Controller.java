@@ -3,6 +3,7 @@ package fi.tuni.prog3.sisu;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -30,8 +31,12 @@ import javafx.scene.input.MouseEvent;
 public class Controller implements Initializable{
     
     private static HashMap<String, Degree> degrees;
+    private static HashMap<String, Course> allCourses;
+    private static HashMap<String, Module> allModules;
     private static Student student;
     private static Degree degree;
+
+    
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -56,7 +61,8 @@ public class Controller implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1){
         //otettu vain yksittäinen degree.
         //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
-
+        allCourses = new HashMap<>();
+        allModules = new HashMap<>();
         TreeItem<String> rootItem = GUITools.initializeTree(degree);
         //selectableCourseList = GUITools.initializeCheckList(degrees);
 
@@ -74,12 +80,25 @@ public class Controller implements Initializable{
         if(item != null){
             String courseHeader = item.getValue();
             String[] splitString = courseHeader.split(" ");
+            String[] courseName = Arrays.copyOf(splitString, splitString.length-1);
+            StringBuilder sb = new StringBuilder();
+            for(String s : courseName){
+                sb.append(s).append(" ");
+            }
+            String name = sb.toString();
             
-            
-            Course c = searchCourse(splitString[0]);
+            Course c = searchCourse(name.substring(0, name.length()-1));
+            if(c!=null){
+                courseInfo.getEngine().loadContent("");
+                courseInfo.getEngine().loadContent(c.getContent());
+            }
+            Module m = searchModule(splitString[0]);
+            if(m!=null){
+                courseInfo.getEngine().loadContent("");
+                courseInfo.getEngine().loadContent(c.getContent());
+            }
 
-            courseInfo.getEngine().loadContent("");
-            courseInfo.getEngine().loadContent(c.getContent());
+           
             /*
             courseInfo.getChildren().clear();
             courseInfo.getChildren().add(new Text(c.getContent()));
@@ -139,25 +158,33 @@ public class Controller implements Initializable{
     public static void setDegree(Degree degree){
         Controller.degree = degree;
     }
+    public static void addCourses(Course c){
+        allCourses.put(c.getName(), c);
+    }
+    public static void addModules(Module m){
+        allModules.put(m.getName(), m);
+    }
+    public static void clearMaps() {
+        if(allCourses != null){
+            allCourses.clear();
+        }
+        if(allModules != null){
+            allModules.clear();
+        }
+        
+    }
     
     public static Course searchCourse(String name){
-        HashMap<String, Module> modules = Controller.degree.getModules();
-        Course c = moduleLoop(modules, name);
-        return c;
-         
-    }
-    public static Course moduleLoop(HashMap<String, Module> modules, String name){
-        Course c = null;
-        for(Module m: modules.values()){
-            if(m.getCourses().containsKey(name)){
-                Course cour = (Course) m.getCourses().get(name);
-                c = cour;
-                break;
-            }
-            else if(!m.getModules().keySet().isEmpty()){
-                 c = moduleLoop(m.getModules(), name);
-            }
+        if(allCourses.containsKey(name)){
+            return allCourses.get(name);
         }
-        return c;
+        return null;
     }
+    public static Module searchModule(String name){
+        if(allModules.containsKey(name)){
+            return allModules.get(name);
+        }
+        return null;
+    }
+    
 }

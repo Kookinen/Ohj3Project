@@ -57,6 +57,7 @@ public class GUITools {
 
     public static TreeItem<String> initializeTree(Degree deg){
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
+        Controller.clearMaps();
         printTree(deg.getModules(), rootItem);
         return rootItem;
     }
@@ -84,13 +85,16 @@ public class GUITools {
     private static void printTree(HashMap<String, Module> modules, TreeItem root){
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
+        
         //käydään kaikki modulet läpi
         for(Module m:modules.values()){
             moduleItem = new TreeItem<>(m.getName()+ " " + m.getTargetCredits()+ "op");
+            Controller.addModules(m);
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
             //käydään modulen alaiset kurssit ( jos on )
             for(Course c:cors.values()){
+                Controller.addCourses(c);
                 courseItem = new TreeItem<>(c.getName()+ " " + c.getTargetCredits()+"op");
                 //lisätään kurssi modulen alle
                 moduleItem.getChildren().add(courseItem);
