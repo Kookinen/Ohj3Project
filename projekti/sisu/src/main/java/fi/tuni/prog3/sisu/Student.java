@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 
 
 public class Student {
     private String name;
     private String number;
+    HashMap<String, Boolean> coursesDone;
     
     
     public Student(String name, String number){
@@ -29,6 +31,15 @@ public class Student {
     public String toString(){
         return String.format("%s%n %s%n",this.name,this.number);
     }
+
+    public HashMap<String, Boolean> getCoursesDone(){
+        return coursesDone;
+    }
+
+    public void addCoursesDone(String course, Boolean status){
+        coursesDone.put(course, status);
+    }
+
     //Not works
     
     

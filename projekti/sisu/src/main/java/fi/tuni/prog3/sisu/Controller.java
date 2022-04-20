@@ -36,8 +36,8 @@ public class Controller implements Initializable{
     private static HashMap<String, Module> allModules;
     private static Student student;
     private static Degree degree;
+    private static HashMap<String, Boolean> coursesDone;
 
-    
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -72,6 +72,8 @@ public class Controller implements Initializable{
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
+
+        coursesDone = student.getCoursesDone();
         
         
     }
@@ -89,6 +91,7 @@ public class Controller implements Initializable{
             }
             String name = sb.toString();
             
+
             Course c = searchCourse(name.substring(0, name.length()-1));
             if(c!=null){
                 if(c.getContent()!=null){
@@ -113,6 +116,7 @@ public class Controller implements Initializable{
                 courseInfo.getEngine().loadContent(degree.getOutcomes());
                 
             }
+
 
            
             /*
