@@ -19,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.web.WebView;
 
 /*
 import javafx.scene.image.Image;
@@ -35,7 +36,7 @@ public class Controller implements Initializable{
     @FXML
     private TreeView<String> mainView = new TreeView<>();
     @FXML
-    private TextFlow courseInfo = new TextFlow();
+    private WebView courseInfo = new WebView();
     @FXML
     private Text studentName = new Text();
     @FXML
@@ -56,14 +57,9 @@ public class Controller implements Initializable{
         //otettu vain yksittäinen degree.
         //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
 
-<<<<<<< HEAD
-        TreeItem<String> rootItem = GUITools.initializeTree(degrees);
+        TreeItem<String> rootItem = GUITools.initializeTree(degree);
         //selectableCourseList = GUITools.initializeCheckList(degrees);
-||||||| 37b47b9
-        TreeItem rootItem = GUITools.initializeTree(degrees);
-=======
-        TreeItem rootItem = GUITools.initializeTree(degree);
->>>>>>> 0e9c884ce4aeb2f2124000721f4a5528edcf018d
+
         mainView.setRoot(rootItem);
 
         studentNumber.setText(student.getNumber());
@@ -81,8 +77,13 @@ public class Controller implements Initializable{
             
             
             Course c = searchCourse(splitString[0]);
+
+            courseInfo.getEngine().loadContent("");
+            courseInfo.getEngine().loadContent(c.getContent());
+            /*
             courseInfo.getChildren().clear();
             courseInfo.getChildren().add(new Text(c.getContent()));
+            */
         }
         
 
