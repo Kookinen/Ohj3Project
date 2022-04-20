@@ -28,6 +28,7 @@ public class Controller implements Initializable{
     
     private static HashMap<String, Degree> degrees;
     private static Student student;
+    private static Degree degree;
     
     @FXML
     private TreeView<String> mainView = new TreeView<>();
@@ -49,7 +50,7 @@ public class Controller implements Initializable{
         //otettu vain yksittäinen degree.
         //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
 
-        TreeItem rootItem = GUITools.initializeTree(degrees);
+        TreeItem rootItem = GUITools.initializeTree(degree);
         mainView.setRoot(rootItem);
 
         studentNumber.setText(student.getNumber());
@@ -61,7 +62,16 @@ public class Controller implements Initializable{
     @FXML
     public void selectItem(){
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-        System.out.println(item.getValue());
+        if(item != null){
+            String courseHeader = item.getValue();
+            String[] splitString = courseHeader.split(" ");
+            
+            
+            Course c = searchCourse(splitString[0]);
+            courseInfo.getChildren().clear();
+            courseInfo.getChildren().add(new Text(c.getContent()));
+        }
+        
 
         /*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
             @Override 
@@ -106,8 +116,33 @@ public class Controller implements Initializable{
     public static void setDegrees(HashMap degrees){
         Controller.degrees = degrees;
     }
-
+    
     public static void setStudent(Student student){
         Controller.student = student;
+    }
+    
+    public static void setDegree(Degree degree){
+        Controller.degree = degree;
+    }
+    
+    public static Course searchCourse(String name){
+        HashMap<String, Module> modules = Controller.degree.getModules();
+        Course c = moduleLoop(modules, name);
+        return c;
+         
+    }
+    public static Course moduleLoop(HashMap<String, Module> modules, String name){
+        Course c = null;
+        for(Module m: modules.values()){
+            if(m.getCourses().containsKey(name)){
+                Course cour = (Course) m.getCourses().get(name);
+                c = cour;
+                break;
+            }
+            else if(!m.getModules().keySet().isEmpty()){
+                 c = moduleLoop(m.getModules(), name);
+            }
+        }
+        return c;
     }
 }
