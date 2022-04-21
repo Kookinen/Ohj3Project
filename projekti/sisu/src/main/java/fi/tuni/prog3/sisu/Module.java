@@ -14,6 +14,7 @@ public class Module {
     String id;
     int targetCredits;
     String outcomes;
+    String type;
     //String curriculumPeriodIds;
     //String validityPeriod;
     HashMap<String, Module> modules;
@@ -45,6 +46,9 @@ public class Module {
     public HashMap getCourses(){
         return courses;
     }
+    public String getType(){
+        return type;
+    }
     
 
     private void decodeJson() {
@@ -69,6 +73,7 @@ public class Module {
             else{
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
+            this.type = obj.get("type").getAsString();
             
             
             switch(obj.getAsJsonPrimitive("type").getAsString()) {
@@ -91,6 +96,7 @@ public class Module {
             
                     break;
             }
+            
                 
             
             

@@ -61,17 +61,13 @@
                               <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
                            </children></VBox>
                         <WebView fx:id="courseInfo" layoutX="551.0" layoutY="54.0" prefHeight="340.0" prefWidth="534.0" />
-<<<<<<< HEAD:projekti/sisu/src/main/resources/mainGUI.fxml
                         <VBox fx:id="completedCourses" layoutX="570.0" layoutY="478.0" prefHeight="295.0" prefWidth="274.0" />
                         <Text layoutX="570.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Omat opinnot" wrappingWidth="164.13671875">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
-||||||| 16cdc43:projekti/sisu/src/main/resources/test.fxml
-=======
                         <Button fx:id="switchButton" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" text="Vaihda tutkintoa" />
->>>>>>> cc3d134601416d053399e8986371cfcf0e677312:projekti/sisu/src/main/resources/test.fxml
                      </children>
                   </AnchorPane>
             </content>

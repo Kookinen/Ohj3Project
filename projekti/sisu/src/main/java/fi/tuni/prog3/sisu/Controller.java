@@ -145,43 +145,17 @@ public class Controller implements Initializable{
     public void checkBoxOnClick(){
 
         student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
-<<<<<<< HEAD
-||||||| 16cdc43
+
         
 
-        //? tarpeellinen
-=======
+
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-        String value = item.getParent().getValue();
-        StringBuilder sb = new StringBuilder();
-        String[] splitValue = value.split(" ");
-        int length = splitValue.length;
-        String last = splitValue[length-1];
-        String pointsSplit = last.split("/")[0];
-        String prevPoints = pointsSplit.substring(0, pointsSplit.length()-2);
-        System.out.print(value);
-        System.out.println(prevPoints);
-        int prevPointsNumb = Integer.parseInt(prevPoints);
-        String[] name = Arrays.copyOf(splitValue, length-1);
-        for(String s:name){
-            sb.append(s).append(" ");
-        }
-        if(courseCheckBox.isSelected()){
-            Course c = searchCourse(Controller.selectedElement);
-            sb.append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
-            item.getParent().setValue(sb.toString());
-        }
-        else{
-            Course c = searchCourse(Controller.selectedElement);
-            sb.setLength(sb.length()-1);
-            Module m = searchModule(sb.toString());
-            sb.append(" ").append(prevPointsNumb-c.getTargetCredits()).append("op/").append(m.getTargetCredits()).append("op");
-            item.getParent().setValue(sb.toString());
-        }
+        addCreditsToTree(item);
+        
+        
         
 
         //? tarpeellinen
->>>>>>> cc3d134601416d053399e8986371cfcf0e677312
         courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         refreshStudiesCompleted();
 
@@ -292,6 +266,39 @@ public class Controller implements Initializable{
             return allModules.get(name);
         }
         return null;
+    }
+
+    private void addCreditsToTree(TreeItem<String> item) {
+        if(item.getParent().getParent() != null ){
+            addCreditsToTree(item.getParent());
+            if(searchModule(item.getParent().getValue())== null){
+                String value = item.getParent().getValue();
+                StringBuilder sb = new StringBuilder();
+                String[] splitValue = value.split(" ");
+                int length = splitValue.length;
+                String last = splitValue[length-1];
+                String pointsSplit = last.split("/")[0];
+                String prevPoints = pointsSplit.substring(0, pointsSplit.length()-2);
+                int prevPointsNumb = Integer.parseInt(prevPoints);
+                String[] name = Arrays.copyOf(splitValue, length-1);
+                for(String s:name){
+                    sb.append(s).append(" ");
+                }
+                sb.setLength(sb.length()-1);
+                if(courseCheckBox.isSelected()){
+                    Course c = searchCourse(Controller.selectedElement);
+                    sb.append(" ").append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
+                    item.getParent().setValue(sb.toString());
+                }
+                else{
+                    Course c = searchCourse(Controller.selectedElement);
+
+                    Module m = searchModule(sb.toString());
+                    sb.append(" ").append(prevPointsNumb-c.getTargetCredits()).append("op/").append(m.getTargetCredits()).append("op");
+                    item.getParent().setValue(sb.toString());
+                }
+            }           
+        }
     }
     
 }

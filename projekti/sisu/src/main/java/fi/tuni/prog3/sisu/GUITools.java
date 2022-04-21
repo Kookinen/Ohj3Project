@@ -88,7 +88,13 @@ public class GUITools {
         
         //käydään kaikki modulet läpi
         for(Module m:modules.values()){
-            moduleItem = new TreeItem<>(m.getName()+ " 0op/" + m.getTargetCredits()+ "op");
+            if(m.getType().equals("GroupingModule")){
+                 moduleItem = new TreeItem<>(m.getName());
+            }
+            else{
+                 moduleItem = new TreeItem<>(m.getName()+ " 0op/" + m.getTargetCredits()+ "op");
+            }
+           
             Controller.addModules(m);
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
