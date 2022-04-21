@@ -11,7 +11,8 @@ import java.util.HashMap;
 public class Student {
     private String name;
     private String number;
-    private String degree;
+    private static String degree;
+
     private HashMap<String, Boolean> coursesDone = new HashMap<>();
     
     
@@ -32,8 +33,8 @@ public class Student {
         return degree;
     }
 
-    public void setDegree(String newDegree){
-        this.degree = newDegree;
+    public static void setDegree(String newDegree){
+        degree = newDegree;
     }
 
     @Override
@@ -48,6 +49,7 @@ public class Student {
     //Tarvitaanko delete vai voiko opiskelija vain lisätä kursseja
     public void addCoursesDone(String course, Boolean status){
         this.coursesDone.put(course, status);
+        
     }
     //Not works
     
