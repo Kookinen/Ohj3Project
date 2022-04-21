@@ -56,11 +56,17 @@
                            </font>
                         </Label>
                         <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
-                        <VBox fx:id="selectableCourseList" layoutX="570.0" layoutY="415.0" prefHeight="96.0" prefWidth="511.0">
+                        <VBox fx:id="selectableCourseList" layoutX="570.0" layoutY="415.0" prefHeight="31.0" prefWidth="511.0">
                            <children>
                               <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
                            </children></VBox>
                         <WebView fx:id="courseInfo" layoutX="551.0" layoutY="54.0" prefHeight="340.0" prefWidth="534.0" />
+                        <VBox fx:id="completedCourses" layoutX="570.0" layoutY="478.0" prefHeight="295.0" prefWidth="274.0" />
+                        <Text layoutX="570.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Omat opinnot" wrappingWidth="164.13671875">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
             </content>

@@ -78,6 +78,12 @@ public class sisu extends Application{
         
         Label degreeLabel = new Label("Select degree:");
         ComboBox degreeBox = new ComboBox();
+        //degreeBox.maxWidth(150);
+        degreeBox.getStylesheets().add(
+            getClass().getResource(
+                    "/dropDownSize.css"
+            ).toExternalForm()
+    );
         
         
         
@@ -131,7 +137,7 @@ public class sisu extends Application{
                         student.setDegree(degree.getName());
                         Parent root = new Parent(){};
                         try{
-                            root = FXMLLoader.load(this.getClass().getResource("/test.fxml"));
+                            root = FXMLLoader.load(this.getClass().getResource("/mainGUI.fxml"));
                             System.out.print("UI-tiedosto löytyi!\n");
 
                         }

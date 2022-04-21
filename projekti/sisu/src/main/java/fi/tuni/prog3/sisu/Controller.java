@@ -7,20 +7,15 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.scene.web.WebView;
 
 /*
@@ -36,9 +31,6 @@ public class Controller implements Initializable{
     private static HashMap<String, Module> allModules;
     private static Student student;
     private static Degree degree;
-
-    private static HashMap<String, Boolean> coursesDone;
-
     private static String selectedElement;
     //private static HashMap<String, Boolean> coursesDone;
     
@@ -57,9 +49,12 @@ public class Controller implements Initializable{
     @FXML
     private ComboBox searchBar = new ComboBox<>();
     @FXML
+    private VBox completedCourses = new VBox();
+    @FXML
     private VBox selectableCourseList = new VBox();
     @FXML
     private CheckBox courseCheckBox = new CheckBox();
+    
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
@@ -75,9 +70,6 @@ public class Controller implements Initializable{
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
-
-        
-        
         
     }
 
@@ -89,8 +81,6 @@ public class Controller implements Initializable{
             String[] splitString = courseHeader.split(" ");
             String[] courseName = Arrays.copyOf(splitString, splitString.length-1);
             StringBuilder sb = new StringBuilder();
-
-            
 
             for(String s : courseName){
                 sb.append(s).append(" ");
@@ -128,25 +118,49 @@ public class Controller implements Initializable{
             //Checkboxin nollaus jos dataa ei tulekkaan
             courseCheckBox.setSelected(false);
 
-            if(student.getCoursesDone().get(Controller.selectedElement) == null || student.getCoursesDone() == null){
-                student.addCoursesDone(Controller.selectedElement, courseCheckBox.isSelected());
+            if(allCourses.containsKey(Controller.selectedElement)){
+                courseCheckBox.setVisible(true);
+                if(student.getCoursesDone().get(Controller.selectedElement) == null || student.getCoursesDone() == null){
+                    student.addCoursesDone(Controller.selectedElement, courseCheckBox.isSelected());
+                }
+                courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
+            } else {
+                courseCheckBox.setVisible(false);
             }
+            
+                
+            
 
             //Checkboxin status haetaan
-            courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
+            //courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         }
     }
 
     @FXML
     public void checkBoxOnClick(){
 
-        //TODO: Vain kurssit voi tallentaa ja checkbox näkyy vain kurssien kohdalla
         student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
-        
-
-        //? tarpeellinen
         courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
-        
+        refreshStudiesCompleted();
+
+    }
+
+    @FXML 
+    void refreshStudiesCompleted(){
+        completedCourses.getChildren().clear();
+
+        for(String key : student.getCoursesDone().keySet()){
+            if(student.getCoursesDone().get(key)){
+                String credits = String.valueOf(allCourses.get(key).maxCredits);
+                StringBuilder sb = new StringBuilder();
+                sb.append(key+" "+credits+"op");
+
+                String course = sb.toString();
+                
+                Text completedCourse = new Text(course);
+                completedCourses.getChildren().add(completedCourse);
+            }
+        }
     }
 
     @FXML
@@ -174,6 +188,8 @@ public class Controller implements Initializable{
         catch(FileNotFoundException e2){
             System.out.println("File not found :(");
         }
+
+        refreshStudiesCompleted();
     }
 
   
