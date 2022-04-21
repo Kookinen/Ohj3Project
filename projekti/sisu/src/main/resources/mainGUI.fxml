@@ -68,6 +68,12 @@
                            </font>
                         </Text>
                         <Button fx:id="switchButton" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" text="Vaihda tutkintoa" />
+                        <Text layoutX="570.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yhteensä:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="allCredits" layoutX="632.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                      </children>
                   </AnchorPane>
             </content>

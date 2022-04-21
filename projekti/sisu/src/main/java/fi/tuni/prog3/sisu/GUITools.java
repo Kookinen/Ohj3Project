@@ -1,24 +1,23 @@
 package fi.tuni.prog3.sisu;
 
-import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.util.Duration;
 import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+
 
 public class GUITools {
     
@@ -82,7 +81,7 @@ public class GUITools {
         return checkBoxList;
     }*/
     
-    private static void printTree(HashMap<String, Module> modules, TreeItem root){
+    private static void printTree(HashMap<String, Module> modules, TreeItem<String> root){
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
         
@@ -113,7 +112,7 @@ public class GUITools {
         }
     }
     
-    public static void setUpDegreeBox(ComboBox cb, HashMap<String, Degree> degrees){
+    public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees){
         cb.setEditable(true);
         cb.setPromptText("Hae tutkinnon nimellä...");
         cb.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>(){

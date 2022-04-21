@@ -49,13 +49,15 @@ public class Controller implements Initializable{
     @FXML
     private Button switchButton = new Button();
     @FXML
-    private ComboBox searchBar = new ComboBox<>();
+    private ComboBox<String> searchBar = new ComboBox<>();
     @FXML
     private VBox completedCourses = new VBox();
     @FXML
     private VBox selectableCourseList = new VBox();
     @FXML
     private CheckBox courseCheckBox = new CheckBox();
+    @FXML
+    private Text allCredits = new Text();
     
 
     @Override
@@ -72,6 +74,8 @@ public class Controller implements Initializable{
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
+
+        allCredits.setText("0op");
         
     }
 
@@ -146,15 +150,9 @@ public class Controller implements Initializable{
 
         student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
 
-        
-
-
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
         addCreditsToTree(item);
         
-        
-        
-
         //? tarpeellinen
         courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         refreshStudiesCompleted();
@@ -177,6 +175,8 @@ public class Controller implements Initializable{
                 completedCourses.getChildren().add(completedCourse);
             }
         }
+
+        allCredits.setText(String.format("%d"+ "op", student.getCredits()));
     }
 
     @FXML
@@ -209,21 +209,22 @@ public class Controller implements Initializable{
     }
     @FXML
     public void switchDegree(){
-        if(!searchBar.getEditor().getText().isEmpty()){
+        if(!searchBar.getEditor().getText().isEmpty() && degrees.containsKey(searchBar.getEditor().getText())){
             Degree degree = degrees.get(searchBar.getEditor().getText());
             String s = degree.getName();
-            Student.setDegree(s);
+            student.setDegree(s);
             TreeItem<String> rootItem = GUITools.initializeTree(degree);
             mainView.setRoot(rootItem);
         }
-         
+        
+        refreshStudiesCompleted();
          
     }
 
   
      //Adding event Filter 
 
-    public static void setDegrees(HashMap degrees){
+    public static void setDegrees(HashMap<String, Degree> degrees){
         Controller.degrees = degrees;
     }
     

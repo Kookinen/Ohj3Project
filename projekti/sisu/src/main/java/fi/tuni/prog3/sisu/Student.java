@@ -1,10 +1,5 @@
 package fi.tuni.prog3.sisu;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.HashMap;
 
 
@@ -12,15 +7,13 @@ public class Student {
     private String name;
     private String number;
     private static String degree;
+    private int credits = 0;
 
     private HashMap<String, Boolean> coursesDone = new HashMap<>();
     
-    
     public Student(String name, String number){
         this.name = name;
-        this.number = number;
-        
-        
+        this.number = number; 
     }
     public String getName(){
         return name;
@@ -33,8 +26,22 @@ public class Student {
         return degree;
     }
 
-    public static void setDegree(String newDegree){
+    public void setDegree(String newDegree){
         degree = newDegree;
+        clearCoursesDone();
+        credits = 0;
+    }
+
+    public int getCredits(){
+        return credits;
+    }
+
+    public void addCredits(int earnedCredits){
+        credits = credits+earnedCredits;
+    }
+
+    public void subtractCredits(int lostCredits){
+        credits = credits-lostCredits;
     }
 
     @Override
@@ -51,9 +58,8 @@ public class Student {
         this.coursesDone.put(course, status);
         
     }
-    //Not works
-    
-    
-    
-    
+
+    public void clearCoursesDone(){
+        this.coursesDone.clear();
+    } 
 }

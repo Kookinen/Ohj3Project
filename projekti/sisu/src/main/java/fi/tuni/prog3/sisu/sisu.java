@@ -4,12 +4,8 @@ package fi.tuni.prog3.sisu;
 import com.google.gson.*;
 
 import java.io.FileNotFoundException;
-//import java.io.BufferedReader;
 import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-//import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 import javafx.application.Application;
@@ -25,7 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+//import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -77,7 +73,7 @@ public class sisu extends Application{
         studentNumber.setMaxWidth(150);
         
         Label degreeLabel = new Label("Select degree:");
-        ComboBox degreeBox = new ComboBox();
+        ComboBox<String> degreeBox = new ComboBox<>();
         //degreeBox.maxWidth(150);
         degreeBox.getStylesheets().add(
             getClass().getResource(
@@ -105,7 +101,7 @@ public class sisu extends Application{
           välilehtiä varten vbox
         */
         //Group root = new Group();
-        VBox vbox = new VBox();
+        //VBox vbox = new VBox();
         
 
 
@@ -117,7 +113,7 @@ public class sisu extends Application{
                 Student student = null;
                 boolean studentFound = false;
                 if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
-                    if(startButton.getText().equals("Register") && !degreeBox.getEditor().getText().isEmpty()){
+                    if(startButton.getText().equals("Register") && !degreeBox.getEditor().getText().isEmpty() && degrees.containsKey(degreeBox.getEditor().getText())){
                         student = new Student(userName.getText(), studentNumber.getText());
                         studentFound = true;
                     }
