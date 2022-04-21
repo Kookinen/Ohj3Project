@@ -65,6 +65,270 @@ public class sisu extends Application{
 
         }
 
+<<<<<<< HEAD
+||||||| 78afb37
+        GridPane grid = new GridPane();
+        Scene login = new Scene(grid, 500, 500);
+        grid.setHgap(5);
+        grid.setVgap(5);
+        
+        Label logMessage = new Label("Log in using your credentials or register as a new user");
+        logMessage.setMaxWidth(300);
+        
+        Label usernameLabel = new Label("Username:");
+        TextField userName = new TextField();
+        userName.setMaxWidth(150);
+        
+        Label studentNumberLabel = new Label("Student Number:");
+        TextField studentNumber = new TextField();
+        studentNumber.setMaxWidth(150);
+        
+        Label degreeLabel = new Label("Select degree:");
+        ComboBox<String> degreeBox = new ComboBox<>();
+        //degreeBox.maxWidth(150);
+        degreeBox.getStylesheets().add(
+            getClass().getResource(
+                    "/dropDownSize.css"
+            ).toExternalForm()
+    );
+        
+        
+        
+        Button logButton = new Button("Log in");
+        logButton.setPrefWidth(150);
+        
+        Button regButton = new Button("Register");
+        regButton.setPrefWidth(150);
+        
+        Button startButton = new Button("Register");
+        startButton.setPrefWidth(150);
+        
+        grid.add(logMessage, 0, 0, 2, 1);
+        grid.add(regButton, 0,1);
+        grid.add(logButton, 0, 2);
+        grid.setAlignment(Pos.CENTER);
+        
+        /*
+          välilehtiä varten vbox
+        */
+        //Group root = new Group();
+        //VBox vbox = new VBox();
+        
+
+
+        
+        
+        startButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                Student student = null;
+                boolean studentFound = false;
+                if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
+                    if(startButton.getText().equals("Register") && !degreeBox.getEditor().getText().isEmpty()){
+                        student = new Student(userName.getText(), studentNumber.getText());
+                        studentFound = true;
+                    }
+                    else{
+                        try {
+                            student = SaveProgress.loadStudent();
+                            studentFound = true;
+                        } catch (FileNotFoundException ex) {}
+                    }
+                    //stage.setMaximized(true);
+                    //stage.setFullScreen(true);
+                    //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
+                    if(studentFound){                    
+                        Controller.setStudent(student);
+                        Degree degree = degrees.get(degreeBox.getEditor().getText()); 
+                        Controller.setDegree(degree);
+                        student.setDegree(degree.getName());
+                        Parent root = new Parent(){};
+                        try{
+                            root = FXMLLoader.load(this.getClass().getResource("/mainGUI.fxml"));
+                            System.out.print("UI-tiedosto löytyi!\n");
+
+                        }
+                        catch (IOException e3){
+                            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
+                        }
+                        catch (NullPointerException e4){
+                            System.out.print("UI-tiedostoa ei löydy!\n");
+                        }
+
+                        Scene mainScene = new Scene(root);
+                        stage.setScene(mainScene);
+                    }
+                }
+            }
+        });
+        regButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 4);
+                grid.add(degreeLabel, 0, 3);
+                grid.add(degreeBox, 1, 3);
+                GUITools.setUpDegreeBox(degreeBox, degrees);
+                
+            }
+        });
+        logButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                startButton.setText("Log in");
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 3);
+
+                //Student jsonista tietojen haku!!!
+                
+            }
+        });
+
+        
+=======
+        GridPane grid = new GridPane();
+        Scene login = new Scene(grid, 500, 500);
+        grid.setHgap(5);
+        grid.setVgap(5);
+        
+        Label logMessage = new Label("Log in using your credentials or register as a new user");
+        logMessage.setMaxWidth(300);
+        
+        Label usernameLabel = new Label("Username:");
+        TextField userName = new TextField();
+        userName.setMaxWidth(150);
+        
+        Label studentNumberLabel = new Label("Student Number:");
+        TextField studentNumber = new TextField();
+        studentNumber.setMaxWidth(150);
+        
+        Label degreeLabel = new Label("Select degree:");
+        ComboBox<String> degreeBox = new ComboBox<>();
+        //degreeBox.maxWidth(150);
+        degreeBox.getStylesheets().add(
+            getClass().getResource(
+                    "/dropDownSize.css"
+            ).toExternalForm()
+    );
+        
+        
+        
+        Button logButton = new Button("Log in");
+        logButton.setPrefWidth(150);
+        
+        Button regButton = new Button("Register");
+        regButton.setPrefWidth(150);
+        
+        Button startButton = new Button("Register");
+        startButton.setPrefWidth(150);
+        
+        grid.add(logMessage, 0, 0, 2, 1);
+        grid.add(regButton, 0,1);
+        grid.add(logButton, 0, 2);
+        grid.setAlignment(Pos.CENTER);
+        
+        /*
+          välilehtiä varten vbox
+        */
+        //Group root = new Group();
+        //VBox vbox = new VBox();
+        
+
+
+        
+        
+        startButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                Student student = null;
+                boolean studentFound = false;
+                if(!userName.getText().isEmpty() && !studentNumber.getText().isEmpty()){
+                    if(startButton.getText().equals("Register") && !degreeBox.getEditor().getText().isEmpty() && degrees.containsKey(degreeBox.getEditor().getText())){
+                        student = new Student(userName.getText(), studentNumber.getText());
+                        studentFound = true;
+                    }
+                    else{
+                        try {
+                            student = SaveProgress.loadStudent();
+                            studentFound = true;
+                        } catch (FileNotFoundException ex) {}
+                    }
+                    //stage.setMaximized(true);
+                    //stage.setFullScreen(true);
+                    //stage.setFullScreenExitHint("Fullscreen-tilasta pääsee pois painamalla ESC!");
+                    if(studentFound){                    
+                        Controller.setStudent(student);
+                        Degree degree = degrees.get(degreeBox.getEditor().getText()); 
+                        Controller.setDegree(degree);
+                        student.setDegree(degree.getName());
+                        Parent root = new Parent(){};
+                        try{
+                            root = FXMLLoader.load(this.getClass().getResource("/mainGUI.fxml"));
+                            System.out.print("UI-tiedosto löytyi!\n");
+
+                        }
+                        catch (IOException e3){
+                            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
+                        }
+                        catch (NullPointerException e4){
+                            System.out.print("UI-tiedostoa ei löydy!\n");
+                        }
+
+                        Scene mainScene = new Scene(root);
+                        stage.setScene(mainScene);
+                    }
+                }
+            }
+        });
+        regButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 4);
+                grid.add(degreeLabel, 0, 3);
+                grid.add(degreeBox, 1, 3);
+                GUITools.setUpDegreeBox(degreeBox, degrees);
+                
+            }
+        });
+        logButton.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                grid.getChildren().clear();
+                
+                startButton.setText("Log in");
+                
+                grid.add(usernameLabel, 0, 1);
+                grid.add(userName, 1, 1);
+                grid.add(studentNumberLabel, 0, 2);
+                grid.add(studentNumber, 1, 2);
+                grid.add(startButton, 1, 3);
+
+                //Student jsonista tietojen haku!!!
+                
+            }
+        });
+
+        
+>>>>>>> a8697d73250240560a2a737b34dd841119786682
 
         LoginController controller = loader.getController();
         controller.setParent(parent);
