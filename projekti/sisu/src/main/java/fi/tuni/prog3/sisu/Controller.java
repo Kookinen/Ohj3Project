@@ -47,6 +47,8 @@ public class Controller implements Initializable{
     @FXML
     private Button loadButton = new Button();
     @FXML
+    private Button switchButton = new Button();
+    @FXML
     private ComboBox searchBar = new ComboBox<>();
     @FXML
     private VBox completedCourses = new VBox();
@@ -102,17 +104,20 @@ public class Controller implements Initializable{
                 }
                 
                 
+                
+                
             }
+            //EI toimi täysin
             Module m = searchModule(splitString[0]);
             if(m!=null){
                 courseInfo.getEngine().loadContent("");
                 courseInfo.getEngine().loadContent(m.getOutcomes());
-                
             }
+            //Ei toimi lainkaan
             if(name.equals(degree.getName())){
                 courseInfo.getEngine().loadContent("");
                 //courseInfo.getEngine().loadContent(degree.getOutcomes());
-                
+
             }
 
             //Checkboxin nollaus jos dataa ei tulekkaan
@@ -140,6 +145,43 @@ public class Controller implements Initializable{
     public void checkBoxOnClick(){
 
         student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
+<<<<<<< HEAD
+||||||| 16cdc43
+        
+
+        //? tarpeellinen
+=======
+        TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
+        String value = item.getParent().getValue();
+        StringBuilder sb = new StringBuilder();
+        String[] splitValue = value.split(" ");
+        int length = splitValue.length;
+        String last = splitValue[length-1];
+        String pointsSplit = last.split("/")[0];
+        String prevPoints = pointsSplit.substring(0, pointsSplit.length()-2);
+        System.out.print(value);
+        System.out.println(prevPoints);
+        int prevPointsNumb = Integer.parseInt(prevPoints);
+        String[] name = Arrays.copyOf(splitValue, length-1);
+        for(String s:name){
+            sb.append(s).append(" ");
+        }
+        if(courseCheckBox.isSelected()){
+            Course c = searchCourse(Controller.selectedElement);
+            sb.append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
+            item.getParent().setValue(sb.toString());
+        }
+        else{
+            Course c = searchCourse(Controller.selectedElement);
+            sb.setLength(sb.length()-1);
+            Module m = searchModule(sb.toString());
+            sb.append(" ").append(prevPointsNumb-c.getTargetCredits()).append("op/").append(m.getTargetCredits()).append("op");
+            item.getParent().setValue(sb.toString());
+        }
+        
+
+        //? tarpeellinen
+>>>>>>> cc3d134601416d053399e8986371cfcf0e677312
         courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         refreshStudiesCompleted();
 
@@ -190,6 +232,18 @@ public class Controller implements Initializable{
         }
 
         refreshStudiesCompleted();
+    }
+    @FXML
+    public void switchDegree(){
+        if(!searchBar.getEditor().getText().isEmpty()){
+            Degree degree = degrees.get(searchBar.getEditor().getText());
+            String s = degree.getName();
+            Student.setDegree(s);
+            TreeItem<String> rootItem = GUITools.initializeTree(degree);
+            mainView.setRoot(rootItem);
+        }
+         
+         
     }
 
   
