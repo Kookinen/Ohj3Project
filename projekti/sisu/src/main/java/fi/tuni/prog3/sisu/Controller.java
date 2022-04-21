@@ -49,13 +49,15 @@ public class Controller implements Initializable{
     @FXML
     private Button switchButton = new Button();
     @FXML
-    private ComboBox searchBar = new ComboBox<>();
+    private ComboBox<String> searchBar = new ComboBox<>();
     @FXML
     private VBox completedCourses = new VBox();
     @FXML
     private VBox selectableCourseList = new VBox();
     @FXML
     private CheckBox courseCheckBox = new CheckBox();
+    @FXML
+    private Text allCredits = new Text();
     
 
     @Override
@@ -72,6 +74,8 @@ public class Controller implements Initializable{
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
+
+        allCredits.setText("0op");
         
     }
 
@@ -145,12 +149,6 @@ public class Controller implements Initializable{
     public void checkBoxOnClick(){
 
         student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
-<<<<<<< HEAD
-||||||| 16cdc43
-        
-
-        //? tarpeellinen
-=======
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
         String value = item.getParent().getValue();
         StringBuilder sb = new StringBuilder();
@@ -170,6 +168,7 @@ public class Controller implements Initializable{
             Course c = searchCourse(Controller.selectedElement);
             sb.append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
             item.getParent().setValue(sb.toString());
+            student.addCredits(c.getTargetCredits());
         }
         else{
             Course c = searchCourse(Controller.selectedElement);
@@ -177,11 +176,11 @@ public class Controller implements Initializable{
             Module m = searchModule(sb.toString());
             sb.append(" ").append(prevPointsNumb-c.getTargetCredits()).append("op/").append(m.getTargetCredits()).append("op");
             item.getParent().setValue(sb.toString());
+            student.subtractCredits(c.getTargetCredits());
         }
         
 
         //? tarpeellinen
->>>>>>> cc3d134601416d053399e8986371cfcf0e677312
         courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         refreshStudiesCompleted();
 
@@ -203,6 +202,8 @@ public class Controller implements Initializable{
                 completedCourses.getChildren().add(completedCourse);
             }
         }
+
+        allCredits.setText(String.format("%d"+ "op", student.getCredits()));
     }
 
     @FXML
@@ -238,18 +239,19 @@ public class Controller implements Initializable{
         if(!searchBar.getEditor().getText().isEmpty()){
             Degree degree = degrees.get(searchBar.getEditor().getText());
             String s = degree.getName();
-            Student.setDegree(s);
+            student.setDegree(s);
             TreeItem<String> rootItem = GUITools.initializeTree(degree);
             mainView.setRoot(rootItem);
         }
-         
+        
+        refreshStudiesCompleted();
          
     }
 
   
      //Adding event Filter 
 
-    public static void setDegrees(HashMap degrees){
+    public static void setDegrees(HashMap<String, Degree> degrees){
         Controller.degrees = degrees;
     }
     

@@ -39,10 +39,10 @@ public class Module {
     public String getOutcomes(){
         return outcomes;
     }
-    public HashMap getModules(){
+    public HashMap<String, Module> getModules(){
         return modules;
     }
-    public HashMap getCourses(){
+    public HashMap<String, Course> getCourses(){
         return courses;
     }
     

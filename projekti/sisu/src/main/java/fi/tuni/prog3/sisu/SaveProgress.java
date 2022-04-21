@@ -1,18 +1,12 @@
 package fi.tuni.prog3.sisu;
 
-import java.io.BufferedWriter;
 import java.io.File;
-
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.net.URL;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -25,11 +19,7 @@ public class SaveProgress {
 
     public SaveProgress(){}
 
-    //TODO: saveStudentin ja loadStudentin json-tiedosto src/ kansioon. Tiedostopolku vaan 404.
-    //TODO: Virhetilanteiden estäminen (file exists, oikea formaatti ja kaikki muu)
     //! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi se toimii ei ole tiedossa.
-
-
     //! Jos Studentia muokataan voi olla, että pitää lisätä asioita...
     public static void saveStudent(Student student) throws IOException{
 

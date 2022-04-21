@@ -1,6 +1,6 @@
 package fi.tuni.prog3.sisu;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.net.MalformedURLException;
 import java.io.IOException;
 import com.google.gson.*;
@@ -19,7 +19,7 @@ public class Degree {
     private String outcomes;
     HashMap<String, Module> modules;
 
-    private StringBuilder sb; //Rakentimeen? ei kai
+    //private StringBuilder sb; //Rakentimeen? ei kai
     
     
     public Degree(String id, String code, String lang, String groupId, String name, int credits){
@@ -61,14 +61,11 @@ public class Degree {
         return outcomes;
     }
     
-    public HashMap getModules(){
+    public HashMap<String, Module> getModules(){
         decodeJson();
         return modules;
     }
     
-    //TODO: Fiksumpi toteutus? Tää on aika paska.
-    //TODO: Miten tämän saa suoritettua kun luokka initialisoidaan?
-
     public void decodeJson() {
         try{ 
             GetJsonData getJson_Module = new GetJsonData(2, id);
@@ -76,14 +73,6 @@ public class Degree {
             JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
             
             //Peruskamat otetaan talteen
-            String id = obj.getAsJsonPrimitive("id").getAsString();
-            String moduleName = "";
-            if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
-            }
-            else{
-                moduleName = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
-            }
             if(!obj.get("learningOutcomes").isJsonNull()){
                 if(obj.getAsJsonObject("learningOutcomes").get("fi") == null){
                     this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("en").getAsString();
@@ -92,7 +81,6 @@ public class Degree {
                     this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("fi").getAsString();
                 }
             }
-            int targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
                 
                 
             // Rulet käydää läpi

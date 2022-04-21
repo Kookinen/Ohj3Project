@@ -1,5 +1,5 @@
 module fi.tuni.prog3.sisu {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     requires javafx.web;
     //requires java.desktop;
     requires com.google.gson;
