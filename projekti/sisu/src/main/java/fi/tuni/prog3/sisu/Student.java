@@ -5,8 +5,8 @@ import java.util.HashMap;
 public class Student {
     private String name;
     private String number;
-    private static String degree;
-    private int credits = 0;
+    private String degree;
+    private int credits;
 
     private HashMap<String, Boolean> coursesDone = new HashMap<>();
 

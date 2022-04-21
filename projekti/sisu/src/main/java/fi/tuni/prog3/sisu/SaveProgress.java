@@ -44,6 +44,7 @@ public class SaveProgress {
 
     }
 
+    //TODO: tiedoston kelvollisuus tarkasteluun
     public static Student loadStudent() throws FileNotFoundException{
 
         Gson gson = new Gson();

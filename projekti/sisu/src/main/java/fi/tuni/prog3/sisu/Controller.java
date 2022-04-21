@@ -62,20 +62,24 @@ public class Controller implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        //otettu vain yksittäinen degree.
-        //TODO: degree-lista josta valitaan mieluinen tai hakusysteemi
+
+        degree = degrees.get(student.getDegree());
+        
         allCourses = new HashMap<>();
         allModules = new HashMap<>();
+        
         TreeItem<String> rootItem = GUITools.initializeTree(degree);
+        
         GUITools.setUpDegreeBox(searchBar, degrees);
         //selectableCourseList = GUITools.initializeCheckList(degrees);
-
+        
         mainView.setRoot(rootItem);
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
 
-        allCredits.setText("0op");
+        refreshStudiesCompleted();
+        
         
     }
 
@@ -190,7 +194,6 @@ public class Controller implements Initializable{
         }
     }
 
-    //TODO: Käyttäjä valitsee tiedoston mitä ladata itse?
     @FXML
     public void load(){
         System.out.println("Loading...");
@@ -290,6 +293,8 @@ public class Controller implements Initializable{
                     Course c = searchCourse(Controller.selectedElement);
                     sb.append(" ").append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
                     item.getParent().setValue(sb.toString());
+                    student.addCredits(c.maxCredits);
+                
                 }
                 else{
                     Course c = searchCourse(Controller.selectedElement);
@@ -297,6 +302,7 @@ public class Controller implements Initializable{
                     Module m = searchModule(sb.toString());
                     sb.append(" ").append(prevPointsNumb-c.getTargetCredits()).append("op/").append(m.getTargetCredits()).append("op");
                     item.getParent().setValue(sb.toString());
+                    student.subtractCredits(c.maxCredits);
                 }
             }           
         }

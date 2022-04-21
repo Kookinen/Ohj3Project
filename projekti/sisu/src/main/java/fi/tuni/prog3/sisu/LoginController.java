@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
@@ -30,49 +31,74 @@ public class LoginController implements Initializable{
     private Stage stage = new Stage();
     private Parent startParent = new Parent() {};
 
+
     @FXML
-    Button register = new Button();
+    TextField name = new TextField();
     @FXML
-    Button load = new Button();
+    TextField studentNumber = new TextField();
     @FXML
-    static Text errorMessage = new Text();
+    private ComboBox<String> degreePicker = new ComboBox<>();
+    
 
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        errorMessage.setVisible(false);
-
-         //Ikoni ikkunaan
-         try{
-            Image icon = GUITools.getImage("sisuTrans.PNG");
-            stage.getIcons().add(icon);
-            
-        }
-        catch (FileNotFoundException e){
-
-        }
-
-        Scene scene = new Scene(startParent);
-        stage.setScene(scene);
-        
-        //Parent mainWindow = loadFXMLsettings("/mainGUI.fxml");
-        //Parent registerWindow = loadFXMLsettings("/registerGUI.fxml");
-        
-        stage.setTitle("Sisu");
-        stage.show();
-
+        GUITools.setUpDegreeBox(degreePicker, degrees);
     }
 
     @FXML
     public void loadStudentData(){
         try{
-            Controller.setStudent(SaveProgress.loadStudent());
+            Student student = SaveProgress.loadStudent();
+
+            //? getDegree = null
+            Controller.setStudent(student);
+
+            Parent parent = loadFXMLsettings("/mainGUI.fxml");
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
         }
         catch (FileNotFoundException e){
-            errorMessage.setText("Tiedostoa ei löytynyt");
         }
     }
 
+    @FXML
+    public void openRegister(){
+        Parent parent = loadFXMLsettings("/registerGUI.fxml");
+        Scene scene = new Scene(parent);
+        stage.setScene(scene);
+        
+    }
+
+    @FXML void registerStudent(){
+
+        String newName = name.getText();
+        String newStudentNumber = studentNumber.getText();
+        String newDegree = getPickedDegree();
+
+        Student student = new Student(newName, newStudentNumber);
+        student.setDegree(newDegree);
+
+        Controller.setStudent(student);
+
+        Parent parent = loadFXMLsettings("/mainGUI.fxml");
+        Scene scene = new Scene(parent);
+        
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+
+    @FXML
+    public String getPickedDegree(){
+        String s = new String();
+        if(!degreePicker.getEditor().getText().isEmpty() && degrees.containsKey(degreePicker.getEditor().getText())){
+            Degree degree = degrees.get(degreePicker.getEditor().getText());
+            s = degree.getName();          
+        }
+        return s; 
+    }
 
     public Parent loadFXMLsettings(String fileName){
 
@@ -102,8 +128,9 @@ public class LoginController implements Initializable{
     }
 
     public static void setDegrees(HashMap<String, Degree> degrees){
-        errorMessage.setVisible(true);
         LoginController.degrees = degrees;
     }
+
+    
     
 }
