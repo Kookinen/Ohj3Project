@@ -151,15 +151,18 @@ public class Controller implements Initializable{
 
     @FXML
     public void checkBoxOnClick(){
-
-        student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
-
-        TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-        addCreditsToTree(item);
         
-        //? tarpeellinen
-        courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
-        refreshStudiesCompleted();
+        if(Controller.selectedElement != null){
+            student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
+
+            TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
+            addCreditsToTree(item);
+        
+            //? tarpeellinen
+            courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
+            refreshStudiesCompleted();
+        }
+        
 
     }
 
@@ -169,7 +172,8 @@ public class Controller implements Initializable{
 
         for(String key : student.getCoursesDone().keySet()){
             if(student.getCoursesDone().get(key)){
-                String credits = String.valueOf(allCourses.get(key).maxCredits);
+                //Muutos maxCreditistä getTargetCreditsiin
+                String credits = String.valueOf(allCourses.get(key).getTargetCredits());
                 StringBuilder sb = new StringBuilder();
                 sb.append(key+" "+credits+"op");
 
@@ -293,7 +297,7 @@ public class Controller implements Initializable{
                     Course c = searchCourse(Controller.selectedElement);
                     sb.append(" ").append(c.getTargetCredits()+prevPointsNumb).append("op/").append(last.split("/")[1]);
                     item.getParent().setValue(sb.toString());
-                    student.addCredits(c.maxCredits);
+                    student.addCredits(c.getTargetCredits());
                 
                 }
                 else{
