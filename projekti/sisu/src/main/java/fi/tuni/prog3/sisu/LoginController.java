@@ -16,8 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
-
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
     private static HashMap<String, Degree> degrees;
     private Stage stage = new Stage();
@@ -28,57 +27,52 @@ public class LoginController implements Initializable{
     TextField studentNumber = new TextField();
     @FXML
     private ComboBox<String> degreePicker = new ComboBox<>();
-    
-    
 
-
-    
-    /** 
+    /**
      * @param arg0
      * @param arg1
      */
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1){
+    public void initialize(URL arg0, ResourceBundle arg1) {
         GUITools.setUpDegreeBox(degreePicker, degrees);
-        
+
     }
 
     @FXML
-    public void loadStudentData(){
-        
+    public void loadStudentData() {
 
-        try{
+        try {
             Student student = SaveProgress.loadStudent();
 
-            //? getDegree = null
+            // ? getDegree = null
             Controller.setStudent(student);
 
             Parent parent = loadFXMLsettings("/mainGUI.fxml");
             Scene scene = new Scene(parent);
             stage.setScene(scene);
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
         }
     }
 
     @FXML
-    public void openRegister(){
-        
+    public void openRegister() {
+
         Parent parent = loadFXMLsettings("/registerGUI.fxml");
-        
+
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        
+
     }
 
     @FXML
-    public void closeProgram(){
+    public void closeProgram() {
         Platform.exit();
         System.exit(0);
     }
 
-    @FXML void registerStudent(){
-        
+    @FXML
+    void registerStudent() {
+
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
@@ -90,66 +84,58 @@ public class LoginController implements Initializable{
 
         Parent parent = loadFXMLsettings("/mainGUI.fxml");
         Scene scene = new Scene(parent);
-        
+
         stage.setScene(scene);
         stage.show();
 
     }
 
-
-    
-    /** 
+    /**
      * @return String
      */
     @FXML
-    public String getPickedDegree(){
+    public String getPickedDegree() {
         String s = new String();
-        if(!degreePicker.getEditor().getText().isEmpty() && degrees.containsKey(degreePicker.getEditor().getText())){
+        if (!degreePicker.getEditor().getText().isEmpty() && degrees.containsKey(degreePicker.getEditor().getText())) {
             Degree degree = degrees.get(degreePicker.getEditor().getText());
-            s = degree.getName();          
+            s = degree.getName();
         }
-        return s; 
+        return s;
     }
 
-    
-    /** 
+    /**
      * @param fileName
      * @return Parent
      */
-    public Parent loadFXMLsettings(String fileName){
+    public Parent loadFXMLsettings(String fileName) {
 
-        Parent mainWindow = new Parent(){};
-        try{
+        Parent mainWindow = new Parent() {
+        };
+        try {
             mainWindow = FXMLLoader.load(this.getClass().getResource(fileName));
             System.out.print("UI-tiedosto löytyi!\n");
 
-        }
-        catch (IOException e3){
-            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! "+e3.getCause());
-        }
-        catch (NullPointerException e4){
+        } catch (IOException e3) {
+            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! " + e3.getCause());
+        } catch (NullPointerException e4) {
             System.out.print("UI-tiedostoa ei löydy!\n");
         }
 
         return mainWindow;
     }
 
-
-    
-    /** 
+    /**
      * @param newStage
      */
-    public void setStage(Stage newStage){
+    public void setStage(Stage newStage) {
         stage = newStage;
     }
 
-    /** 
+    /**
      * @param degrees
      */
-    public static void setDegrees(HashMap<String, Degree> degrees){
+    public static void setDegrees(HashMap<String, Degree> degrees) {
         LoginController.degrees = degrees;
     }
 
-    
-    
 }

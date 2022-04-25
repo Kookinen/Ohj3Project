@@ -17,56 +17,55 @@ import javax.swing.filechooser.FileNameExtensionFilter;*/
 
 public class SaveProgress {
 
-    public SaveProgress(){}
+    public SaveProgress() {
+    }
 
-    
-    /** 
+    /**
      * @param student
      * @throws IOException
      */
-    //! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi se toimii ei ole tiedossa.
-    //! Jos Studentia muokataan voi olla, että pitää lisätä asioita...
-    public static void saveStudent(Student student) throws IOException{
+    // ! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi
+    // se toimii ei ole tiedossa.
+    // ! Jos Studentia muokataan voi olla, että pitää lisätä asioita...
+    public static void saveStudent(Student student) throws IOException {
 
-        //Student studentToSave = new Student(student.getName(), student.getNumber());
+        // Student studentToSave = new Student(student.getName(), student.getNumber());
         Gson gson = new Gson();
 
         FileChooser fileChooser = new FileChooser();
 
-        //Jos käyttäjä haluaa luoda uuden tiedoston, joutuu hän nimeämään txt:n uudelleen.
-        //Siksi tässä on useita tiedostopäätteitä.
+        // Jos käyttäjä haluaa luoda uuden tiedoston, joutuu hän nimeämään txt:n
+        // uudelleen.
+        // Siksi tässä on useita tiedostopäätteitä.
         fileChooser.getExtensionFilters().addAll(
-            new ExtensionFilter("JSON Files", "*.json"),
-            new ExtensionFilter("Text Files", "*.txt"),
-            new ExtensionFilter("All Files", "*.*")
-        );
+                new ExtensionFilter("JSON Files", "*.json"),
+                new ExtensionFilter("Text Files", "*.txt"),
+                new ExtensionFilter("All Files", "*.*"));
         File file = fileChooser.showOpenDialog(null);
-        //Jesus christ help us
-        //File file = new File("student.json");
+        // Jesus christ help us
+        // File file = new File("student.json");
         FileWriter writer = new FileWriter(file);
         gson.toJson(student, writer);
         writer.close();
 
     }
 
-    
-    /** 
+    /**
      * @return Student
      * @throws FileNotFoundException
      */
-    //TODO: tiedoston kelvollisuus tarkasteluun
-    public static Student loadStudent() throws FileNotFoundException{
+    // TODO: tiedoston kelvollisuus tarkasteluun
+    public static Student loadStudent() throws FileNotFoundException {
 
         Gson gson = new Gson();
         FileChooser fileChooser = new FileChooser();
 
-        //Jäsenmuuttujiksi?
+        // Jäsenmuuttujiksi?
         fileChooser.getExtensionFilters().addAll(
-            new ExtensionFilter("JSON Files", "*.json")
-        );
+                new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showOpenDialog(null);
-        Student student = gson.fromJson(new FileReader(file),Student.class);
-        return student;    
+        Student student = gson.fromJson(new FileReader(file), Student.class);
+        return student;
 
     }
 }

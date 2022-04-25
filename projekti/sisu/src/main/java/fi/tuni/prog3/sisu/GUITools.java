@@ -1,6 +1,5 @@
 package fi.tuni.prog3.sisu;
 
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,18 +21,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
-
 public class GUITools {
-    
-    public GUITools(){}
 
-    
-    /** 
+    public GUITools() {
+    }
+
+    /**
      * @param filename
      * @return Image
      * @throws FileNotFoundException
      */
-    public static Image getImage(String filename) throws FileNotFoundException{
+    public static Image getImage(String filename) throws FileNotFoundException {
 
         InputStream stream = new FileInputStream(filename);
         Image image = new Image(stream);
@@ -41,28 +39,27 @@ public class GUITools {
         return image;
     }
 
-    
-    /** 
+    /**
      * @param filename
      * @return Node
      * @throws FileNotFoundException
      */
-    public static Node getImageAsNode(String filename) throws FileNotFoundException{
-        
+    public static Node getImageAsNode(String filename) throws FileNotFoundException {
+
         Image image = getImage(filename);
         ImageView imageView = new ImageView();
         imageView.setImage(image);
-        
+
         return imageView;
     }
 
-    public static String getMotivationalImageUrl(){
+    public static String getMotivationalImageUrl() {
         String imageURL = new String();
         try {
             URLConnection connection = new URL("https://inspirobot.me/api?generate=true").openConnection();
             InputStream input = connection.getInputStream();
             System.out.println(connection.getContentType());
-        
+
             imageURL = new BufferedReader(new InputStreamReader(input)).readLine();
         } catch (IOException e) {
             System.out.println("Not found!");
@@ -70,110 +67,108 @@ public class GUITools {
         return imageURL;
     }
 
-    
-    /** 
+    /**
      * @param node
      * @return RotateTransition
      */
-    public RotateTransition spin(Node node){
-        
-        RotateTransition rotateTransition = new RotateTransition(); 
-        rotateTransition.setDuration(Duration.millis(1000));  
-        rotateTransition.setNode(node);       
-        rotateTransition.setByAngle(360); 
-        rotateTransition.setCycleCount(50);  
-        //rotateTransition.setAutoReverse(false); 
+    public RotateTransition spin(Node node) {
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setDuration(Duration.millis(1000));
+        rotateTransition.setNode(node);
+        rotateTransition.setByAngle(360);
+        rotateTransition.setCycleCount(50);
+        // rotateTransition.setAutoReverse(false);
 
         return rotateTransition;
 
     }
-    
 
-    
-    /** 
+    /**
      * @param deg
      * @return TreeItem<String>
      */
-    public static TreeItem<String> initializeTree(Degree deg){
+    public static TreeItem<String> initializeTree(Degree deg) {
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
         Controller.clearMaps();
         printTree(deg.getModules(), rootItem);
         return rootItem;
     }
 
-    /*public static VBox initializeCheckList(HashMap<String, Degree> degrees){
-        
-        VBox checkBoxList = new VBox();
-        Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
-        HashMap<String, Module> modules = deg.getModules();
+    /*
+     * public static VBox initializeCheckList(HashMap<String, Degree> degrees){
+     * 
+     * VBox checkBoxList = new VBox();
+     * Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
+     * HashMap<String, Module> modules = deg.getModules();
+     * 
+     * for(Module m:modules.values()){
+     * CheckBox check = new CheckBox(m.getName());
+     * checkBoxList.getChildren().add(check);
+     * 
+     * HashMap<String, Course> courses = m.getCourses();
+     * for(Course c:courses.values()){
+     * CheckBox checkOneTwo = new CheckBox(c.getName());
+     * checkBoxList.getChildren().add(checkOneTwo);
+     * }
+     * }
+     * 
+     * return checkBoxList;
+     * }
+     */
 
-        for(Module m:modules.values()){
-            CheckBox check = new CheckBox(m.getName());
-            checkBoxList.getChildren().add(check);
-            
-            HashMap<String, Course> courses = m.getCourses();
-            for(Course c:courses.values()){
-                CheckBox checkOneTwo = new CheckBox(c.getName());
-                checkBoxList.getChildren().add(checkOneTwo);
-            }
-        }
-
-        return checkBoxList;
-    }*/
-    
-    private static void printTree(HashMap<String, Module> modules, TreeItem<String> root){
+    private static void printTree(HashMap<String, Module> modules, TreeItem<String> root) {
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
-        
-        //käydään kaikki modulet läpi
-        for(Module m:modules.values()){
-            if(m.getType().equals("GroupingModule")){
-                 moduleItem = new TreeItem<>(m.getName());
+
+        // käydään kaikki modulet läpi
+        for (Module m : modules.values()) {
+            if (m.getType().equals("GroupingModule")) {
+                moduleItem = new TreeItem<>(m.getName());
+            } else {
+                moduleItem = new TreeItem<>(m.getName() + " 0op/" + m.getTargetCredits() + "op");
             }
-            else{
-                 moduleItem = new TreeItem<>(m.getName()+ " 0op/" + m.getTargetCredits()+ "op");
-            }
-           
+
             Controller.addModules(m);
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
-            //käydään modulen alaiset kurssit ( jos on )
-            for(Course c:cors.values()){
+            // käydään modulen alaiset kurssit ( jos on )
+            for (Course c : cors.values()) {
                 Controller.addCourses(c);
-                courseItem = new TreeItem<>(c.getName()+ " " + c.getTargetCredits()+"op");
-                //lisätään kurssi modulen alle
+                courseItem = new TreeItem<>(c.getName() + " " + c.getTargetCredits() + "op");
+                // lisätään kurssi modulen alle
                 moduleItem.getChildren().add(courseItem);
             }
             HashMap<String, Module> mods = m.getModules();
-            if(!mods.isEmpty()){
-                //modulesta uusi root kun kutsutaan uudestaan
+            if (!mods.isEmpty()) {
+                // modulesta uusi root kun kutsutaan uudestaan
                 printTree(mods, moduleItem);
             }
         }
     }
-    
-    
-    /** 
+
+    /**
      * @param cb
      * @param degrees
      */
-    public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees){
+    public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees) {
         cb.setEditable(true);
         cb.setPromptText("Hae tutkinnon nimellä...");
-        cb.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>(){
+        cb.getEditor().setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(KeyEvent k){
+            public void handle(KeyEvent k) {
                 String s = cb.getEditor().getText();
                 cb.getItems().clear();
-                
+
                 compare(s);
-               
+
             }
 
             private void compare(String s) {
                 ArrayList<String> names = new ArrayList<>();
-                for(Degree d:degrees.values()){
-                    if(d.getName().length() >= s.length() && d.getName().substring(0, s.length()).compareToIgnoreCase(s)==0){
+                for (Degree d : degrees.values()) {
+                    if (d.getName().length() >= s.length()
+                            && d.getName().substring(0, s.length()).compareToIgnoreCase(s) == 0) {
                         names.add(d.getName());
                     }
                 }
