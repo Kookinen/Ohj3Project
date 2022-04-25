@@ -16,6 +16,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
+/**
+ * Controls the start and registration windows. Responsible for GUI
+ * functionality.
+ * Controls startupGUI.fxml and registerGUI.fxml.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class LoginController implements Initializable {
 
     private static HashMap<String, Degree> degrees;
@@ -29,8 +37,10 @@ public class LoginController implements Initializable {
     private ComboBox<String> degreePicker = new ComboBox<>();
 
     /**
-     * @param arg0
-     * @param arg1
+     * Initializes the UI and performs necessary actions.
+     * 
+     * @param arg0 unused.
+     * @param arg1 unused.
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -38,22 +48,31 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Loads student data from file.
+     * Uses method from SaveProgress class.
+     * 
+     * @throws FileNotFoundException if file is not found.
+     */
     @FXML
     public void loadStudentData() {
 
         try {
             Student student = SaveProgress.loadStudent();
 
-            // ? getDegree = null
             Controller.setStudent(student);
 
             Parent parent = loadFXMLsettings("/mainGUI.fxml");
             Scene scene = new Scene(parent);
             stage.setScene(scene);
         } catch (FileNotFoundException e) {
+
         }
     }
 
+    /**
+     * Opens the registration window.
+     */
     @FXML
     public void openRegister() {
 
@@ -64,12 +83,19 @@ public class LoginController implements Initializable {
 
     }
 
+    /**
+     * Closes the program.
+     */
     @FXML
     public void closeProgram() {
         Platform.exit();
         System.exit(0);
     }
 
+    /**
+     * Registers new student and opens the main window.
+     * Initialized new Student object and passes it on to main Controller.
+     */
     @FXML
     void registerStudent() {
 
@@ -91,6 +117,8 @@ public class LoginController implements Initializable {
     }
 
     /**
+     * TODO: dokumentoi
+     * 
      * @return String
      */
     @FXML
@@ -104,8 +132,10 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * @param fileName
-     * @return Parent
+     * Loads a FXML-file and sets it to new Parent.
+     * 
+     * @param fileName path to file.
+     * @return Parent containin the FXML formatting.
      */
     public Parent loadFXMLsettings(String fileName) {
 
@@ -125,14 +155,19 @@ public class LoginController implements Initializable {
     }
 
     /**
-     * @param newStage
+     * Sets the stage for the controller. Is used to get the sisu.java stage for the
+     * controller to use.
+     * 
+     * @param newStage stage to be set as the controller stage.
      */
     public void setStage(Stage newStage) {
         stage = newStage;
     }
 
     /**
-     * @param degrees
+     * Sets the HashMap of degrees for the controller.
+     * 
+     * @param degrees HashMap containing Degree-objects.
      */
     public static void setDegrees(HashMap<String, Degree> degrees) {
         LoginController.degrees = degrees;

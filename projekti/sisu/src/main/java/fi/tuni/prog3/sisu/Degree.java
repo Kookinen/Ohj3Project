@@ -26,13 +26,14 @@ public class Degree {
     // private StringBuilder sb; //Rakentimeen? ei kai
 
     /**
+     * Constructor for a new Degree. All variables are fetched from Sisu API.
      * 
-     * @param id
-     * @param code
-     * @param lang
-     * @param groupId
-     * @param name
-     * @param credits
+     * @param id      Degree id, can be used to differentiate.
+     * @param code    Degree code, can be used to differentiate.
+     * @param lang    Degree lang, default is finnish.
+     * @param groupId Degree groupId.
+     * @param name    Degree name, can be used to differentiate.
+     * @param credits Degree credits.
      */
     public Degree(String id, String code, String lang, String groupId, String name, int credits) {
         this.id = id;
@@ -45,56 +46,56 @@ public class Degree {
     }
 
     /**
-     * @return String
+     * @return This Degrees id.
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return String
+     * @return This Degrees code.
      */
     public String getCode() {
         return code;
     }
 
     /**
-     * @return String
+     * @return This Degrees language.
      */
     public String getLang() {
         return lang;
     }
 
     /**
-     * @return String
+     * @return This Degrees group id.
      */
     public String getGroupId() {
         return groupId;
     }
 
     /**
-     * @return String
+     * @return This Degrees name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return int
+     * @return This Degrees credits.
      */
     public int getCredits() {
         return credits;
     }
 
     /**
-     * @return String
+     * @return This degrees outcomes.
      */
     public String getOutcomes() {
         return outcomes;
     }
 
     /**
-     * @return HashMap<String, Module>
+     * @return This Degrees Module Keys, Modules in a hashmap.
      */
     public HashMap<String, Module> getModules() {
         decodeJson();
@@ -102,7 +103,7 @@ public class Degree {
     }
 
     /**
-     * 
+     * TODO:Dokumentoi
      */
     public void decodeJson() {
         try {
@@ -135,6 +136,8 @@ public class Degree {
     }
 
     /**
+     * TODO:Dokumentoi
+     * 
      * @param arr
      */
     private void compositeRule(JsonArray arr) {

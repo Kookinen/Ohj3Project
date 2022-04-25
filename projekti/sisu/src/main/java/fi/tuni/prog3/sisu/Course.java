@@ -22,8 +22,9 @@ public class Course {
     String additional;
 
     /**
+     * Constructor for a new Course.
      * 
-     * @param id
+     * @param id String id to differentiate the Course object.
      */
     public Course(String id) {
         this.id = id;
@@ -31,47 +32,48 @@ public class Course {
     }
 
     /**
-     * @return String
+     * @return This Courses id.
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return String
+     * @return This Courses name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return String
+     * @return This Courses code.
      */
     public String getCode() {
         return code;
     }
 
     /**
-     * @return int
+     * @return This Courses target credits (minCredits).
      */
     public int getTargetCredits() {
         return minCredits;
     }
 
     /**
-     * @return String
+     * @return This Courses description/info.
      */
     public String getContent() {
         return content;
     }
 
     /**
-     * @return String
+     * @return This Courses additional content.
      */
     public String getAdditional() {
         return additional;
     }
 
+    // TODO: Dokumentoi
     private void getInfo() {
         try {
 

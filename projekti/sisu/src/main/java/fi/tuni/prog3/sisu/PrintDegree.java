@@ -1,13 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
- */
 package fi.tuni.prog3.sisu;
 
 import java.util.HashMap;
 
+/**
+ * Prints the data structure to the command line.
+ * Is used to identify problems in the data structure and to chech its validity.
+ * 
+ */
 public class PrintDegree {
 
+    /**
+     * Initializes new PrintDegree object
+     * 
+     * @param degreeName name of degree.
+     * @param modules    HashMap of degree modules.
+     */
     public PrintDegree(String degreeName, HashMap<String, Module> modules) {
         System.out.println(degreeName);
         int depth = 1;
@@ -15,8 +22,10 @@ public class PrintDegree {
     }
 
     /**
-     * @param modules
-     * @param depth
+     * Crawls the data structure and prints everything based on specified depth.
+     * 
+     * @param modules HashMap of the data structure.
+     * @param depth   depth to be crawled trough.
      */
     private void printAll(HashMap<String, Module> modules, int depth) {
         System.out.println(modules);

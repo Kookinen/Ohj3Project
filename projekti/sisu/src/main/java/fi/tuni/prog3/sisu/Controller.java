@@ -21,6 +21,7 @@ import javafx.scene.web.WebView;
 /**
  * Controls the main UI-window and its elements. Is responsible for program
  * functionality.
+ * Controls mainGUI.fxml.
  * 
  * @author Joni Koskinen
  * @author Julius Juutilainen
@@ -61,6 +62,8 @@ public class Controller implements Initializable {
     private Text allCredits = new Text();
     @FXML
     private WebView motivation = new WebView();
+
+    // TODO: Tarkista että paluuarvot ja heitot on dokumentoitu!
 
     /**
      * Initializes the UI and performs necessary actions.
@@ -181,7 +184,7 @@ public class Controller implements Initializable {
      * element.
      */
     @FXML
-    void refreshStudiesCompleted() {
+    public void refreshStudiesCompleted() {
         completedCourses.getChildren().clear();
 
         for (String key : student.getCoursesDone().keySet()) {
@@ -266,9 +269,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Sets the static Controller variable Degrees
-     * 
-     * @param degrees HashMap containing String keys and Degree degrees.
+     * @param degrees HashMap containing String keys and Degree degrees to set.
      */
 
     public static void setDegrees(HashMap<String, Degree> degrees) {
@@ -276,45 +277,35 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Sets the static Controller variable student.
-     * 
-     * @param student Student-object to be passed onto the Controller.
+     * @param student Student-object to be set onto the Controller.
      */
     public static void setStudent(Student student) {
         Controller.student = student;
     }
 
     /**
-     * Sets the static Controller variable degree
-     * 
-     * @param degree Degree-object to be passed onto the Controller.
+     * @param degree Degree-object to be set onto the Controller.
      */
     public static void setDegree(Degree degree) {
         Controller.degree = degree;
     }
 
     /**
-     * Sets the static String variable element.
-     * 
-     * @param element String element to be passed onto the Controller.
+     * @param element String element to be set onto the Controller.
      */
     public static void setSelectedElement(String element) {
         Controller.selectedElement = element;
     }
 
     /**
-     * Adds a new Course to the allCourses HashMap
-     * 
-     * @param c Course to be added to the HashMap
+     * @param c Course to be added to the allCourses HashMap
      */
     public static void addCourses(Course c) {
         allCourses.put(c.getName(), c);
     }
 
     /**
-     * Adds a new Module to the allModules HashMap.
-     * 
-     * @param m Module to be added to the HashMap.
+     * @param m Module to be added to the allModules HashMap.
      */
     public static void addModules(Module m) {
         allModules.put(m.getName(), m);

@@ -11,8 +11,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.util.Duration;
-import javafx.animation.RotateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
@@ -21,15 +19,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * A set of GUI tools to add functionality to the GUI.
+ * Contains unused functions, useful for futher developement.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class GUITools {
 
     public GUITools() {
     }
 
     /**
-     * @param filename
-     * @return Image
-     * @throws FileNotFoundException
+     * Gets image from filepath.
+     * 
+     * @param filename path to file.
+     * @return Image.
+     * @throws FileNotFoundException if file is not found.
      */
     public static Image getImage(String filename) throws FileNotFoundException {
 
@@ -40,19 +47,27 @@ public class GUITools {
     }
 
     /**
-     * @param filename
-     * @return Node
-     * @throws FileNotFoundException
+     * Gets image from filepath as Node
+     * 
+     * @param filename path to file.
+     * @return Node containing image.
+     * @throws FileNotFoundException if file is not found.
      */
     public static Node getImageAsNode(String filename) throws FileNotFoundException {
 
         Image image = getImage(filename);
-        ImageView imageView = new ImageView();
-        imageView.setImage(image);
+        ImageView imageNode = new ImageView();
+        imageNode.setImage(image);
 
-        return imageView;
+        return imageNode;
     }
 
+    /**
+     * Gets new motivational image from https://inspirobot.me/.
+     * Inspirobot uses AI to generate motivational images.
+     * 
+     * @return URL of the new image.
+     */
     public static String getMotivationalImageUrl() {
         String imageURL = new String();
         try {
@@ -68,25 +83,11 @@ public class GUITools {
     }
 
     /**
-     * @param node
-     * @return RotateTransition
-     */
-    public RotateTransition spin(Node node) {
-
-        RotateTransition rotateTransition = new RotateTransition();
-        rotateTransition.setDuration(Duration.millis(1000));
-        rotateTransition.setNode(node);
-        rotateTransition.setByAngle(360);
-        rotateTransition.setCycleCount(50);
-        // rotateTransition.setAutoReverse(false);
-
-        return rotateTransition;
-
-    }
-
-    /**
-     * @param deg
-     * @return TreeItem<String>
+     * Initialized the main GUI Degree TreeView.
+     * 
+     * @param deg chosen Degree to be used in the initialization.
+     * @return TreeItem<String> visual representation of Degree contents shown in
+     *         UI.
      */
     public static TreeItem<String> initializeTree(Degree deg) {
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
@@ -95,28 +96,12 @@ public class GUITools {
         return rootItem;
     }
 
-    /*
-     * public static VBox initializeCheckList(HashMap<String, Degree> degrees){
+    /**
+     * TODO: Dokumentoi
      * 
-     * VBox checkBoxList = new VBox();
-     * Degree deg = degrees.get("Tietojenkäsittelytieteiden kandidaattiohjelma");
-     * HashMap<String, Module> modules = deg.getModules();
-     * 
-     * for(Module m:modules.values()){
-     * CheckBox check = new CheckBox(m.getName());
-     * checkBoxList.getChildren().add(check);
-     * 
-     * HashMap<String, Course> courses = m.getCourses();
-     * for(Course c:courses.values()){
-     * CheckBox checkOneTwo = new CheckBox(c.getName());
-     * checkBoxList.getChildren().add(checkOneTwo);
-     * }
-     * }
-     * 
-     * return checkBoxList;
-     * }
+     * @param modules
+     * @param root
      */
-
     private static void printTree(HashMap<String, Module> modules, TreeItem<String> root) {
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
@@ -148,6 +133,8 @@ public class GUITools {
     }
 
     /**
+     * TODO: Dokumentoi
+     * 
      * @param cb
      * @param degrees
      */

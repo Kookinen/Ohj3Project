@@ -21,9 +21,10 @@ public class sisu extends Application {
     public HashMap<String, Degree> degrees = new HashMap<>();
 
     /**
-     * @param stage
+     * Starts the program.
+     * 
+     * @param stage main stage.
      */
-    // private static String fileName;
 
     @Override
     public void start(Stage stage) {
@@ -77,7 +78,9 @@ public class sisu extends Application {
     }
 
     /**
-     * @param args[]
+     * Calls the launch method.
+     * 
+     * @param args[] unused
      */
     public static void main(String args[]) {
 
@@ -85,6 +88,8 @@ public class sisu extends Application {
     }
 
     /**
+     * TODO: Dokumentoi
+     * 
      * @param sb
      */
     private void decodeJson(StringBuilder sb) {

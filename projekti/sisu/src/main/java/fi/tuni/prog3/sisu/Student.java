@@ -2,6 +2,10 @@ package fi.tuni.prog3.sisu;
 
 import java.util.HashMap;
 
+/**
+ * Student represents a student, or more specifically the user. Is used to store
+ * user data.
+ */
 public class Student {
     private String name;
     private String number;
@@ -10,34 +14,40 @@ public class Student {
 
     private HashMap<String, Boolean> coursesDone = new HashMap<>();
 
+    /**
+     * Initialized a new Student.
+     * 
+     * @param name   student name.
+     * @param number student number.
+     */
     public Student(String name, String number) {
         this.name = name;
         this.number = number;
     }
 
     /**
-     * @return String
+     * @return The current student name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return String
+     * @return The current student number;
      */
     public String getNumber() {
         return number;
     }
 
     /**
-     * @return String
+     * @return The current student degree;
      */
     public String getDegree() {
         return degree;
     }
 
     /**
-     * @param newDegree
+     * @param newDegree degree (name) to set.
      */
     public void setDegree(String newDegree) {
         degree = newDegree;
@@ -46,44 +56,37 @@ public class Student {
     }
 
     /**
-     * @return int
+     * @return The current amount of credits earned.
      */
     public int getCredits() {
         return credits;
     }
 
     /**
-     * @param earnedCredits
+     * @param earnedCredits credits to be added to the total.
      */
     public void addCredits(int earnedCredits) {
         credits = credits + earnedCredits;
     }
 
     /**
-     * @param lostCredits
+     * @param lostCredits credits to be subtracted from the total.
      */
     public void subtractCredits(int lostCredits) {
         credits = credits - lostCredits;
     }
 
     /**
-     * @return String
-     */
-    @Override
-    public String toString() {
-        return String.format("%s%n %s%n", this.name, this.number);
-    }
-
-    /**
-     * @return HashMap<String, Boolean>
+     * @return HashMap of the current students courses and their status (true =
+     *         passed, false = not passed).
      */
     public HashMap<String, Boolean> getCoursesDone() {
         return coursesDone;
     }
 
     /**
-     * @param course
-     * @param status
+     * @param course course to be added.
+     * @param status added courses status.
      */
     // Tarvitaanko delete vai voiko opiskelija vain lisätä kursseja
     public void addCoursesDone(String course, Boolean status) {
@@ -91,6 +94,9 @@ public class Student {
 
     }
 
+    /**
+     * Clears this students courses.
+     */
     public void clearCoursesDone() {
         this.coursesDone.clear();
     }

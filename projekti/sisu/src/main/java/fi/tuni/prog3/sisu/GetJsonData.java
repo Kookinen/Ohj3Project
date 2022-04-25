@@ -7,6 +7,12 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.IOException;
 
+/**
+ * Is used to fetch JSON-data from the Sisu API.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class GetJsonData {
 
     private int urlId;
@@ -22,6 +28,8 @@ public class GetJsonData {
     }
 
     /**
+     * TODO: Dokumentoi
+     * 
      * @return StringBuilder
      * @throws MalformedURLException
      * @throws IOException
