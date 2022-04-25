@@ -16,97 +16,87 @@ import javafx.scene.image.Image;
 //import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+public class sisu extends Application {
 
-
-public class sisu extends Application{
-
-    
     public HashMap<String, Degree> degrees = new HashMap<>();
-    
-    
-    
-    /** 
-     * @param stage
+
+    /**
+     * Starts the program.
+     * 
+     * @param stage main stage.
      */
-    //private static String fileName;
-    
+
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
 
-        try{ 
+        try {
 
-            //Haetaan data API:sta
+            // Haetaan data API:sta
             GetJsonData getJson_Degree = new GetJsonData(1, "");
             StringBuilder sb = getJson_Degree.getJsonDataFromURL();
             decodeJson(sb);
-        }
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
             e.printStackTrace();
-        }
-        catch (IOException e2){
+        } catch (IOException e2) {
             e2.printStackTrace();
         }
 
-         //Ikoni ikkunaan
-         try{
+        // Ikoni ikkunaan
+        try {
             Image icon = GUITools.getImage("sisuTrans.PNG");
             stage.getIcons().add(icon);
-            
-        }
-        catch (FileNotFoundException e){
+
+        } catch (FileNotFoundException e) {
 
         }
-        
-        Parent parent = new Parent() {};
+
+        Parent parent = new Parent() {
+        };
         FXMLLoader loader = new FXMLLoader();
 
         loader = new FXMLLoader(getClass().getResource("/startupGUI.fxml"));
-        
-        try{
+
+        try {
             loader = new FXMLLoader(getClass().getResource("/startupGUI.fxml"));
             parent = loader.load();
-        }
-        catch(IOException e3){
+        } catch (IOException e3) {
 
         }
-
 
         LoginController controller = loader.getController();
         controller.setStage(stage);
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-        
-        //Parent mainWindow = loadFXMLsettings("/mainGUI.fxml");
-        //Parent registerWindow = loadFXMLsettings("/registerGUI.fxml");
-        
+
+        // Parent mainWindow = loadFXMLsettings("/mainGUI.fxml");
+        // Parent registerWindow = loadFXMLsettings("/registerGUI.fxml");
+
         stage.setTitle("Sisu");
         stage.show();
 
-        
-    
     }
 
-    
-    /** 
-     * @param args[]
+    /**
+     * Calls the launch method.
+     * 
+     * @param args[] unused
      */
     public static void main(String args[]) {
 
         launch();
     }
 
-    
-
-    
-    /** 
+    /**
+     * TODO: Dokumentoi
+     * 
      * @param sb
      */
     private void decodeJson(StringBuilder sb) {
         JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
         JsonArray arr = obj.getAsJsonArray("searchResults");
         Iterator<JsonElement> it = arr.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             JsonObject jObject = it.next().getAsJsonObject();
             JsonElement id = jObject.get("id");
             JsonElement code = jObject.get("code");
@@ -115,12 +105,12 @@ public class sisu extends Application{
             JsonElement name = jObject.get("name");
             JsonElement minCredit = jObject.get("credits").getAsJsonObject().get("min");
             Degree deg = new Degree(id.getAsString(), code.getAsString(),
-                    lang.getAsString(),groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
+                    lang.getAsString(), groupId.getAsString(), name.getAsString(), minCredit.getAsInt());
             degrees.put(name.getAsString(), deg);
         }
 
         Controller.setDegrees(degrees);
         LoginController.setDegrees(degrees);
-        
+
     }
 }

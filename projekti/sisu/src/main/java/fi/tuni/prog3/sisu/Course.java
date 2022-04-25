@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 
 /**
- * Course represents a course in the Sisu API. It is used to store and fetch data.
+ * Course represents a course in the Sisu API. It is used to store and fetch
+ * data.
+ * 
  * @author Joni Koskinen
  * @author Julius Juutilainen
  */
@@ -20,109 +22,99 @@ public class Course {
     String additional;
 
     /**
+     * Constructor for a new Course.
      * 
-     * @param id
+     * @param id String id to differentiate the Course object.
      */
-    public Course(String id){
+    public Course(String id) {
         this.id = id;
         getInfo();
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Courses id.
      */
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Courses name.
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Courses code.
      */
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
-    
-    /** 
-     * @return int
+    /**
+     * @return This Courses target credits (minCredits).
      */
-    public int getTargetCredits(){
+    public int getTargetCredits() {
         return minCredits;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Courses description/info.
      */
-    public String getContent(){
+    public String getContent() {
         return content;
     }
-    
-    /** 
-     * @return String
+
+    /**
+     * @return This Courses additional content.
      */
-    public String getAdditional(){
+    public String getAdditional() {
         return additional;
     }
 
+    // TODO: Dokumentoi
     private void getInfo() {
-        try{
-           
+        try {
+
             GetJsonData getJson_Module = new GetJsonData(4, id);
             StringBuilder sb = getJson_Module.getJsonDataFromURL();
-            
-            
-            JsonObject obj =  JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
+
+            JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
             this.minCredits = obj.getAsJsonObject("credits").getAsJsonPrimitive("min").getAsInt();
-            
-            
-            if(obj.getAsJsonObject("credits").get("max").isJsonNull()){
+
+            if (obj.getAsJsonObject("credits").get("max").isJsonNull()) {
                 this.maxCredits = minCredits;
-            }
-            else{
+            } else {
                 this.maxCredits = obj.getAsJsonObject("credits").getAsJsonPrimitive("max").getAsInt();
             }
-            
-            if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
+
+            if (obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null) {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
             }
-            
-            else{
+
+            else {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
             this.code = obj.getAsJsonPrimitive("code").getAsString();
-            
-            if(!obj.get("content").isJsonNull()){
-                if(obj.getAsJsonObject("content").get("fi") == null){
+
+            if (!obj.get("content").isJsonNull()) {
+                if (obj.getAsJsonObject("content").get("fi") == null) {
                     this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("en").getAsString();
-                }
-                else{
+                } else {
                     this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("fi").getAsString();
                 }
             }
-            if(!obj.get("additional").isJsonNull()){
-                if(obj.getAsJsonObject("additional").get("fi") == null){
+            if (!obj.get("additional").isJsonNull()) {
+                if (obj.getAsJsonObject("additional").get("fi") == null) {
                     this.additional = obj.getAsJsonObject("additional").getAsJsonPrimitive("en").getAsString();
-                }
-                else{
+                } else {
                     this.additional = obj.getAsJsonObject("additional").getAsJsonPrimitive("fi").getAsString();
                 }
             }
-            
+
+        } catch (MalformedURLException e) {
+        } catch (IOException e2) {
         }
-        catch (MalformedURLException e){
-        }
-        catch (IOException e2){
-        }       
     }
 }

@@ -1,5 +1,6 @@
 /**
  * Contains the Sisu course project
+ * 
  * @author Joni Koskinen
  * @author Julius Juutilainen
  */

@@ -6,9 +6,10 @@ import com.google.gson.*;
 import java.util.HashMap;
 import java.util.Iterator;
 
-
 /**
- * Degree represents a degree in the Sisu API. It is used to store and fetch data.
+ * Degree represents a degree in the Sisu API. It is used to store and fetch
+ * data.
+ * 
  * @author Joni Koskinen
  * @author Julius Juutilainen
  */
@@ -16,24 +17,25 @@ public class Degree {
     private String id;
     private String code;
     private String lang;
-    private String groupId; //Module löytyy tällä?
+    private String groupId; // Module löytyy tällä?
     private String name;
     private int credits;
     private String outcomes;
     HashMap<String, Module> modules;
 
-    //private StringBuilder sb; //Rakentimeen? ei kai
-    
+    // private StringBuilder sb; //Rakentimeen? ei kai
+
     /**
+     * Constructor for a new Degree. All variables are fetched from Sisu API.
      * 
-     * @param id
-     * @param code
-     * @param lang
-     * @param groupId
-     * @param name
-     * @param credits
+     * @param id      Degree id, can be used to differentiate.
+     * @param code    Degree code, can be used to differentiate.
+     * @param lang    Degree lang, default is finnish.
+     * @param groupId Degree groupId.
+     * @param name    Degree name, can be used to differentiate.
+     * @param credits Degree credits.
      */
-    public Degree(String id, String code, String lang, String groupId, String name, int credits){
+    public Degree(String id, String code, String lang, String groupId, String name, int credits) {
         this.id = id;
         this.code = code;
         this.lang = lang;
@@ -42,129 +44,117 @@ public class Degree {
         this.credits = credits;
         modules = new HashMap<>();
         
+
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Degrees id.
      */
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Degrees code.
      */
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Degrees language.
      */
-    public String getLang(){
+    public String getLang() {
         return lang;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Degrees group id.
      */
-    public String getGroupId(){
+    public String getGroupId() {
         return groupId;
     }
 
-    
-    /** 
-     * @return String
+    /**
+     * @return This Degrees name.
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    
-    /** 
-     * @return int
+    /**
+     * @return This Degrees credits.
      */
-    public int getCredits(){
+    public int getCredits() {
         return credits;
     }
-    
-    
-    /** 
-     * @return String
+
+    /**
+     * @return This degrees outcomes.
      */
-    public String getOutcomes(){
+    public String getOutcomes() {
         return outcomes;
     }
-    
-    
+
     /**
-     * @return HashMap<String, Module>
+     * @return This Degrees Module Keys, Modules in a hashmap.
      */
-    public HashMap<String, Module> getModules(){
+    public HashMap<String, Module> getModules() {
         decodeJson();
         return modules;
     }
-    
+
     /**
-     * 
+     * TODO:Dokumentoi
      */
     public void decodeJson() {
-        try{ 
+        try {
             GetJsonData getJson_Module = new GetJsonData(2, id);
-            StringBuilder sb = getJson_Module.getJsonDataFromURL();  
+            StringBuilder sb = getJson_Module.getJsonDataFromURL();
             JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
-            
-            //Peruskamat otetaan talteen
-            if(!obj.get("learningOutcomes").isJsonNull()){
-                if(obj.getAsJsonObject("learningOutcomes").get("fi") == null){
+
+            // Peruskamat otetaan talteen
+            if (!obj.get("learningOutcomes").isJsonNull()) {
+                if (obj.getAsJsonObject("learningOutcomes").get("fi") == null) {
                     this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("en").getAsString();
-                }
-                else{
+                } else {
                     this.outcomes = obj.getAsJsonObject("learningOutcomes").getAsJsonPrimitive("fi").getAsString();
                 }
             }
-                
-                
+
             // Rulet käydää läpi
             JsonArray arr = null;
             String rule = obj.getAsJsonObject("rule").get("type").getAsString();
-            if(rule.equals("CreditsRule")){
+            if (rule.equals("CreditsRule")) {
                 arr = obj.getAsJsonObject("rule").getAsJsonObject("rule").getAsJsonArray("rules");
-            }
-            else if(rule.equals("CompositeRule")){
+            } else if (rule.equals("CompositeRule")) {
                 arr = obj.getAsJsonObject("rule").getAsJsonArray("rules");
             }
             compositeRule(arr);
-        }
-        catch (MalformedURLException e){
-        }
-        catch (IOException e2){
+        } catch (MalformedURLException e) {
+        } catch (IOException e2) {
         }
 
-        
     }
 
-    
-    /** 
+    /**
+     * TODO:Dokumentoi
+     * 
      * @param arr
      */
     private void compositeRule(JsonArray arr) {
-        Iterator<JsonElement> it = arr.iterator();
-        
+        Iterator<JsonElement> it = arr.iterator();     
         while(it.hasNext()){
+
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();
             switch (type) {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
                     break;
-                case "ModuleRule":                    
+                case "ModuleRule":
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
-                    Module m = new Module(moduleGroupId); 
+                    Module m = new Module(moduleGroupId);
                     modules.put(m.getName(), m);
                     break;
                 default:
@@ -173,5 +163,3 @@ public class Degree {
         }
     }
 }
-    
-

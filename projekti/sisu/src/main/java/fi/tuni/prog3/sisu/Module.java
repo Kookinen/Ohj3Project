@@ -18,8 +18,8 @@ public class Module {
     int targetCredits;
     String outcomes;
     String type;
-    //String curriculumPeriodIds;
-    //String validityPeriod;
+    // String curriculumPeriodIds;
+    // String validityPeriod;
     HashMap<String, Module> modules;
     HashMap<String, Course> courses;
 
@@ -27,143 +27,127 @@ public class Module {
      * 
      * @param id
      */
-    public Module(String id){
+    public Module(String id) {
         this.id = id;
         modules = new HashMap<>();
         courses = new HashMap<>();
         decodeJson();
     }
 
-    
-    /** 
+    /**
      * @return String
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    
-
-    
-    /** 
+    /**
      * @return int
      */
-    public int getTargetCredits(){
+    public int getTargetCredits() {
         return targetCredits;
     }
 
-    
-    /** 
+    /**
      * @return String
      */
-    public String getOutcomes(){
+    public String getOutcomes() {
         return outcomes;
     }
-    
-    /** 
+
+    /**
      * @return HashMap<String, Module>
      */
-    public HashMap<String, Module> getModules(){
+    public HashMap<String, Module> getModules() {
         return modules;
     }
-    
-    /** 
+
+    /**
      * @return HashMap<String, Course>
      */
-    public HashMap<String, Course> getCourses(){
+    public HashMap<String, Course> getCourses() {
         return courses;
     }
-    
-    /** 
+
+    /**
      * @return String
      */
-    public String getType(){
+    public String getType() {
         return type;
     }
-    
+
     /**
      * 
      */
     private void decodeJson() {
-        try{
+        try {
             StringBuilder sb = new StringBuilder();
             JsonObject obj;
-            if(id.startsWith("otm")){
+            if (id.startsWith("otm")) {
                 GetJsonData getJson_Module = new GetJsonData(2, id);
                 sb = getJson_Module.getJsonDataFromURL();
                 obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
-            }
-            else{
+            } else {
                 GetJsonData getJson_Module = new GetJsonData(3, id);
                 sb = getJson_Module.getJsonDataFromURL();
-                obj =  JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
+                obj = JsonParser.parseString(sb.toString()).getAsJsonArray().get(0).getAsJsonObject();
             }
 
-            if(obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null){
-                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString(); 
+            if (obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null) {
+                this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
             }
-            
-            else{
+
+            else {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
             this.type = obj.get("type").getAsString();
-            
-            
-            switch(obj.getAsJsonPrimitive("type").getAsString()) {
+
+            switch (obj.getAsJsonPrimitive("type").getAsString()) {
                 case "GroupingModule":
                     break;
                 case "StudyModule":
-                    if(!obj.get("targetCredits").isJsonNull()){
+                    if (!obj.get("targetCredits").isJsonNull()) {
                         this.targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
                     }
-                    
-                    if(!obj.get("outcomes").isJsonNull()){
-                        if(obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi") == null){
+
+                    if (!obj.get("outcomes").isJsonNull()) {
+                        if (obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi") == null) {
                             this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("en").getAsString();
-                        }  
-                        else{
+                        } else {
                             this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi").getAsString();
                         }
                     }
-                    
-            
+
                     break;
             }
-            
-                
-            
-            
-            //Rulet läpi
+
+            // Rulet läpi
             JsonArray arr = null;
             String rule = obj.getAsJsonObject("rule").get("type").getAsString();
-            if(rule.equals("CreditsRule")){
+            if (rule.equals("CreditsRule")) {
                 arr = obj.getAsJsonObject("rule").getAsJsonObject("rule").getAsJsonArray("rules");
-            }
-            else if(rule.equals("CompositeRule")){
+            } else if (rule.equals("CompositeRule")) {
                 arr = obj.getAsJsonObject("rule").getAsJsonArray("rules");
             }
             compositeRule(arr);
-        }  
-        catch (MalformedURLException e){
+        } catch (MalformedURLException e) {
+        } catch (IOException e2) {
         }
-        catch (IOException e2){
-        }        
     }
-    
-    
-    /** 
+
+    /**
      * @param arr
      */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();
-        while(it.hasNext()){
+        while (it.hasNext()) {
             JsonObject jObject = it.next().getAsJsonObject();
-            String type = jObject.get("type").getAsString(); 
+            String type = jObject.get("type").getAsString();
             switch (type) {
                 case "CompositeRule":
                     compositeRule(jObject.getAsJsonArray("rules"));
                     break;
-                case "ModuleRule":                    
+                case "ModuleRule":
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
                     Module m = new Module(moduleGroupId);
                     modules.put(m.getName(), m);
@@ -177,8 +161,6 @@ public class Module {
                     break;
             }
         }
-        
+
     }
 }
-
-

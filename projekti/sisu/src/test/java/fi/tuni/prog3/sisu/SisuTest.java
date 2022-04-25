@@ -1,6 +1,7 @@
 
 package fi.tuni.prog3.sisu;
 
+
 import java.util.HashMap;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -61,8 +62,8 @@ public class SisuTest extends ApplicationTest{
         assertEquals(expName, name);
         assertEquals(expCredit, credit);
         
-        deg.modules.put("moduuli1", new Module("otm-6c36cb36-1507-44ff-baab-a30ac76ca786"));
-        deg.modules.put("moduuli2", new Module("otm-35d5a7e1-71c1-456a-8783-9cf8c34262f5"));
+        deg.modules.put("moduuli1", new sisu.Module("otm-6c36cb36-1507-44ff-baab-a30ac76ca786"));
+        deg.modules.put("moduuli2", new sisu.Module("otm-35d5a7e1-71c1-456a-8783-9cf8c34262f5"));
         HashMap<String, Module> modules = deg.getModules();
         assertTrue(modules.containsKey("moduuli1"));
         assertTrue(modules.containsKey("moduuli2"));
