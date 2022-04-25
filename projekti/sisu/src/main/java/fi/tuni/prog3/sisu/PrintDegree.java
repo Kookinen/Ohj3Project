@@ -15,6 +15,11 @@ public class PrintDegree {
             int depth = 1;
             printAll(modules, depth);
         }
+        
+        /** 
+         * @param modules
+         * @param depth
+         */
         private void printAll(HashMap<String, Module> modules, int depth){
             System.out.println(modules);
             for(Module m:modules.values()){

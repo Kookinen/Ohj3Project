@@ -1,46 +1,76 @@
 package fi.tuni.prog3.sisu;
 
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+/**
+ * Course represents a course in the Sisu API. It is used to store and fetch data.
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class Course {
     String id;
-    //String groupId;
     String name;
     String code;
     int minCredits;
     int maxCredits;
-    //int gradeScaleId;
     String content;
     String additional;
 
+    /**
+     * 
+     * @param id
+     */
     public Course(String id){
         this.id = id;
         getInfo();
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getId(){
         return id;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
         return name;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getCode(){
         return code;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getTargetCredits(){
         return minCredits;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getContent(){
         return content;
     }
+    
+    /** 
+     * @return String
+     */
     public String getAdditional(){
         return additional;
     }

@@ -15,5 +15,6 @@
       <Button layoutX="218.0" layoutY="247.0" mnemonicParsing="false" onMouseClicked="#loadStudentData" prefHeight="25.0" prefWidth="183.0" text="Lataa" />
       <Button layoutX="218.0" layoutY="216.0" mnemonicParsing="false" onMouseClicked="#openRegister" prefHeight="25.0" prefWidth="183.0" text="Rekisteröi" />
       <Text layoutX="298.0" layoutY="325.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
    </children>
 </AnchorPane>

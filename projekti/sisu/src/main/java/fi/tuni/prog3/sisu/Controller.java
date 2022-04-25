@@ -6,9 +6,10 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -18,12 +19,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 
-/*
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-*/
-
+/**
+ * Controls the main UI-window and its elements. Is responsible for program functionality.
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class Controller implements Initializable{
     
     private static HashMap<String, Degree> degrees;
@@ -58,8 +58,16 @@ public class Controller implements Initializable{
     private CheckBox courseCheckBox = new CheckBox();
     @FXML
     private Text allCredits = new Text();
+    @FXML
+    private WebView motivation = new WebView();
     
 
+    
+    /** 
+     * Initializes the UI and performs necessary actions. 
+     * @param arg0 unused
+     * @param arg1 unused
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
 
@@ -78,11 +86,17 @@ public class Controller implements Initializable{
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
 
+        motivation.getEngine().load(GUITools.getMotivationalImageUrl());
         refreshStudiesCompleted();
         
         
     }
 
+    /**
+     * Shows info based on selected element and toggles the visibility of "course completed" checkbox.
+     * Checks if clicked element is a course and sets checkbox visibility by it.
+     * NOTE: Not every element has info that can be fetched.
+     */
     @FXML
     public void selectItem(){
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
@@ -141,14 +155,14 @@ public class Controller implements Initializable{
                 courseCheckBox.setVisible(false);
             }
             
-                
-            
-
-            //Checkboxin status haetaan
-            //courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
         }
     }
 
+    /**
+     * "Completes" course
+     * Gives the Student-object a course key and sets visible credits to TreeView TreeItem.
+     * Lastly refreshes the completed studies part of the UI view.
+     */
     @FXML
     public void checkBoxOnClick(){
 
@@ -163,6 +177,10 @@ public class Controller implements Initializable{
 
     }
 
+    /**
+     * Refreshes the comleted studies part of the UI.
+     * Adds completed courses to a VBOX and adds credits to the allCredits Text element.
+     */
     @FXML 
     void refreshStudiesCompleted(){
         completedCourses.getChildren().clear();
@@ -183,6 +201,10 @@ public class Controller implements Initializable{
         allCredits.setText(String.format("%d"+ "op", student.getCredits()));
     }
 
+    /**
+     * Saves current Student by using methods from SaveProgress.
+     * Catches IOException if given file is not valid.
+     */
     @FXML
     public void save(){
         System.out.println("Saving...");
@@ -194,6 +216,11 @@ public class Controller implements Initializable{
         }
     }
 
+    /**
+     * Loads Student object from file, replaces the current Student.
+     * Catches FileNotFoundException if given file doesn't exist.
+     * Lastly refreshes the completed studies part of the UI view.
+     */
     @FXML
     public void load(){
         System.out.println("Loading...");
@@ -210,6 +237,13 @@ public class Controller implements Initializable{
 
         refreshStudiesCompleted();
     }
+
+    /**
+     * Switches the current degree shown in UI and sets it for the current Student.
+     * NOTE: Switching degrees will reset the Students credits and courses done.
+     * Lastly refreshes the completed studies part of the UI view.
+     * 
+     */
     @FXML
     public void switchDegree(){
         if(!searchBar.getEditor().getText().isEmpty() && degrees.containsKey(searchBar.getEditor().getText())){
@@ -224,31 +258,69 @@ public class Controller implements Initializable{
          
     }
 
+    @FXML public void getNewMotivationalImage(){
+        motivation.getEngine().load(GUITools.getMotivationalImageUrl());
+    }
+
   
-     //Adding event Filter 
+     
+    /** 
+     * Sets the static Controller variable Degrees
+     * @param degrees HashMap containing String keys and Degree degrees.
+     */
+     
 
     public static void setDegrees(HashMap<String, Degree> degrees){
         Controller.degrees = degrees;
     }
     
+    
+    /** 
+     * Sets the static Controller variable student.  
+     * @param student Student-object to be passed onto the Controller.
+     */
     public static void setStudent(Student student){
         Controller.student = student;
     }
     
+    
+    /** 
+     * Sets the static Controller variable degree
+     * @param degree Degree-object to be passed onto the Controller.
+     */
     public static void setDegree(Degree degree){
         Controller.degree = degree;
     }
 
+    
+    /** 
+     * Sets the static String variable element.
+     * @param element String element to be passed onto the Controller.
+     */
     public static void setSelectedElement(String element){
         Controller.selectedElement = element;
     }
 
+    
+    /** 
+     * Adds a new Course to the allCourses HashMap
+     * @param c Course to be added to the HashMap
+     */
     public static void addCourses(Course c){
         allCourses.put(c.getName(), c);
     }
+    
+    /** 
+     * Adds a new Module to the allModules HashMap.
+     * @param m Module to be added to the HashMap.
+     */
     public static void addModules(Module m){
         allModules.put(m.getName(), m);
     }
+
+    /**
+     * Clears the allCourses and allModules HashMaps.
+     */
     public static void clearMaps() {
         if(allCourses != null){
             allCourses.clear();
@@ -259,19 +331,47 @@ public class Controller implements Initializable{
         
     }
     
+    
+    /** 
+     * @param name A String containing the search key.
+     * @return Course The Course object corresponding with the search key.
+     */
     public static Course searchCourse(String name){
         if(allCourses.containsKey(name)){
             return allCourses.get(name);
         }
-        return null;
+        else{
+            return null;
+        }
     }
+    
+    /** 
+     * @param name A String containing the search key.
+     * @return Module The Module object corresponding with the search key.
+     */
     public static Module searchModule(String name){
         if(allModules.containsKey(name)){
             return allModules.get(name);
         }
-        return null;
+        else{
+            return null;
+        }
     }
 
+    /**
+     * Closes the program.
+     */
+    @FXML
+    public void closeProgram(){
+        Platform.exit();
+        System.exit(0);
+    }
+
+    
+    /** 
+     * TODO: Dokumentoi
+     * @param item
+     */
     private void addCreditsToTree(TreeItem<String> item) {
         if(item.getParent().getParent() != null ){
             addCreditsToTree(item.getParent());
