@@ -19,6 +19,11 @@ public class SaveProgress {
 
     public SaveProgress(){}
 
+    
+    /** 
+     * @param student
+     * @throws IOException
+     */
     //! Jotta tämä toimisi, piti tehdä jotakin epäpyhää module-info.java:ssa. Miksi se toimii ei ole tiedossa.
     //! Jos Studentia muokataan voi olla, että pitää lisätä asioita...
     public static void saveStudent(Student student) throws IOException{
@@ -44,6 +49,11 @@ public class SaveProgress {
 
     }
 
+    
+    /** 
+     * @return Student
+     * @throws FileNotFoundException
+     */
     //TODO: tiedoston kelvollisuus tarkasteluun
     public static Student loadStudent() throws FileNotFoundException{
 

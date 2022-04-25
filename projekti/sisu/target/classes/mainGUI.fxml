@@ -42,6 +42,7 @@
                         </Text>
                         <Button fx:id="loadButton" layoutX="108.0" layoutY="217.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
                         <Button fx:id="saveButton" layoutX="37.0" layoutY="217.0" mnemonicParsing="false" onMouseClicked="#save" text="Tallenna" />
+                        <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -74,10 +75,22 @@
                            </font>
                         </Text>
                         <Text fx:id="allCredits" layoutX="632.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                        <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab text="Motivaatio">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <WebView fx:id="motivation" layoutX="230.0" layoutY="100.0" prefHeight="642.0" prefWidth="642.0" />
+                        <Button layoutX="1013.0" layoutY="14.0" mnemonicParsing="false" onAction="#getNewMotivationalImage" onMouseClicked="#getNewMotivationalImage" text="Uusi kuva!" />
+                        <Text fill="#0000009d" layoutX="230.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Inspirobot.me" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

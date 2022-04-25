@@ -3,34 +3,25 @@ package fi.tuni.prog3.sisu;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 
 
 public class LoginController implements Initializable{
 
     private static HashMap<String, Degree> degrees;
     private Stage stage = new Stage();
-    private Parent startParent = new Parent() {};
-
 
     @FXML
     TextField name = new TextField();
@@ -41,13 +32,21 @@ public class LoginController implements Initializable{
     
 
 
+    
+    /** 
+     * @param arg0
+     * @param arg1
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         GUITools.setUpDegreeBox(degreePicker, degrees);
+        
     }
 
     @FXML
     public void loadStudentData(){
+        
+
         try{
             Student student = SaveProgress.loadStudent();
 
@@ -64,14 +63,22 @@ public class LoginController implements Initializable{
 
     @FXML
     public void openRegister(){
+        
         Parent parent = loadFXMLsettings("/registerGUI.fxml");
+        
         Scene scene = new Scene(parent);
         stage.setScene(scene);
         
     }
 
-    @FXML void registerStudent(){
+    @FXML
+    public void closeProgram(){
+        Platform.exit();
+        System.exit(0);
+    }
 
+    @FXML void registerStudent(){
+        
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
@@ -90,6 +97,10 @@ public class LoginController implements Initializable{
     }
 
 
+    
+    /** 
+     * @return String
+     */
     @FXML
     public String getPickedDegree(){
         String s = new String();
@@ -100,6 +111,11 @@ public class LoginController implements Initializable{
         return s; 
     }
 
+    
+    /** 
+     * @param fileName
+     * @return Parent
+     */
     public Parent loadFXMLsettings(String fileName){
 
         Parent mainWindow = new Parent(){};
@@ -119,14 +135,17 @@ public class LoginController implements Initializable{
     }
 
 
+    
+    /** 
+     * @param newStage
+     */
     public void setStage(Stage newStage){
         stage = newStage;
     }
 
-    public void setParent(Parent newParent){
-        startParent = newParent;
-    }
-
+    /** 
+     * @param degrees
+     */
     public static void setDegrees(HashMap<String, Degree> degrees){
         LoginController.degrees = degrees;
     }

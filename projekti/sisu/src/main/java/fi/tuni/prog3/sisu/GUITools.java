@@ -3,8 +3,12 @@ package fi.tuni.prog3.sisu;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
-
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,6 +27,12 @@ public class GUITools {
     
     public GUITools(){}
 
+    
+    /** 
+     * @param filename
+     * @return Image
+     * @throws FileNotFoundException
+     */
     public static Image getImage(String filename) throws FileNotFoundException{
 
         InputStream stream = new FileInputStream(filename);
@@ -31,6 +41,12 @@ public class GUITools {
         return image;
     }
 
+    
+    /** 
+     * @param filename
+     * @return Node
+     * @throws FileNotFoundException
+     */
     public static Node getImageAsNode(String filename) throws FileNotFoundException{
         
         Image image = getImage(filename);
@@ -40,6 +56,25 @@ public class GUITools {
         return imageView;
     }
 
+    public static String getMotivationalImageUrl(){
+        String imageURL = new String();
+        try {
+            URLConnection connection = new URL("https://inspirobot.me/api?generate=true").openConnection();
+            InputStream input = connection.getInputStream();
+            System.out.println(connection.getContentType());
+        
+            imageURL = new BufferedReader(new InputStreamReader(input)).readLine();
+        } catch (IOException e) {
+            System.out.println("Not found!");
+        }
+        return imageURL;
+    }
+
+    
+    /** 
+     * @param node
+     * @return RotateTransition
+     */
     public RotateTransition spin(Node node){
         
         RotateTransition rotateTransition = new RotateTransition(); 
@@ -54,6 +89,11 @@ public class GUITools {
     }
     
 
+    
+    /** 
+     * @param deg
+     * @return TreeItem<String>
+     */
     public static TreeItem<String> initializeTree(Degree deg){
         TreeItem<String> rootItem = new TreeItem<>(deg.getName());
         Controller.clearMaps();
@@ -112,6 +152,11 @@ public class GUITools {
         }
     }
     
+    
+    /** 
+     * @param cb
+     * @param degrees
+     */
     public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees){
         cb.setEditable(true);
         cb.setPromptText("Hae tutkinnon nimellä...");

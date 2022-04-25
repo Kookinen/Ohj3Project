@@ -25,6 +25,12 @@ public class GetJsonData {
 
 
 
+    
+    /** 
+     * @return StringBuilder
+     * @throws MalformedURLException
+     * @throws IOException
+     */
     public StringBuilder getJsonDataFromURL() throws MalformedURLException, IOException{
         URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"

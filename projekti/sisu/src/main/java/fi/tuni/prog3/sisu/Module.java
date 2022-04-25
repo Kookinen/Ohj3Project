@@ -8,7 +8,10 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Iterator;
-//Listoja joihin moduuleita ja kursseja
+
+/**
+ * 
+ */
 public class Module {
     String name;
     String id;
@@ -20,6 +23,10 @@ public class Module {
     HashMap<String, Module> modules;
     HashMap<String, Course> courses;
 
+    /**
+     * 
+     * @param id
+     */
     public Module(String id){
         this.id = id;
         modules = new HashMap<>();
@@ -27,30 +34,56 @@ public class Module {
         decodeJson();
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
         return name;
     }
 
     
 
+    
+    /** 
+     * @return int
+     */
     public int getTargetCredits(){
         return targetCredits;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getOutcomes(){
         return outcomes;
     }
+    
+    /** 
+     * @return HashMap<String, Module>
+     */
     public HashMap<String, Module> getModules(){
         return modules;
     }
+    
+    /** 
+     * @return HashMap<String, Course>
+     */
     public HashMap<String, Course> getCourses(){
         return courses;
     }
+    
+    /** 
+     * @return String
+     */
     public String getType(){
         return type;
     }
     
-
+    /**
+     * 
+     */
     private void decodeJson() {
         try{
             StringBuilder sb = new StringBuilder();
@@ -117,6 +150,10 @@ public class Module {
         }        
     }
     
+    
+    /** 
+     * @param arr
+     */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();
         while(it.hasNext()){

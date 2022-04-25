@@ -9,19 +9,10 @@ import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.GridPane;
 //import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -33,6 +24,10 @@ public class sisu extends Application{
     public HashMap<String, Degree> degrees = new HashMap<>();
     
     
+    
+    /** 
+     * @param stage
+     */
     //private static String fileName;
     
     @Override
@@ -77,7 +72,6 @@ public class sisu extends Application{
 
 
         LoginController controller = loader.getController();
-        controller.setParent(parent);
         controller.setStage(stage);
 
         Scene scene = new Scene(parent);
@@ -93,6 +87,10 @@ public class sisu extends Application{
     
     }
 
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]) {
 
         launch();
@@ -100,6 +98,10 @@ public class sisu extends Application{
 
     
 
+    
+    /** 
+     * @param sb
+     */
     private void decodeJson(StringBuilder sb) {
         JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();
         JsonArray arr = obj.getAsJsonArray("searchResults");

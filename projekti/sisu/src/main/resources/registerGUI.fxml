@@ -15,5 +15,6 @@
       <ComboBox fx:id="degreePicker" editable="true" layoutX="225.0" layoutY="194.0" prefHeight="25.0" prefWidth="180.0" promptText="Hae tutkinnon nimellä" />
       <Label layoutX="133.0" layoutY="198.0" text="Valitse tutkinto:" />
       <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" text="Rekisteröidy" />
+      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
    </children>
 </AnchorPane>

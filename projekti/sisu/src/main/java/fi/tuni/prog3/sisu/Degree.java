@@ -1,6 +1,5 @@
 package fi.tuni.prog3.sisu;
 
-//import java.util.ArrayList;
 import java.net.MalformedURLException;
 import java.io.IOException;
 import com.google.gson.*;
@@ -8,7 +7,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 
-
+/**
+ * Degree represents a degree in the Sisu API. It is used to store and fetch data.
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
+ */
 public class Degree {
     private String id;
     private String code;
@@ -21,7 +24,15 @@ public class Degree {
 
     //private StringBuilder sb; //Rakentimeen? ei kai
     
-    
+    /**
+     * 
+     * @param id
+     * @param code
+     * @param lang
+     * @param groupId
+     * @param name
+     * @param credits
+     */
     public Degree(String id, String code, String lang, String groupId, String name, int credits){
         this.id = id;
         this.code = code;
@@ -29,43 +40,78 @@ public class Degree {
         this.groupId = groupId;
         this.name = name;
         this.credits = credits;
-        
+        modules = new HashMap<>();
         
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getId(){
         return id;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getCode(){
         return code;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getLang(){
         return lang;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getGroupId(){
         return groupId;
     }
 
+    
+    /** 
+     * @return String
+     */
     public String getName(){
         return name;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getCredits(){
         return credits;
     }
     
+    
+    /** 
+     * @return String
+     */
     public String getOutcomes(){
         return outcomes;
     }
     
+    
+    /**
+     * @return HashMap<String, Module>
+     */
     public HashMap<String, Module> getModules(){
         decodeJson();
         return modules;
     }
     
+    /**
+     * 
+     */
     public void decodeJson() {
         try{ 
             GetJsonData getJson_Module = new GetJsonData(2, id);
@@ -102,9 +148,13 @@ public class Degree {
         
     }
 
+    
+    /** 
+     * @param arr
+     */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();
-        modules = new HashMap<>();
+        
         while(it.hasNext()){
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();
