@@ -18,6 +18,9 @@ import javafx.stage.Stage;
 
 /**
  * Main class and the starting point of the application.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
  */
 public class sisu extends Application {
 

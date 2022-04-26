@@ -65,7 +65,6 @@ public class Controller implements Initializable {
     @FXML
     private WebView motivation = new WebView();
 
-    // TODO: Tarkista että paluuarvot ja heitot on dokumentoitu!
 
     /**
      * Initializes the UI and performs necessary actions.
@@ -253,6 +252,9 @@ public class Controller implements Initializable {
             Controller.student = SaveProgress.loadStudent();
             studentNumber.setText(student.getNumber());
             studentName.setText(student.getName());
+            TreeItem<String> rootItem = GUITools.initializeTree(degrees.get(student.getDegree()));
+            mainView.setRoot(rootItem);
+
         } catch (FileNotFoundException e2) {
             System.out.println("File not found :(");
         }
@@ -379,9 +381,12 @@ public class Controller implements Initializable {
     }
 
     /**
-     * TODO: Dokumentoi
+     * Shows credits in the TreeView in the format of "n/m op" where m is the max amount of credits
+     * and n is the current amount of credits earned by the student.
      * 
-     * @param item
+     * This method is unique to Controller and is not made to be used in other contexts.
+     * 
+     * @param item TreeItem to add the functionality to
      */
     private void addCreditsToTree(TreeItem<String> item) {
         if (item.getParent().getParent() != null) {
@@ -420,6 +425,7 @@ public class Controller implements Initializable {
             }
         }
     }
+    
     private String[] splitString(String string){
         String[] splitValue = string.split(" ");
         int length = splitValue.length;

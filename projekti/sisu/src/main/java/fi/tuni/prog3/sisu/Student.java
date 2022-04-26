@@ -5,6 +5,9 @@ import java.util.HashMap;
 /**
  * Student represents a student, or more specifically the user. Is used to store
  * user data.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
  */
 public class Student {
     private String name;

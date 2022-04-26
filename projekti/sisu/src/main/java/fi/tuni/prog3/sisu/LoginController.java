@@ -67,7 +67,7 @@ public class LoginController implements Initializable {
             Scene scene = new Scene(parent);
             stage.setScene(scene);
         } catch (FileNotFoundException e) {
-
+            e.printStackTrace();
         }
     }
 

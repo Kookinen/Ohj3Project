@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 /**
  * 
- * Module represents a module in the Sisu API. It is used to store and fetch
+ * DegreeModule represents a module in the Sisu API. It is used to store and fetch
  * data.
  * 
  */
@@ -27,9 +27,9 @@ public class DegreeModule {
     HashMap<String, Course> courses;
 
     /**
-     * Constructor for a new module
+     * Constructor for a new degreeModule
      * 
-     * @param id is the id of the new module. Is used to differentiate.
+     * @param id is the id of the new degreeModule. Is used to differentiate.
      */
     public DegreeModule(String id) {
         this.id = id;
@@ -39,21 +39,21 @@ public class DegreeModule {
     }
 
     /**
-     * @return this modules name.
+     * @return this degreeModules name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return this modules credits.
+     * @return this degreeModules credits.
      */
     public int getTargetCredits() {
         return targetCredits;
     }
 
     /**
-     * @return this modules outcomes.
+     * @return this degreeModules outcomes.
      */
     public String getOutcomes() {
         return outcomes;
@@ -61,7 +61,7 @@ public class DegreeModule {
 
     /**
      * TODO: oikein?
-     * @return this modules HashMap<String, DegreeModule> containing neighbouring modules.
+     * @return this degreeModules HashMap<String, DegreeModule> containing neighbouring modules.
      * @return HashMap<String, DegreeModule>
      */
     public HashMap<String, DegreeModule> getModules() {
@@ -69,14 +69,14 @@ public class DegreeModule {
     }
 
     /**
-     * @return this modules HashMap<String, Course> containing this modules courses.
+     * @return this degreeModules HashMap<String, Course> containing this modules courses.
      */
     public HashMap<String, Course> getCourses() {
         return courses;
     }
 
     /**
-     * @return this modules type.
+     * @return this degreeModules type.
      */
     public String getType() {
         return type;

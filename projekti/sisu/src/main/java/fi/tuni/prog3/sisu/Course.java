@@ -23,6 +23,7 @@ public class Course {
 
     /**
      * Constructor for a new Course.
+     * Calls getInfo to fetch data from sisu API.
      * 
      * @param id String id to differentiate the Course object.
      */
@@ -73,7 +74,11 @@ public class Course {
         return additional;
     }
 
-    // TODO: Dokumentoi
+    /**
+     * Fetches JSON Data via GetJsonData and sets class variables.
+     * Is used to interprent Json data and find correct objects from it.
+     * Data is fetched from sisu API.
+     */
     private void getInfo() {
         try {
 
@@ -114,7 +119,9 @@ public class Course {
             }
 
         } catch (MalformedURLException e) {
+            e.printStackTrace();
         } catch (IOException e2) {
+            e2.printStackTrace();
         }
     }
 }

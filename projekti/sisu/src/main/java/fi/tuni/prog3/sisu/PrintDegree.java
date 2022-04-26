@@ -6,6 +6,8 @@ import java.util.HashMap;
  * Prints the data structure to the command line.
  * Is used to identify problems in the data structure and to chech its validity.
  * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
  */
 public class PrintDegree {
 

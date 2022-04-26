@@ -1,7 +1,7 @@
 module fi.tuni.prog3.sisu {
     requires transitive javafx.controls;
     requires javafx.web;
-    // requires java.desktop;
+    //requires java.desktop;
     requires com.google.gson;
     requires javafx.fxml;
 

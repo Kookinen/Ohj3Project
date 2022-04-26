@@ -13,6 +13,9 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  * Is used to save and load Student-objects.
+ * 
+ * <@author Joni Koskinen
+ * @author Julius Juutilainen
  */
 public class SaveProgress {
 
@@ -30,13 +33,10 @@ public class SaveProgress {
 
         Gson gson = new Gson();
         FileChooser fileChooser = new FileChooser();
-
-        // Multiple file ends so a user can create new JSON in the file explorer.
+        
         fileChooser.getExtensionFilters().addAll(
-                new ExtensionFilter("JSON Files", "*.json"),
-                new ExtensionFilter("Text Files", "*.txt"),
-                new ExtensionFilter("All Files", "*.*"));
-        File file = fileChooser.showOpenDialog(null);
+                new ExtensionFilter("JSON Files", "*.json"));
+        File file = fileChooser.showSaveDialog(null);
 
         FileWriter writer = new FileWriter(file);
         gson.toJson(student, writer);
@@ -50,7 +50,6 @@ public class SaveProgress {
      * @return Student object loaded from file.
      * @throws FileNotFoundException if file user gives is not found.
      */
-    // TODO: tiedoston kelvollisuus tarkasteluun
     public static Student loadStudent() throws FileNotFoundException {
 
         Gson gson = new Gson();
