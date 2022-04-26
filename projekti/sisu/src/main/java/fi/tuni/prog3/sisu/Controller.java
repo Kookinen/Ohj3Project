@@ -30,7 +30,7 @@ public class Controller implements Initializable {
 
     private static HashMap<String, Degree> degrees;
     private static HashMap<String, Course> allCourses;
-    private static HashMap<String, Module> allModules;
+    private static HashMap<String, DegreeModule> allModules;
     private static Student student;
     private static Degree degree;
     private static String selectedElement;
@@ -133,7 +133,7 @@ public class Controller implements Initializable {
 
             }
             // EI toimi täysin
-            Module m = searchModule(splitString[0]);
+            DegreeModule m = searchModule(splitString[0]);
             if (m != null) {
                 courseInfo.getEngine().loadContent("");
                 courseInfo.getEngine().loadContent(m.getOutcomes());
@@ -176,7 +176,13 @@ public class Controller implements Initializable {
 
             TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
             addCreditsToTree(item);
-        
+            Course c = searchCourse(combineString(splitString(item.getValue())));
+            if(courseCheckBox.isSelected()){
+                student.addCredits(c.getTargetCredits());
+            }
+            else{
+                student.subtractCredits(c.getTargetCredits());
+            }
             //? tarpeellinen
             courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
             refreshStudiesCompleted();
@@ -316,9 +322,9 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param m Module to be added to the allModules HashMap.
+     * @param m DegreeModule to be added to the allModules HashMap.
      */
-    public static void addModules(Module m) {
+    public static void addModules(DegreeModule m) {
         allModules.put(m.getName(), m);
     }
 
@@ -349,9 +355,9 @@ public class Controller implements Initializable {
 
     /**
      * @param name A String containing the search key.
-     * @return Module The Module object corresponding with the search key.
+     * @return DegreeModule The DegreeModule object corresponding with the search key.
      */
-    public static Module searchModule(String name) {
+    public static DegreeModule searchModule(String name) {
         if (allModules.containsKey(name)) {
             return allModules.get(name);
         } else {
@@ -395,23 +401,34 @@ public class Controller implements Initializable {
                     sb.append(" ").append(c.getTargetCredits() + prevPointsNumb).append("op/")
                             .append(last.split("/")[1]);
                     item.getParent().setValue(sb.toString());
-                    //Väärässä paikassa
-                    System.out.println("addCreditsToTree add credits " + c.getTargetCredits());
-                    student.addCredits(c.getTargetCredits());
+                    
+                    
                 }
                 else{
                     Course c = searchCourse(Controller.selectedElement);
 
-                    Module m = searchModule(sb.toString());
+                    DegreeModule m = searchModule(sb.toString());
                     sb.append(" ").append(prevPointsNumb - c.getTargetCredits()).append("op/")
                             .append(m.getTargetCredits()).append("op");
                     item.getParent().setValue(sb.toString());
-                    //Väärässä paikassa
-                    System.out.println("addCreditsToTree sub credits " + c.getTargetCredits());
-                    student.subtractCredits(c.getTargetCredits());
+                    
                 }
             }
         }
+    }
+    private String[] splitString(String string){
+        String[] splitValue = string.split(" ");
+        int length = splitValue.length;
+        String[] name = Arrays.copyOf(splitValue, length - 1);
+        return name;
+    }
+    private String combineString(String[] nameArray){
+        StringBuilder sb = new StringBuilder();
+        for (String s : nameArray) {
+            sb.append(s).append(" ");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb.toString();
     }
 
 }

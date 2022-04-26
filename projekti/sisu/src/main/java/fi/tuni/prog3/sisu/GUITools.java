@@ -102,12 +102,12 @@ public class GUITools {
      * @param modules
      * @param root
      */
-    private static void printTree(HashMap<String, Module> modules, TreeItem<String> root) {
+    private static void printTree(HashMap<String, DegreeModule> modules, TreeItem<String> root) {
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
 
         // käydään kaikki modulet läpi
-        for (Module m : modules.values()) {
+        for (DegreeModule m : modules.values()) {
             if (m.getType().equals("GroupingModule")) {
                 moduleItem = new TreeItem<>(m.getName());
             } else {
@@ -124,7 +124,7 @@ public class GUITools {
                 // lisätään kurssi modulen alle
                 moduleItem.getChildren().add(courseItem);
             }
-            HashMap<String, Module> mods = m.getModules();
+            HashMap<String, DegreeModule> mods = m.getModules();
             if (!mods.isEmpty()) {
                 // modulesta uusi root kun kutsutaan uudestaan
                 printTree(mods, moduleItem);

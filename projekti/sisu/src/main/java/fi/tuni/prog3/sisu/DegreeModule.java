@@ -12,7 +12,7 @@ import java.util.Iterator;
 /**
  * 
  */
-public class Module {
+public class DegreeModule {
     String name;
     String id;
     int targetCredits;
@@ -20,14 +20,14 @@ public class Module {
     String type;
     // String curriculumPeriodIds;
     // String validityPeriod;
-    HashMap<String, Module> modules;
+    HashMap<String, DegreeModule> modules;
     HashMap<String, Course> courses;
 
     /**
      * 
      * @param id
      */
-    public Module(String id) {
+    public DegreeModule(String id) {
         this.id = id;
         modules = new HashMap<>();
         courses = new HashMap<>();
@@ -56,9 +56,9 @@ public class Module {
     }
 
     /**
-     * @return HashMap<String, Module>
+     * @return HashMap<String, DegreeModule>
      */
-    public HashMap<String, Module> getModules() {
+    public HashMap<String, DegreeModule> getModules() {
         return modules;
     }
 
@@ -149,7 +149,7 @@ public class Module {
                     break;
                 case "ModuleRule":
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
-                    Module m = new Module(moduleGroupId);
+                    DegreeModule m = new DegreeModule(moduleGroupId);
                     modules.put(m.getName(), m);
                     break;
                 case "CourseUnitRule":

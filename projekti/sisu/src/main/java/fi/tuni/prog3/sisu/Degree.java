@@ -17,11 +17,11 @@ public class Degree {
     private String id;
     private String code;
     private String lang;
-    private String groupId; // Module löytyy tällä?
+    private String groupId; // DegreeModule löytyy tällä?
     private String name;
     private int credits;
     private String outcomes;
-    HashMap<String, Module> modules;
+    HashMap<String, DegreeModule> modules;
 
     // private StringBuilder sb; //Rakentimeen? ei kai
 
@@ -97,9 +97,9 @@ public class Degree {
     }
 
     /**
-     * @return This Degrees Module Keys, Modules in a hashmap.
+     * @return This Degrees DegreeModule Keys, Modules in a hashmap.
      */
-    public HashMap<String, Module> getModules() {
+    public HashMap<String, DegreeModule> getModules() {
         decodeJson();
         return modules;
     }
@@ -154,7 +154,7 @@ public class Degree {
                     break;
                 case "ModuleRule":
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
-                    Module m = new Module(moduleGroupId);
+                    DegreeModule m = new DegreeModule(moduleGroupId);
                     modules.put(m.getName(), m);
                     break;
                 default:
