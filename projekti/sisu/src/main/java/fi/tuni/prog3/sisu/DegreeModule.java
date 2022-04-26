@@ -15,7 +15,7 @@ import java.util.Iterator;
  * data.
  * 
  */
-public class Module {
+public class DegreeModule {
     String name;
     String id;
     int targetCredits;
@@ -23,7 +23,7 @@ public class Module {
     String type;
     // String curriculumPeriodIds;
     // String validityPeriod;
-    HashMap<String, Module> modules;
+    HashMap<String, DegreeModule> modules;
     HashMap<String, Course> courses;
 
     /**
@@ -31,7 +31,7 @@ public class Module {
      * 
      * @param id is the id of the new module. Is used to differentiate.
      */
-    public Module(String id) {
+    public DegreeModule(String id) {
         this.id = id;
         modules = new HashMap<>();
         courses = new HashMap<>();
@@ -61,9 +61,10 @@ public class Module {
 
     /**
      * TODO: oikein?
-     * @return this modules HashMap<String, Module> containing neighbouring modules.
+     * @return this modules HashMap<String, DegreeModule> containing neighbouring modules.
+     * @return HashMap<String, DegreeModule>
      */
-    public HashMap<String, Module> getModules() {
+    public HashMap<String, DegreeModule> getModules() {
         return modules;
     }
 
@@ -156,7 +157,7 @@ public class Module {
                     break;
                 case "ModuleRule":
                     String moduleGroupId = jObject.get("moduleGroupId").getAsString();
-                    Module m = new Module(moduleGroupId);
+                    DegreeModule m = new DegreeModule(moduleGroupId);
                     modules.put(m.getName(), m);
                     break;
                 case "CourseUnitRule":

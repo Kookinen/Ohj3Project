@@ -15,7 +15,7 @@ public class PrintDegree {
      * @param degreeName name of degree.
      * @param modules    HashMap of degree modules.
      */
-    public PrintDegree(String degreeName, HashMap<String, Module> modules) {
+    public PrintDegree(String degreeName, HashMap<String, DegreeModule> modules) {
         System.out.println(degreeName);
         int depth = 1;
         printAll(modules, depth);
@@ -27,9 +27,9 @@ public class PrintDegree {
      * @param modules HashMap of the data structure.
      * @param depth   depth to be crawled trough.
      */
-    private void printAll(HashMap<String, Module> modules, int depth) {
+    private void printAll(HashMap<String, DegreeModule> modules, int depth) {
         System.out.println(modules);
-        for (Module m : modules.values()) {
+        for (DegreeModule m : modules.values()) {
             String space = "  ";
             System.out.println(space.repeat(depth) + m.getName());
             HashMap<String, Course> cors = m.getCourses();
@@ -37,7 +37,7 @@ public class PrintDegree {
             for (Course c : cors.values()) {
                 System.out.println(space.repeat(depth + 1) + c.getName() + " " + c.getTargetCredits());
             }
-            HashMap<String, Module> mods = m.getModules();
+            HashMap<String, DegreeModule> mods = m.getModules();
             if (!mods.isEmpty()) {
                 printAll(mods, depth);
             }

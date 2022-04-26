@@ -1,7 +1,6 @@
 
 package fi.tuni.prog3.sisu;
 
-
 import java.util.HashMap;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -65,16 +64,26 @@ public class SisuTest extends ApplicationTest{
         assertEquals(expName, name);
         assertEquals(expCredit, credit);
         
+<<<<<<< HEAD
         deg.modules.put("moduuli1", new fi.tuni.prog3.sisu.Module("otm-6c36cb36-1507-44ff-baab-a30ac76ca786"));
         deg.modules.put("moduuli2", new fi.tuni.prog3.sisu.Module("otm-35d5a7e1-71c1-456a-8783-9cf8c34262f5"));
         HashMap<String, Module> modules = deg.getModules();
+||||||| fe26159
+        deg.modules.put("moduuli1", new sisu.Module("otm-6c36cb36-1507-44ff-baab-a30ac76ca786"));
+        deg.modules.put("moduuli2", new sisu.Module("otm-35d5a7e1-71c1-456a-8783-9cf8c34262f5"));
+        HashMap<String, Module> modules = deg.getModules();
+=======
+        deg.modules.put("moduuli1", new DegreeModule("otm-6c36cb36-1507-44ff-baab-a30ac76ca786"));
+        deg.modules.put("moduuli2", new DegreeModule("otm-35d5a7e1-71c1-456a-8783-9cf8c34262f5"));
+        HashMap<String, DegreeModule> modules = deg.getModules();
+>>>>>>> 7b9d62b6d0f8f9d73e259b9940014f551533a091
         assertTrue(modules.containsKey("moduuli1"));
         assertTrue(modules.containsKey("moduuli2"));
     }
     
     @Test
     public void testModule(){
-        Module m = new Module("otm-3858f1d8-4bf9-4769-b419-3fee1260d7ff");
+        DegreeModule m = new DegreeModule("otm-3858f1d8-4bf9-4769-b419-3fee1260d7ff");
         String expName = "Tietojenkäsittelytieteiden tutkinto-ohjelman yhteiset opinnot";
         String name = m.getName();
         int expCredits = 35;
