@@ -62,7 +62,7 @@ public class LoginController implements Initializable {
             Student student = SaveProgress.loadStudent();
 
             Controller.setStudent(student);
-
+            GUITools.setStudent(student);
             Parent parent = loadFXMLsettings("/mainGUI.fxml");
             Scene scene = new Scene(parent);
             stage.setScene(scene);
@@ -108,6 +108,7 @@ public class LoginController implements Initializable {
         student.setDegree(newDegree);
 
         Controller.setStudent(student);
+        GUITools.setStudent(student);
 
         Parent parent = loadFXMLsettings("/mainGUI.fxml");
         Scene scene = new Scene(parent);

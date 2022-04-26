@@ -80,8 +80,6 @@ public class Student {
      * @param lostCredits credits to be subtracted from the total.
      */
     public void subtractCredits(int lostCredits) {
-        System.out.println("credits " + credits);
-        System.out.println("credits lost " + lostCredits);
         credits = credits - lostCredits;
     }
 

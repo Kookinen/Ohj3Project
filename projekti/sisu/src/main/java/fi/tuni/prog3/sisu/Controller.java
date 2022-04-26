@@ -34,7 +34,7 @@ public class Controller implements Initializable {
     private static HashMap<String, DegreeModule> allModules;
     private static Student student;
     private static Degree degree;
-    private static String selectedElement;
+    private static String selectedItemName;
     // private static HashMap<String, Boolean> coursesDone;
 
     @FXML
@@ -153,13 +153,13 @@ public class Controller implements Initializable {
             // Checkboxin nollaus jos dataa ei tulekkaan
             courseCheckBox.setSelected(false);
 
-            if (allCourses.containsKey(Controller.selectedElement)) {
+            if (allCourses.containsKey(Controller.selectedItemName)) {
                 courseCheckBox.setVisible(true);
-                if (student.getCoursesDone().get(Controller.selectedElement) == null
+                if (student.getCoursesDone().get(Controller.selectedItemName) == null
                         || student.getCoursesDone() == null) {
-                    student.addCoursesDone(Controller.selectedElement, courseCheckBox.isSelected());
+                    student.addCoursesDone(Controller.selectedItemName, courseCheckBox.isSelected());
                 }
-                courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
+                courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedItemName));
             } else {
                 courseCheckBox.setVisible(false);
             }
@@ -176,21 +176,27 @@ public class Controller implements Initializable {
     @FXML
     public void checkBoxOnClick(){
         
-        if(Controller.selectedElement != null){
-            student.addCoursesDone(Controller.selectedElement,courseCheckBox.isSelected());
+        if(Controller.selectedItemName != null){
+            
+            student.addCoursesDone(Controller.selectedItemName,courseCheckBox.isSelected());
 
             TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-            addCreditsToTree(item);
-            Course c = searchCourse(combineString(splitString(item.getValue())));
-            if(courseCheckBox.isSelected()){
-                student.addCredits(c.getTargetCredits());
+            if(item != null){
+                Course c = searchCourse(GUITools.combineString(GUITools.splitString(item.getValue())).toString());
+
+                if(courseCheckBox.isSelected()){
+                    student.addCredits(c.getTargetCredits());
+                    addCreditsToTree(item, c.getTargetCredits(), true);
+                }
+                else{
+                    student.subtractCredits(c.getTargetCredits());
+                    addCreditsToTree(item, c.getTargetCredits(), false);
+                }
+                //? tarpeellinen
+                courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedItemName));
+                System.out.println(courseCheckBox.isSelected());
+                refreshStudiesCompleted();
             }
-            else{
-                student.subtractCredits(c.getTargetCredits());
-            }
-            //? tarpeellinen
-            courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedElement));
-            refreshStudiesCompleted();
         }
         
 
@@ -213,7 +219,7 @@ public class Controller implements Initializable {
                 String credits = String.valueOf(allCourses.get(key).getTargetCredits());
 
                 StringBuilder sb = new StringBuilder();
-                sb.append(key + " " + credits + "op");
+                sb.append(key).append(" ").append(credits).append("op");
 
                 String course = sb.toString();
 
@@ -254,8 +260,10 @@ public class Controller implements Initializable {
         // Refresh-metodi?
         try {
             Controller.student = SaveProgress.loadStudent();
+            GUITools.setStudent(student);
             studentNumber.setText(student.getNumber());
             studentName.setText(student.getName());
+            System.out.println(student.getDegree());
             TreeItem<String> rootItem = GUITools.initializeTree(degrees.get(student.getDegree()));
             mainView.setRoot(rootItem);
 
@@ -320,8 +328,8 @@ public class Controller implements Initializable {
     /**
      * @param element String element to be set onto the Controller.
      */
-    public static void setSelectedElement(String element) {
-        Controller.selectedElement = element;
+    public static void setSelectedElement(String itemName) {
+        Controller.selectedItemName = itemName;
     }
 
     /**
@@ -337,7 +345,23 @@ public class Controller implements Initializable {
     public static void addModules(DegreeModule m) {
         allModules.put(m.getName(), m);
     }
-
+    
+    /**
+     * Getter method for unit tests
+     * @return all courses under the degree
+     */
+    public static HashMap<String, Course> getCourses(){
+        return allCourses;
+    }
+    
+    /**
+     * Getter method for unit tests
+     * @return all modules under the degree
+     */
+    public static HashMap<String, DegreeModule> getModules(){
+        return allModules;
+    }
+    
     /**
      * Clears the allCourses and allModules HashMaps.
      */
@@ -391,13 +415,14 @@ public class Controller implements Initializable {
      * This method is unique to Controller and is not made to be used in other contexts.
      * 
      * @param item TreeItem to add the functionality to
+     * @param credits int, courses credits
+     * @param coursePassed boolean, determines whether the user has completed the course
      */
-    private void addCreditsToTree(TreeItem<String> item) {
+    public static void addCreditsToTree(TreeItem<String> item, int credits, boolean coursePassed) {
         if (item.getParent().getParent() != null) {
-            addCreditsToTree(item.getParent());
+            addCreditsToTree(item.getParent(), credits, coursePassed);
             if (searchModule(item.getParent().getValue()) == null) {
                 String value = item.getParent().getValue();
-                StringBuilder sb = new StringBuilder();
                 String[] splitValue = value.split(" ");
                 int length = splitValue.length;
                 String last = splitValue[length - 1];
@@ -405,23 +430,17 @@ public class Controller implements Initializable {
                 String prevPoints = pointsSplit.substring(0, pointsSplit.length() - 2);
                 int prevPointsNumb = Integer.parseInt(prevPoints);
                 String[] name = Arrays.copyOf(splitValue, length - 1);
-                for (String s : name) {
-                    sb.append(s).append(" ");
-                }
-                sb.setLength(sb.length() - 1);
-                if (courseCheckBox.isSelected()) {
-                    Course c = searchCourse(Controller.selectedElement);
-                    sb.append(" ").append(c.getTargetCredits() + prevPointsNumb).append("op/")
+                StringBuilder sb = GUITools.combineString(name);
+                if (coursePassed) {
+                    sb.append(" ").append(credits + prevPointsNumb).append("op/")
                             .append(last.split("/")[1]);
                     item.getParent().setValue(sb.toString());
                     
                     
                 }
                 else{
-                    Course c = searchCourse(Controller.selectedElement);
-
                     DegreeModule m = searchModule(sb.toString());
-                    sb.append(" ").append(prevPointsNumb - c.getTargetCredits()).append("op/")
+                    sb.append(" ").append(prevPointsNumb - credits).append("op/")
                             .append(m.getTargetCredits()).append("op");
                     item.getParent().setValue(sb.toString());
                     
@@ -429,20 +448,6 @@ public class Controller implements Initializable {
             }
         }
     }
-    
-    private String[] splitString(String string){
-        String[] splitValue = string.split(" ");
-        int length = splitValue.length;
-        String[] name = Arrays.copyOf(splitValue, length - 1);
-        return name;
-    }
-    private String combineString(String[] nameArray){
-        StringBuilder sb = new StringBuilder();
-        for (String s : nameArray) {
-            sb.append(s).append(" ");
-        }
-        sb.setLength(sb.length() - 1);
-        return sb.toString();
-    }
+
 
 }

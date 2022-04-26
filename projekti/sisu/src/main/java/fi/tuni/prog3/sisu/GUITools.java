@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javafx.event.EventHandler;
@@ -27,7 +28,9 @@ import javafx.scene.input.KeyEvent;
  * @author Julius Juutilainen
  */
 public class GUITools {
-
+    
+    private static Student student;
+    
     public GUITools() {
     }
 
@@ -118,11 +121,15 @@ public class GUITools {
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
             // käydään modulen alaiset kurssit ( jos on )
-            for (Course c : cors.values()) {
+            for (Course c : cors.values()){
+                
                 Controller.addCourses(c);
                 courseItem = new TreeItem<>(c.getName() + " " + c.getTargetCredits() + "op");
                 // lisätään kurssi modulen alle
                 moduleItem.getChildren().add(courseItem);
+                if(student.getCoursesDone().containsKey(c.getName()) && student.getCoursesDone().get(c.getName())){
+                    Controller.addCreditsToTree(courseItem, c.getTargetCredits(), true);
+                }
             }
             HashMap<String, DegreeModule> mods = m.getModules();
             if (!mods.isEmpty()) {
@@ -163,5 +170,21 @@ public class GUITools {
             }
         });
     }
-
+    public static String[] splitString(String string){
+        String[] splitValue = string.split(" ");
+        int length = splitValue.length;
+        String[] name = Arrays.copyOf(splitValue, length - 1);
+        return name;
+    }
+    public static StringBuilder combineString(String[] nameArray){
+        StringBuilder sb = new StringBuilder();
+        for (String s : nameArray) {
+            sb.append(s).append(" ");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb;
+    }
+    public static void setStudent(Student student) {
+        GUITools.student = student;
+    }
 }
