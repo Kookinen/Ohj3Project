@@ -2,26 +2,18 @@
 package fi.tuni.prog3.sisu;
 
 import java.util.HashMap;
-import javafx.scene.control.Button;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxAssert;
-import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.framework.junit5.Start;
-import org.testfx.matcher.control.LabeledMatchers;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SisuTest extends ApplicationTest{
 
-   
-    
-    @Start
-    @Override
+    /*@Override
     public void start(Stage stage){
         System.out.println("Testiviesti");
         new sisu().start(stage);
-    }
+    }*/
+    
     
     @Test
     public void testStudent(){
@@ -94,9 +86,22 @@ public class SisuTest extends ApplicationTest{
         assertEquals(expCode, code);
         assertEquals(expCredits, credits);
     }
-
+    
     /*@Test
-    public void testButtons(FxRobot robot){
+    public void testController(){
+        Controller.addCourses(new Course("uta-ykoodi-47926"));
+        String expCourseName = "Johdatus analyysiin"; 
+        assertTrue(Controller.getCourses().containsKey(expCourseName));
+        assertNotEquals(Controller.searchCourse(expCourseName), null);
+        Controller.addModules(new DegreeModule("otm-1d25ee85-df98-4c03-b4ff-6cad7b09618b"));
+        String expModuleName = "Tietojenkäsittelytieteiden kandidaattiohjelma";
+        assertTrue(Controller.getModules().containsKey(expModuleName));
+        assertNotEquals(Controller.searchModule(expModuleName), null);
+    }*/
+    
+    
+    /*@Test
+    public void testButtons(FxRobot robot, Stage stage){
         FxAssert.verifyThat("#regButt", LabeledMatchers.hasText("Rekisteröi"));
         FxAssert.verifyThat("#loadButt", LabeledMatchers.hasText("Lataa"));
     }*/

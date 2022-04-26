@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javafx.event.EventHandler;
@@ -162,6 +163,20 @@ public class GUITools {
                 cb.getItems().addAll(names);
             }
         });
+    }
+    public static String[] splitString(String string){
+        String[] splitValue = string.split(" ");
+        int length = splitValue.length;
+        String[] name = Arrays.copyOf(splitValue, length - 1);
+        return name;
+    }
+    public static StringBuilder combineString(String[] nameArray){
+        StringBuilder sb = new StringBuilder();
+        for (String s : nameArray) {
+            sb.append(s).append(" ");
+        }
+        sb.setLength(sb.length() - 1);
+        return sb;
     }
 
 }

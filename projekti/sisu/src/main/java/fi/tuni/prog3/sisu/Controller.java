@@ -176,7 +176,7 @@ public class Controller implements Initializable {
 
             TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
             addCreditsToTree(item);
-            Course c = searchCourse(combineString(splitString(item.getValue())));
+            Course c = searchCourse(GUITools.combineString(GUITools.splitString(item.getValue())).toString());
             if(courseCheckBox.isSelected()){
                 student.addCredits(c.getTargetCredits());
             }
@@ -327,7 +327,23 @@ public class Controller implements Initializable {
     public static void addModules(DegreeModule m) {
         allModules.put(m.getName(), m);
     }
-
+    
+    /**
+     * Getter method for unit tests
+     * @return all courses under the degree
+     */
+    public static HashMap<String, Course> getCourses(){
+        return allCourses;
+    }
+    
+    /**
+     * Getter method for unit tests
+     * @return all modules under the degree
+     */
+    public static HashMap<String, DegreeModule> getModules(){
+        return allModules;
+    }
+    
     /**
      * Clears the allCourses and allModules HashMaps.
      */
@@ -384,18 +400,15 @@ public class Controller implements Initializable {
             addCreditsToTree(item.getParent());
             if (searchModule(item.getParent().getValue()) == null) {
                 String value = item.getParent().getValue();
-                StringBuilder sb = new StringBuilder();
                 String[] splitValue = value.split(" ");
                 int length = splitValue.length;
                 String last = splitValue[length - 1];
                 String pointsSplit = last.split("/")[0];
+                System.out.println(pointsSplit);
                 String prevPoints = pointsSplit.substring(0, pointsSplit.length() - 2);
                 int prevPointsNumb = Integer.parseInt(prevPoints);
                 String[] name = Arrays.copyOf(splitValue, length - 1);
-                for (String s : name) {
-                    sb.append(s).append(" ");
-                }
-                sb.setLength(sb.length() - 1);
+                StringBuilder sb = GUITools.combineString(name);
                 if (courseCheckBox.isSelected()) {
                     Course c = searchCourse(Controller.selectedElement);
                     sb.append(" ").append(c.getTargetCredits() + prevPointsNumb).append("op/")
@@ -416,19 +429,6 @@ public class Controller implements Initializable {
             }
         }
     }
-    private String[] splitString(String string){
-        String[] splitValue = string.split(" ");
-        int length = splitValue.length;
-        String[] name = Arrays.copyOf(splitValue, length - 1);
-        return name;
-    }
-    private String combineString(String[] nameArray){
-        StringBuilder sb = new StringBuilder();
-        for (String s : nameArray) {
-            sb.append(s).append(" ");
-        }
-        sb.setLength(sb.length() - 1);
-        return sb.toString();
-    }
+    
 
 }

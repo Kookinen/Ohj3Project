@@ -1,4 +1,9 @@
 -------------------------------------------------------------------------------
 Test set: fi.tuni.prog3.sisu.SisuTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.708 sec
+Tests run: 5, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 10.074 sec <<< FAILURE!
+fi.tuni.prog3.sisu.SisuTest.testController()  Time elapsed: 0.027 sec  <<< FAILURE!
+java.lang.NullPointerException: Cannot invoke "java.util.HashMap.put(Object, Object)" because "fi.tuni.prog3.sisu.Controller.allCourses" is null
+	at fi.tuni.prog3.sisu.Controller.addCourses(Controller.java:321)
+	at fi.tuni.prog3.sisu.SisuTest.testController(SisuTest.java:91)
+
