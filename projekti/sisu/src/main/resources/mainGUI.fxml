@@ -21,28 +21,48 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text fill="#00000091" layoutX="38.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijan nimi:" wrappingWidth="403.13671875">
-                           <font>
-                              <Font size="26.0" />
-                           </font></Text>
-                        <Text fill="#00000091" layoutX="37.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijanumero:" wrappingWidth="404.13671875">
-                           <font>
-                              <Font size="26.0" />
-                           </font></Text>
                         <Text layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISU Alpha v0.1" wrappingWidth="410.13671875" />
-                        <Text fx:id="studentName" layoutX="468.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="studentNumber" layoutX="468.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
-                           <font>
-                              <Font size="26.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="loadButton" layoutX="108.0" layoutY="217.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
-                        <Button fx:id="saveButton" layoutX="37.0" layoutY="217.0" mnemonicParsing="false" onMouseClicked="#save" text="Tallenna" />
                         <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
+                        <VBox layoutX="28.0" layoutY="14.0" prefHeight="117.0" prefWidth="236.0">
+                           <children>
+                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijanumero:" wrappingWidth="235.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijan nimi:" wrappingWidth="210.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opintopisteet:" wrappingWidth="210.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="279.0" layoutY="15.0" prefHeight="93.0" prefWidth="404.0">
+                           <children>
+                              <Text fx:id="studentName" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="studentNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="studentCredits" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <Button fx:id="loadButton" layoutX="96.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
+                        <Button fx:id="saveButton" layoutX="28.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#save" text="Tallenna" />
                      </children></AnchorPane>
             </content>
           </Tab>

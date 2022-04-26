@@ -5,6 +5,9 @@ import java.util.HashMap;
 /**
  * Student represents a student, or more specifically the user. Is used to store
  * user data.
+ * 
+ * @author Joni Koskinen
+ * @author Julius Juutilainen
  */
 public class Student {
     private String name;
@@ -62,6 +65,10 @@ public class Student {
         return credits;
     }
 
+    public String getCreditsASString(){
+        return Integer.toString(this.credits);
+    }
+
     /**
      * @param earnedCredits credits to be added to the total.
      */
@@ -73,8 +80,6 @@ public class Student {
      * @param lostCredits credits to be subtracted from the total.
      */
     public void subtractCredits(int lostCredits) {
-        System.out.println("credits " + credits);
-        System.out.println("credits lost " + lostCredits);
         credits = credits - lostCredits;
     }
 

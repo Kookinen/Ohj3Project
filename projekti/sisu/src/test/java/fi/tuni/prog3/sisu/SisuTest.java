@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Is used to test the program. Contains unit tests.
+ */
 public class SisuTest extends ApplicationTest{
 
     /*@Override

@@ -11,6 +11,9 @@ import java.util.Iterator;
 
 /**
  * 
+ * DegreeModule represents a module in the Sisu API. It is used to store and fetch
+ * data.
+ * 
  */
 public class DegreeModule {
     String name;
@@ -24,8 +27,9 @@ public class DegreeModule {
     HashMap<String, Course> courses;
 
     /**
+     * Constructor for a new degreeModule
      * 
-     * @param id
+     * @param id is the id of the new degreeModule. Is used to differentiate.
      */
     public DegreeModule(String id) {
         this.id = id;
@@ -35,27 +39,29 @@ public class DegreeModule {
     }
 
     /**
-     * @return String
+     * @return this degreeModules name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return int
+     * @return this degreeModules credits.
      */
     public int getTargetCredits() {
         return targetCredits;
     }
 
     /**
-     * @return String
+     * @return this degreeModules outcomes.
      */
     public String getOutcomes() {
         return outcomes;
     }
 
     /**
+     * TODO: oikein?
+     * @return this degreeModules HashMap<String, DegreeModule> containing neighbouring modules.
      * @return HashMap<String, DegreeModule>
      */
     public HashMap<String, DegreeModule> getModules() {
@@ -63,20 +69,21 @@ public class DegreeModule {
     }
 
     /**
-     * @return HashMap<String, Course>
+     * @return this degreeModules HashMap<String, Course> containing this modules courses.
      */
     public HashMap<String, Course> getCourses() {
         return courses;
     }
 
     /**
-     * @return String
+     * @return this degreeModules type.
      */
     public String getType() {
         return type;
     }
 
     /**
+     * TODO:dokumentoi
      * 
      */
     private void decodeJson() {
@@ -136,6 +143,7 @@ public class DegreeModule {
     }
 
     /**
+     * TODO: dokumentoi
      * @param arr
      */
     private void compositeRule(JsonArray arr) {
