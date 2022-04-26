@@ -16,6 +16,9 @@ import javafx.scene.image.Image;
 //import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Main class and the starting point of the application.
+ */
 public class sisu extends Application {
 
     public HashMap<String, Degree> degrees = new HashMap<>();

@@ -45,6 +45,8 @@ public class Controller implements Initializable {
     @FXML
     private Text studentNumber = new Text();
     @FXML
+    private Text studentCredits = new Text();
+    @FXML
     private Button saveButton = new Button();
     @FXML
     private Button loadButton = new Button();
@@ -88,6 +90,7 @@ public class Controller implements Initializable {
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
+        studentCredits.setText(student.getCreditsASString());
 
         motivation.getEngine().load(GUITools.getMotivationalImageUrl());
         refreshStudiesCompleted();
@@ -211,6 +214,7 @@ public class Controller implements Initializable {
             }
         }
         allCredits.setText(String.format("%d" + "op", student.getCredits()));
+        studentCredits.setText(student.getCreditsASString());
 
     }
 

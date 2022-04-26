@@ -26,7 +26,7 @@ public class Degree {
     // private StringBuilder sb; //Rakentimeen? ei kai
 
     /**
-     * Constructor for a new Degree. All variables are fetched from Sisu API.
+     * Constructor for a new Degree.
      * 
      * @param id      Degree id, can be used to differentiate.
      * @param code    Degree code, can be used to differentiate.
@@ -48,56 +48,56 @@ public class Degree {
     }
 
     /**
-     * @return This Degrees id.
+     * @return this degrees id.
      */
     public String getId() {
         return id;
     }
 
     /**
-     * @return This Degrees code.
+     * @return this degrees code.
      */
     public String getCode() {
         return code;
     }
 
     /**
-     * @return This Degrees language.
+     * @return this degrees language.
      */
     public String getLang() {
         return lang;
     }
 
     /**
-     * @return This Degrees group id.
+     * @return this degrees group id.
      */
     public String getGroupId() {
         return groupId;
     }
 
     /**
-     * @return This Degrees name.
+     * @return this degrees name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return This Degrees credits.
+     * @return this degrees credits.
      */
     public int getCredits() {
         return credits;
     }
 
     /**
-     * @return This degrees outcomes.
+     * @return this degrees outcomes.
      */
     public String getOutcomes() {
         return outcomes;
     }
 
     /**
-     * @return This Degrees Module Keys, Modules in a hashmap.
+     * @return this degrees Module Keys, Modules in a hashmap.
      */
     public HashMap<String, Module> getModules() {
         decodeJson();

@@ -11,6 +11,9 @@ import java.util.Iterator;
 
 /**
  * 
+ * Module represents a module in the Sisu API. It is used to store and fetch
+ * data.
+ * 
  */
 public class Module {
     String name;
@@ -24,8 +27,9 @@ public class Module {
     HashMap<String, Course> courses;
 
     /**
+     * Constructor for a new module
      * 
-     * @param id
+     * @param id is the id of the new module. Is used to differentiate.
      */
     public Module(String id) {
         this.id = id;
@@ -35,48 +39,50 @@ public class Module {
     }
 
     /**
-     * @return String
+     * @return this modules name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @return int
+     * @return this modules credits.
      */
     public int getTargetCredits() {
         return targetCredits;
     }
 
     /**
-     * @return String
+     * @return this modules outcomes.
      */
     public String getOutcomes() {
         return outcomes;
     }
 
     /**
-     * @return HashMap<String, Module>
+     * TODO: oikein?
+     * @return this modules HashMap<String, Module> containing neighbouring modules.
      */
     public HashMap<String, Module> getModules() {
         return modules;
     }
 
     /**
-     * @return HashMap<String, Course>
+     * @return this modules HashMap<String, Course> containing this modules courses.
      */
     public HashMap<String, Course> getCourses() {
         return courses;
     }
 
     /**
-     * @return String
+     * @return this modules type.
      */
     public String getType() {
         return type;
     }
 
     /**
+     * TODO:dokumentoi
      * 
      */
     private void decodeJson() {
@@ -136,6 +142,7 @@ public class Module {
     }
 
     /**
+     * TODO: dokumentoi
      * @param arr
      */
     private void compositeRule(JsonArray arr) {

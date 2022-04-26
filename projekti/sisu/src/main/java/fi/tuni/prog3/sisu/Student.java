@@ -62,6 +62,10 @@ public class Student {
         return credits;
     }
 
+    public String getCreditsASString(){
+        return Integer.toString(this.credits);
+    }
+
     /**
      * @param earnedCredits credits to be added to the total.
      */
