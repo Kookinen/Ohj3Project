@@ -5,16 +5,20 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #15151C;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.LoginController">
    <children>
       <TextField fx:id="studentNumber" layoutX="226.0" layoutY="154.0" prefHeight="25.0" prefWidth="180.0" promptText="Opiskelijanumero" />
       <TextField fx:id="name" layoutX="226.0" layoutY="117.0" prefHeight="25.0" prefWidth="180.0" promptText="Nimi" />
-      <Label layoutX="185.0" layoutY="121.0" text="Nimi:" />
-      <Label layoutX="117.0" layoutY="158.0" text="Opiskelijanumero:" />
+      <Label layoutX="183.0" layoutY="121.0" text="Nimi:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="111.0" layoutY="158.0" style="-fx-font-weight: bold;" text="Opiskelijanumero:" textFill="WHITE" />
       <ComboBox fx:id="degreePicker" editable="true" layoutX="225.0" layoutY="194.0" prefHeight="25.0" prefWidth="180.0" promptText="Hae tutkinnon nimellä" />
-      <Label layoutX="133.0" layoutY="198.0" text="Valitse tutkinto:" />
-      <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" text="Rekisteröidy" />
-      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
+      <Label layoutX="123.0" layoutY="198.0" style="-fx-font-weight: bold;" text="Valitse tutkinto:" textFill="WHITE" />
+      <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #5E7CE2;" text="Rekisteröidy" textFill="WHITE" />
+      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Sulje" textFill="WHITE" />
    </children>
 </AnchorPane>

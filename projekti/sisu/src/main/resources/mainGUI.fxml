@@ -9,104 +9,119 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1131.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1116.0" style="-fx-background-color: #15151C;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.Controller">
    <children>
-      <TabPane layoutX="15.0" layoutY="15.0" prefHeight="871.0" prefWidth="1101.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="1.0" prefHeight="840.0" prefWidth="1116.0" stylesheets="@mainGuiStyleSheet.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Opiskelija-info">
+          <Tab closable="false" text="Opiskelija-info">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="866.0" prefWidth="1110.0" styleClass="anchor-pane">
                      <children>
-                        <Text layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISU Alpha v0.1" wrappingWidth="410.13671875" />
-                        <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
-                        <VBox layoutX="28.0" layoutY="14.0" prefHeight="117.0" prefWidth="236.0">
+                        <Text fill="WHITE" layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISU Alpha v0.1" wrappingWidth="410.13671875" />
+                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Lopeta" textFill="WHITE" />
+                        <VBox layoutX="358.0" layoutY="342.0" prefHeight="117.0" prefWidth="236.0">
                            <children>
-                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijanumero:" wrappingWidth="235.13671875">
+                              <Text fill="#ffffff91" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijanumero:" wrappingWidth="235.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijan nimi:" wrappingWidth="210.13671875">
+                              <Text fill="#ffffff91" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijan nimi:" wrappingWidth="210.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fill="#00000091" strokeType="OUTSIDE" strokeWidth="0.0" text="Opintopisteet:" wrappingWidth="210.13671875">
+                              <Text fill="#ffffff91" strokeType="OUTSIDE" strokeWidth="0.0" text="Opintopisteet:" wrappingWidth="210.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
                         </VBox>
-                        <VBox layoutX="279.0" layoutY="15.0" prefHeight="93.0" prefWidth="404.0">
+                        <VBox layoutX="558.0" layoutY="342.0" prefHeight="93.0" prefWidth="404.0">
                            <children>
-                              <Text fx:id="studentName" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentName" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="studentNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentNumber" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="studentCredits" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentCredits" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
                         </VBox>
-                        <Button fx:id="loadButton" layoutX="96.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" text="Lataa" />
-                        <Button fx:id="saveButton" layoutX="28.0" layoutY="131.0" mnemonicParsing="false" onMouseClicked="#save" text="Tallenna" />
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Opinnot">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TreeView fx:id="mainView" layoutX="14.0" layoutY="54.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="722.0" prefWidth="523.0" />
-                        <Label layoutX="14.0" layoutY="17.0" prefHeight="20.0" prefWidth="52.0" text="Haku:">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="469.0" promptText="Hae tutkinnon nimellä..." />
-                        <VBox fx:id="selectableCourseList" layoutX="570.0" layoutY="415.0" prefHeight="31.0" prefWidth="511.0">
-                           <children>
-                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" text="Olen suorittanut tämän kurssin" />
-                           </children></VBox>
-                        <WebView fx:id="courseInfo" layoutX="551.0" layoutY="54.0" prefHeight="340.0" prefWidth="534.0" />
-                        <VBox fx:id="completedCourses" layoutX="570.0" layoutY="478.0" prefHeight="295.0" prefWidth="274.0" />
-                        <Text layoutX="570.0" layoutY="461.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Omat opinnot" wrappingWidth="164.13671875">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="switchButton" layoutX="551.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" text="Vaihda tutkintoa" />
-                        <Text layoutX="570.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yhteensä:">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Text>
-                        <Text fx:id="allCredits" layoutX="632.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                        <Button layoutX="1045.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" text="Sulje" />
+                        <Button fx:id="loadButton" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #00A676; -fx-text-fill: #ffffff;" text="Lataa" />
+                        <Button fx:id="saveButton" layoutX="446.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#save" style="-fx-background-color: #00A676; -fx-text-fill: #ffffff;" text="Tallenna" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Motivaatio">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <Tab closable="false" text="Opinnot">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane">
                      <children>
+                        <TreeView fx:id="mainView" layoutX="14.0" layoutY="54.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="732.0" prefWidth="572.0" stylesheets="@mainGuiStyleSheet.css" />
+                        <Label layoutX="14.0" layoutY="17.0" prefHeight="20.0" prefWidth="52.0" text="Haku:" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="521.0" promptText="Hae tutkinnon nimellä..." stylesheets="@mainGuiStyleSheet.css" />
+                        <VBox fx:id="selectableCourseList" layoutX="613.0" layoutY="415.0" prefHeight="31.0" prefWidth="468.0">
+                           <children>
+                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" style="-fx-text-fill: #ffffff;" text="Olen suorittanut tämän kurssin">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </CheckBox>
+                           </children>
+                        </VBox>
+                        <WebView fx:id="courseInfo" layoutX="612.0" layoutY="54.0" prefHeight="340.0" prefWidth="473.0" />
+                        <VBox fx:id="completedCourses" layoutX="610.0" layoutY="481.0" prefHeight="295.0" prefWidth="274.0" />
+                        <Text fill="WHITE" layoutX="610.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Omat opinnot" wrappingWidth="164.13671875">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="switchButton" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" style="-fx-background-color: #00A676; -fx-text-fill: #ffffff;" text="Vaihda tutkintoa" />
+                        <Text fill="WHITE" layoutX="613.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yhteensä:">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="allCredits" fill="WHITE" layoutX="681.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Lopeta" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab closable="false" text="Motivaatio">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchor-pane">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#15151c" height="656.0" layoutX="223.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="657.0" />
                         <WebView fx:id="motivation" layoutX="230.0" layoutY="100.0" prefHeight="642.0" prefWidth="642.0" />
-                        <Button layoutX="1013.0" layoutY="14.0" mnemonicParsing="false" onAction="#getNewMotivationalImage" onMouseClicked="#getNewMotivationalImage" text="Uusi kuva!" />
-                        <Text fill="#0000009d" layoutX="230.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Inspirobot.me" />
+                        <Button layoutX="1013.0" layoutY="14.0" mnemonicParsing="false" onAction="#getNewMotivationalImage" onMouseClicked="#getNewMotivationalImage" style="-fx-background-color: #00A676;" text="Uusi kuva!" textFill="WHITE" />
+                        <Text fill="#ffffff9e" layoutX="230.0" layoutY="763.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Inspirobot.me">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Text>
                      </children>
                   </AnchorPane>
               </content>

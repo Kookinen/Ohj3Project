@@ -16,6 +16,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
@@ -93,6 +94,8 @@ public class Controller implements Initializable {
 
         motivation.getEngine().load(GUITools.getMotivationalImageUrl());
         refreshStudiesCompleted();
+
+        courseInfo.getEngine().setUserStyleSheetLocation(getClass().getResource("/webViewStyleSheet.css").toString());
 
     }
 
@@ -215,6 +218,7 @@ public class Controller implements Initializable {
                 String course = sb.toString();
 
                 Text completedCourse = new Text(course);
+                completedCourse.setStyle("-fx-fill: #ffffff");
                 completedCourses.getChildren().add(completedCourse);
             }
         }

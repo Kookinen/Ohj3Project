@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+
 /**
  * Is used to save and load Student-objects.
  * 
@@ -33,7 +34,7 @@ public class SaveProgress {
 
         Gson gson = new Gson();
         FileChooser fileChooser = new FileChooser();
-        
+
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(null);
@@ -55,12 +56,15 @@ public class SaveProgress {
         Gson gson = new Gson();
         FileChooser fileChooser = new FileChooser();
 
-        // Jäsenmuuttujiksi?
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
-        File file = fileChooser.showOpenDialog(null);
+
+        //Note: only files saved by the program should be opened
+        File file = fileChooser.showOpenDialog(null);      
+        
+        //TODO: check if json format is correct for class Student.
         Student student = gson.fromJson(new FileReader(file), Student.class);
         return student;
-
+ 
     }
 }
