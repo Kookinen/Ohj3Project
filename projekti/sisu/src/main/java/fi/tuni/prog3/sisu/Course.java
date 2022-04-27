@@ -58,6 +58,9 @@ public class Course {
      * @return This Courses target credits (minCredits).
      */
     public int getTargetCredits() {
+        if(maxCredits != 0){
+            return maxCredits;
+        }
         return minCredits;
     }
     /**
