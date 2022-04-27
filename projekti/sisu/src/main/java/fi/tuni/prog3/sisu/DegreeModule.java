@@ -21,6 +21,7 @@ public class DegreeModule {
     int targetCredits;
     String outcomes;
     String type;
+    String contentDescription;
     // String curriculumPeriodIds;
     // String validityPeriod;
     HashMap<String, DegreeModule> modules;
@@ -53,10 +54,16 @@ public class DegreeModule {
     }
 
     /**
-     * @return this degreeModules outcomes.
+     * @return degreeModules outcomes.
      */
     public String getOutcomes() {
         return outcomes;
+    }
+    /**
+     * @return degreeModules content description 
+     */
+    public String getContentDescription(){
+        return contentDescription;
     }
 
     /**
@@ -124,6 +131,14 @@ public class DegreeModule {
                             this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi").getAsString();
                         }
                     }
+                    if (!obj.get("contentDescription").isJsonNull()) {
+                        if (obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("fi") == null) {
+                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("en").getAsString();
+                        } else {
+                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("fi").getAsString();
+                        }
+                    }
+                    
 
                     break;
             }

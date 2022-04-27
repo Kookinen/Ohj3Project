@@ -14,7 +14,6 @@ public class Student {
     private String number;
     private String degree;
     private int credits;
-
     private HashMap<String, Boolean> coursesDone = new HashMap<>();
 
     /**
@@ -65,7 +64,7 @@ public class Student {
         return credits;
     }
 
-    public String getCreditsASString(){
+    public String getCreditsAsString(){
         return Integer.toString(this.credits);
     }
 

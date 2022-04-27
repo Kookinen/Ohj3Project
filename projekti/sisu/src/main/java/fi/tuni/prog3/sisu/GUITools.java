@@ -98,7 +98,7 @@ public class GUITools {
         printTree(deg.getModules(), rootItem);
         return rootItem;
     }
-
+    
     /**
      * Prints the treeview containing courses, modules and credits.
      * 

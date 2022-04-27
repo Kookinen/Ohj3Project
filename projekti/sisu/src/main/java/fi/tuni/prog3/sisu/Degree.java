@@ -105,7 +105,9 @@ public class Degree {
     }
 
     /**
-     * TODO:Dokumentoi
+     * Extracts information from the json text by iterating through it 
+     * Extracts also modules and courses under it and calls compositeRule to
+     * create them
      */
     public void decodeJson() {
         try {

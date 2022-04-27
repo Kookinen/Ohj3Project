@@ -75,7 +75,6 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
         degree = degrees.get(student.getDegree());
 
         allCourses = new HashMap<>();
@@ -90,7 +89,7 @@ public class Controller implements Initializable {
 
         studentNumber.setText(student.getNumber());
         studentName.setText(student.getName());
-        studentCredits.setText(student.getCreditsASString());
+        studentCredits.setText(student.getCreditsAsString());
 
         motivation.getEngine().load(GUITools.getMotivationalImageUrl());
         refreshStudiesCompleted();
@@ -112,7 +111,7 @@ public class Controller implements Initializable {
             String courseHeader = item.getValue();
             String[] splitString = courseHeader.split(" ");
             String[] courseName = splitString;
-            if(splitString.length > 1){
+            if(splitString.length > 1 && courseHeader.endsWith("op")){
                 courseName = Arrays.copyOf(splitString, splitString.length-1);
             }
 
@@ -123,38 +122,44 @@ public class Controller implements Initializable {
             }
             sb.setLength(sb.length() - 1);
             String name = sb.toString();
-            System.out.println(name);
+            
             setSelectedElement(name);
 
             Course c = searchCourse(name);
             StringBuilder infoData = new StringBuilder();
+            courseInfo.getEngine().loadContent("");
+            
             if (c != null) {
-                courseInfo.getEngine().loadContent("");
-                if (c.getOutcomes() != null) {
-                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(c.getOutcomes());  
-                }
+                infoData.append("<p><h2>").append(c.getName()).append("</h2></p>");
                 if (c.getContent() != null){
                     infoData.append("<p><h3>Sisältö: </h3></p>").append(c.getContent());   
+                }
+                if (c.getOutcomes() != null) {
+                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(c.getOutcomes());  
                 }
                 if (c.getAdditional() != null) {
                     infoData.append("<p><h3>Lisätiedot: </h3></p>").append(c.getAdditional());
                 }
-                courseInfo.getEngine().loadContent(infoData.toString());
-
             }
-            // EI toimi täysin
+            
             DegreeModule m = searchModule(name);
             if (m != null) {
-                courseInfo.getEngine().loadContent("");
-                courseInfo.getEngine().loadContent(m.getOutcomes());
+                infoData.append("<p><h2>").append(m.getName()).append("</h2></p>");
+                if(m.getContentDescription() != null){
+                    infoData.append("<p><h3>Sisältö: </h3></p>").append(m.getContentDescription());
+                }
+                if(m.getOutcomes() != null){
+                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(m.getOutcomes());
+                }
             }
-            // Ei toimi lainkaan
+            
             if (name.equals(degree.getName())) {
-                courseInfo.getEngine().loadContent("");
-                // courseInfo.getEngine().loadContent(degree.getOutcomes());
-
+                infoData.append("<p><h2>").append(degree.getName()).append("</h2></p>");
+                if(degree.getOutcomes() != null){
+                    infoData.append(degree.getOutcomes());
+                }
             }
-
+            courseInfo.getEngine().loadContent(infoData.toString());
             // Checkboxin nollaus jos dataa ei tulekkaan
             courseCheckBox.setSelected(false);
 
@@ -168,7 +173,6 @@ public class Controller implements Initializable {
             } else {
                 courseCheckBox.setVisible(false);
             }
-
         }
     }
 
@@ -183,7 +187,9 @@ public class Controller implements Initializable {
         
         if(Controller.selectedItemName != null){
             
-            student.addCoursesDone(Controller.selectedItemName,courseCheckBox.isSelected());
+            
+
+           student.addCoursesDone(Controller.selectedItemName,courseCheckBox.isSelected());
 
             TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
             if(item != null){
@@ -199,13 +205,9 @@ public class Controller implements Initializable {
                 }
                 //? tarpeellinen
                 courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedItemName));
-                System.out.println(courseCheckBox.isSelected());
                 refreshStudiesCompleted();
-            }
+            }    
         }
-        
-
-
     }
 
     /**
@@ -234,7 +236,7 @@ public class Controller implements Initializable {
             }
         }
         allCredits.setText(String.format("%d" + "op", student.getCredits()));
-        studentCredits.setText(student.getCreditsASString());
+        studentCredits.setText(student.getCreditsAsString());
 
     }
 
@@ -268,9 +270,9 @@ public class Controller implements Initializable {
             GUITools.setStudent(student);
             studentNumber.setText(student.getNumber());
             studentName.setText(student.getName());
-            System.out.println(student.getDegree());
             TreeItem<String> rootItem = GUITools.initializeTree(degrees.get(student.getDegree()));
             mainView.setRoot(rootItem);
+            
 
         } catch (FileNotFoundException e2) {
             System.out.println("File not found :(");

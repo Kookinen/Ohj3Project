@@ -53,7 +53,7 @@ public class sisu extends Application {
             stage.getIcons().add(icon);
 
         } catch (FileNotFoundException e) {
-
+            e.printStackTrace();
         }
 
         Parent parent = new Parent() {
@@ -66,7 +66,7 @@ public class sisu extends Application {
             loader = new FXMLLoader(getClass().getResource("/startupGUI.fxml"));
             parent = loader.load();
         } catch (IOException e3) {
-
+            e3.printStackTrace();
         }
 
         LoginController controller = loader.getController();

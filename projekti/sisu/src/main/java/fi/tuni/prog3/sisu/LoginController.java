@@ -103,9 +103,7 @@ public class LoginController implements Initializable {
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
-        System.out.println(newDegree);
         if(newDegree != null){
-            System.out.println("läpi");
             Student student = new Student(newName, newStudentNumber);
             student.setDegree(newDegree);
 
