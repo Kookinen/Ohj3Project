@@ -95,7 +95,7 @@ public class Controller implements Initializable {
         refreshStudiesCompleted();
 
         courseInfo.getEngine().setUserStyleSheetLocation(getClass().getResource("/webViewStyleSheet.css").toString());
-
+        
     }
 
     /**
@@ -107,6 +107,7 @@ public class Controller implements Initializable {
     @FXML
     public void selectItem() {
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
+        
         if (item != null) {
             String courseHeader = item.getValue();
             String[] splitString = courseHeader.split(" ");
