@@ -94,9 +94,9 @@ public class sisu extends Application {
     }
 
     /**
-     * TODO: Dokumentoi
-     * 
-     * @param sb
+     * Extracts information from the json text by iterating through it and
+     * creates degree objects from said information
+     * @param sb Json-text in a StringBuilder
      */
     private void decodeJson(StringBuilder sb) {
         JsonObject obj = JsonParser.parseString(sb.toString()).getAsJsonObject();

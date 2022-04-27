@@ -100,16 +100,16 @@ public class GUITools {
     }
 
     /**
-     * TODO: Dokumentoi
+     * Prints the treeview containing courses, modules and credits.
      * 
-     * @param modules
-     * @param root
+     * @param modules HashMap contains all the modules under the degree/module
+     * @param root TreeItem that functions as the base for the tree
      */
     private static void printTree(HashMap<String, DegreeModule> modules, TreeItem<String> root) {
         TreeItem<String> moduleItem;
         TreeItem<String> courseItem;
 
-        // käydään kaikki modulet läpi
+        // Go through all modules
         for (DegreeModule m : modules.values()) {
             if (m.getType().equals("GroupingModule")) {
                 moduleItem = new TreeItem<>(m.getName());
@@ -120,12 +120,10 @@ public class GUITools {
             Controller.addModules(m);
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
-            // käydään modulen alaiset kurssit ( jos on )
+            // Go through courses under the module ( if there are any )
             for (Course c : cors.values()){
-                
                 Controller.addCourses(c);
                 courseItem = new TreeItem<>(c.getName() + " " + c.getTargetCredits() + "op");
-                // lisätään kurssi modulen alle
                 moduleItem.getChildren().add(courseItem);
                 if(student.getCoursesDone().containsKey(c.getName()) && student.getCoursesDone().get(c.getName())){
                     Controller.addCreditsToTree(courseItem, c.getTargetCredits(), true);
@@ -133,17 +131,16 @@ public class GUITools {
             }
             HashMap<String, DegreeModule> mods = m.getModules();
             if (!mods.isEmpty()) {
-                // modulesta uusi root kun kutsutaan uudestaan
                 printTree(mods, moduleItem);
             }
         }
     }
 
     /**
-     * TODO: Dokumentoi
-     * 
-     * @param cb
-     * @param degrees
+     * Sets up the degree search box. When key is typed, automatically searches
+     * degrees that match typed chars.
+     * @param cb ComboBox that is being set up
+     * @param degrees HashMap containing all the degrees
      */
     public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees) {
         cb.setEditable(true);
@@ -170,12 +167,22 @@ public class GUITools {
             }
         });
     }
+    /**
+     * Splits given string by space
+     * @param string String to be split
+     * @return returns name as an array
+     */
     public static String[] splitString(String string){
         String[] splitValue = string.split(" ");
         int length = splitValue.length;
         String[] name = Arrays.copyOf(splitValue, length - 1);
         return name;
     }
+    /**
+     * Combines given array to string with spaces
+     * @param nameArray Array to be combined
+     * @return returns stringbuilder element with the name
+     */
     public static StringBuilder combineString(String[] nameArray){
         StringBuilder sb = new StringBuilder();
         for (String s : nameArray) {
@@ -184,6 +191,10 @@ public class GUITools {
         sb.setLength(sb.length() - 1);
         return sb;
     }
+    /**
+     * Adds the student object to GUITools
+     * @param student Student object to be added 
+     */
     public static void setStudent(Student student) {
         GUITools.student = student;
     }

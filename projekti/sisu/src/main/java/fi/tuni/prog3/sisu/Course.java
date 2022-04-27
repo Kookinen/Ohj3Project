@@ -20,6 +20,7 @@ public class Course {
     int maxCredits;
     String content;
     String additional;
+    String outcomes;
 
     /**
      * Constructor for a new Course.
@@ -59,7 +60,13 @@ public class Course {
     public int getTargetCredits() {
         return minCredits;
     }
-
+    /**
+     * @return This Courses outcomes.
+     */
+    public String getOutcomes(){
+        return outcomes;
+    }
+        
     /**
      * @return This Courses description/info.
      */
@@ -102,7 +109,13 @@ public class Course {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
             this.code = obj.getAsJsonPrimitive("code").getAsString();
-
+            if (!obj.get("outcomes").isJsonNull()) {
+                if (obj.getAsJsonObject("outcomes").get("fi") == null) {
+                    this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("en").getAsString();
+                } else {
+                    this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi").getAsString();
+                }
+            }
             if (!obj.get("content").isJsonNull()) {
                 if (obj.getAsJsonObject("content").get("fi") == null) {
                     this.content = obj.getAsJsonObject("content").getAsJsonPrimitive("en").getAsString();

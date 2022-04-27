@@ -17,7 +17,9 @@ public class SisuTest extends ApplicationTest{
         new sisu().start(stage);
     }*/
     
-    
+    /**
+     * Checks student objects get-methods
+     */
     @Test
     public void testStudent(){
         Student s = new Student("William", "12004321");
@@ -33,7 +35,9 @@ public class SisuTest extends ApplicationTest{
         assertEquals(expNumberResult, numberResult);
         assertEquals(expDegreeResult, degreeResult);
     }
-    
+    /**
+     * Checks degree objects get-methods
+     */
     @Test
     public void testDegree(){
         Degree deg = new Degree("otm-d729cfc3-97ad-467f-86b7-b6729c496c82", "TSTK", "fi", "otm-fa02a1e7-4fe1-43e3-818b-810d8e723531","Tieto- ja sähkötekniikan kandidaattiohjelma", 5);
@@ -62,7 +66,9 @@ public class SisuTest extends ApplicationTest{
         assertTrue(modules.containsKey("moduuli1"));
         assertTrue(modules.containsKey("moduuli2"));
     }
-    
+    /**
+     * Checks module objects get-methods
+     */
     @Test
     public void testModule(){
         DegreeModule m = new DegreeModule("otm-3858f1d8-4bf9-4769-b419-3fee1260d7ff");
@@ -76,6 +82,9 @@ public class SisuTest extends ApplicationTest{
         assertEquals(expCredits, credits);
         assertEquals(expType, type);
     }
+    /**
+     * Checks course objects get-methods
+     */
     @Test
     public void testCourse(){
         Course c = new Course("uta-ykoodi-47926");

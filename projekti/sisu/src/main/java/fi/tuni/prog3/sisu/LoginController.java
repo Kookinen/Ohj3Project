@@ -103,29 +103,32 @@ public class LoginController implements Initializable {
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
+        System.out.println(newDegree);
+        if(newDegree != null){
+            System.out.println("läpi");
+            Student student = new Student(newName, newStudentNumber);
+            student.setDegree(newDegree);
 
-        Student student = new Student(newName, newStudentNumber);
-        student.setDegree(newDegree);
+            Controller.setStudent(student);
+            GUITools.setStudent(student);
 
-        Controller.setStudent(student);
-        GUITools.setStudent(student);
+            Parent parent = loadFXMLsettings("/mainGUI.fxml");
+            Scene scene = new Scene(parent);
 
-        Parent parent = loadFXMLsettings("/mainGUI.fxml");
-        Scene scene = new Scene(parent);
-
-        stage.setScene(scene);
-        stage.show();
-
+            stage.setScene(scene);
+            stage.show();
+        }       
     }
 
     /**
-     * TODO: dokumentoi
-     * 
-     * @return String
+     * Fetches the degree name from degree searchbox(ComboBox)
+     * Checks also that the name isn't empty and degrees hashmap contains it.
+     * @return String Returns null or String depending on whether degree was 
+     * found
      */
     @FXML
     public String getPickedDegree() {
-        String s = new String();
+        String s = null;
         if (!degreePicker.getEditor().getText().isEmpty() && degrees.containsKey(degreePicker.getEditor().getText())) {
             Degree degree = degrees.get(degreePicker.getEditor().getText());
             s = degree.getName();
@@ -148,7 +151,7 @@ public class LoginController implements Initializable {
             System.out.print("UI-tiedosto löytyi!\n");
 
         } catch (IOException e3) {
-            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! " + e3.getCause());
+            System.out.print("VIRHE TIEDOSTON KÄSITTELYSSÄ! " + e3.getCause()+ "/n");
         } catch (NullPointerException e4) {
             System.out.print("UI-tiedostoa ei löydy!\n");
         }

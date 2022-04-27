@@ -123,22 +123,27 @@ public class Controller implements Initializable {
             }
             sb.setLength(sb.length() - 1);
             String name = sb.toString();
+            System.out.println(name);
             setSelectedElement(name);
 
             Course c = searchCourse(name);
-
+            StringBuilder infoData = new StringBuilder();
             if (c != null) {
-                if (c.getContent() != null) {
-                    courseInfo.getEngine().loadContent("");
-                    courseInfo.getEngine().loadContent(c.getContent());
-                } else if (c.getAdditional() != null) {
-                    courseInfo.getEngine().loadContent("");
-                    courseInfo.getEngine().loadContent(c.getAdditional());
+                courseInfo.getEngine().loadContent("");
+                if (c.getOutcomes() != null) {
+                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(c.getOutcomes());  
                 }
+                if (c.getContent() != null){
+                    infoData.append("<p><h3>Sisältö: </h3></p>").append(c.getContent());   
+                }
+                if (c.getAdditional() != null) {
+                    infoData.append("<p><h3>Lisätiedot: </h3></p>").append(c.getAdditional());
+                }
+                courseInfo.getEngine().loadContent(infoData.toString());
 
             }
             // EI toimi täysin
-            DegreeModule m = searchModule(splitString[0]);
+            DegreeModule m = searchModule(name);
             if (m != null) {
                 courseInfo.getEngine().loadContent("");
                 courseInfo.getEngine().loadContent(m.getOutcomes());

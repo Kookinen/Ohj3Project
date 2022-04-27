@@ -60,9 +60,8 @@ public class DegreeModule {
     }
 
     /**
-     * TODO: oikein?
-     * @return this degreeModules HashMap<String, DegreeModule> containing neighbouring modules.
-     * @return HashMap<String, DegreeModule>
+     * @return HashMap<String, DegreeModule> Returns hashmap containing 
+     * child modules.
      */
     public HashMap<String, DegreeModule> getModules() {
         return modules;
@@ -83,8 +82,9 @@ public class DegreeModule {
     }
 
     /**
-     * TODO:dokumentoi
-     * 
+     * Extracts information from the json text by iterating through it 
+     * Extracts also modules and courses under it and calls compositeRule to
+     * create them
      */
     private void decodeJson() {
         try {
@@ -143,8 +143,9 @@ public class DegreeModule {
     }
 
     /**
-     * TODO: dokumentoi
-     * @param arr
+     * Extracts module/course information from jsonArray and creates 
+     * module/course objects
+     * @param arr JsonArray containing the information
      */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();
