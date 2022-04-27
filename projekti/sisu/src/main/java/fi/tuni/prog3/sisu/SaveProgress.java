@@ -55,14 +55,13 @@ public class SaveProgress {
 
         Gson gson = new Gson();
         FileChooser fileChooser = new FileChooser();
-
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
 
         //Note: only files saved by the program should be opened
         File file = fileChooser.showOpenDialog(null);      
         
-        //TODO: check if json format is correct for class Student.
+        //! JSON formatting is not checked
         Student student = gson.fromJson(new FileReader(file), Student.class);
         return student;
  
