@@ -24,7 +24,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="866.0" prefWidth="1110.0" styleClass="anchor-pane">
                      <children>
                         <Text fill="WHITE" layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SISU Alpha v1.0" wrappingWidth="410.13671875" />
-                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Lopeta" textFill="WHITE" />
+                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" styleClass="red-button" stylesheets="@mainGuiStyleSheet.css" text="Lopeta" textFill="WHITE" />
                         <VBox layoutX="358.0" layoutY="342.0" prefHeight="117.0" prefWidth="236.0">
                            <children>
                               <Text fill="#ffffff91" strokeType="OUTSIDE" strokeWidth="0.0" text="Opiskelijanumero:" wrappingWidth="235.13671875">
@@ -63,8 +63,8 @@
                               </Text>
                            </children>
                         </VBox>
-                        <Button fx:id="loadButton" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: #5E7CE2; -fx-text-fill: #ffffff;" text="Lataa" />
-                        <Button fx:id="saveButton" layoutX="446.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#save" style="-fx-background-color: #5E7CE2; -fx-text-fill: #ffffff;" text="Tallenna" />
+                        <Button fx:id="loadButton" layoutX="527.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#load" prefHeight="25.0" prefWidth="62.0" style="-fx-text-fill: #ffffff;" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Lataa" />
+                        <Button fx:id="saveButton" layoutX="446.0" layoutY="475.0" mnemonicParsing="false" onMouseClicked="#save" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Tallenna" />
                      </children>
                   </AnchorPane>
             </content>
@@ -96,7 +96,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
-                        <Button fx:id="switchButton" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" style="-fx-background-color: #5E7CE2; -fx-text-fill: #ffffff;" text="Vaihda tutkintoa" />
+                        <Button fx:id="switchButton" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Vaihda tutkintoa" />
                         <Text fill="WHITE" layoutX="613.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yhteensä:">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -107,7 +107,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
-                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Lopeta" textFill="WHITE" />
+                        <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" styleClass="red-button" text="Lopeta" textFill="WHITE" />
                         <ScrollPane layoutX="606.0" layoutY="462.0" prefHeight="307.0" prefWidth="481.0">
                            <content>
                               <VBox fx:id="completedCourses" prefHeight="304.0" prefWidth="478.0" />
@@ -123,7 +123,7 @@
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#15151c" height="656.0" layoutX="223.0" layoutY="93.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="657.0" />
                         <WebView fx:id="motivation" layoutX="230.0" layoutY="100.0" prefHeight="642.0" prefWidth="642.0" />
-                        <Button layoutX="1013.0" layoutY="14.0" mnemonicParsing="false" onAction="#getNewMotivationalImage" onMouseClicked="#getNewMotivationalImage" style="-fx-background-color: #5E7CE2;" text="Uusi kuva!" textFill="WHITE" />
+                        <Button layoutX="1013.0" layoutY="14.0" mnemonicParsing="false" onAction="#getNewMotivationalImage" onMouseClicked="#getNewMotivationalImage" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Uusi kuva!" textFill="WHITE" />
                         <Text fill="#ffffff9e" layoutX="230.0" layoutY="763.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Via Inspirobot.me">
                            <font>
                               <Font name="System Bold" size="12.0" />

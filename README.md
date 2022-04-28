@@ -6,7 +6,14 @@ Projekti toteuttaa ohjelman, jolla voi tutkia SISU:sta löytyviä tutkinto-ohjel
 __Kuvaus:__
 Ohjelma mahdollistaa oman tutkinto-ohjelman seuraamisen. Ohjelmasta voi valita oman tutkinto-ohjelman, tallentaa käydyt kurssit ja tarkastella oman tutkinto-ohjelman sisältöä. Ohjelma kysyy aloittaessa perustietoja ja sitä voi käyttää graafisen käyttöliittymän kautta.
 
-__Tekijät ja yhteystiedot:__
+__Toiminnallisuus:__
+Ohjelma hakee käynnistyessään tiedot SISU:n API:sta. Käyttäjä pääsee käynnistyessä joko rekisteröimään uuden, tai lataamaan tallennetun asetustiedoston.
+Ohjelma tukee tutkinnon vaihtamista käyttöliittymän kautta, ja se osaa täydentää hakutermit automaattisesti. Ohjelma tukee opiskelijan tallentamista ja lataamista.
+Ohjelma näyttää valitun elementin tietoja niin kattavasti kuin se voi.
+Ohjelmassa on graafinen käyttöliittymä, joka on web3.0 tyylin inspiroima. Käyttöliittymä on toteutettu käyttämällä JavaFX FXML:ää, Scene Builderia ja CSS-tyylitiedostoja.
 
-Julius Juutilainen 292058 julius.juutilainen@tuni.fi
+Huomionarvoista on, että asetustiedostoissa voi olla vain yksi aktiivinen tutkinto. Tutkinnon vaihto nollaa edellisen tutkinnon suoritteet.
+
+__Tekijät ja yhteystiedot:__
+Julius Juutilainen 292058 julius.juutilainen@tuni.fi, julius.juutilainen@protonmail.com
 Joni Koskinen H291631 joni.e.koskinen@tuni.fi
