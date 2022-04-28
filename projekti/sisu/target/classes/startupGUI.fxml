@@ -7,7 +7,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #15151C;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fi.tuni.prog3.sisu.LoginController">
    <children>
-      <Text fill="WHITE" layoutX="144.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lataa opiskelijatiedosto tai rekisteröi uusi tiedosto">
+      <Text fill="#faf7e2" layoutX="144.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Lataa opiskelijatiedosto tai rekisteröi uusi tiedosto">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

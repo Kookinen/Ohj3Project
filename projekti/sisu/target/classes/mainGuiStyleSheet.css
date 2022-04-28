@@ -28,14 +28,14 @@
 
 .tab .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #FAF7E2;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #FAF7E2;
 }
 
 .anchor-pane {
@@ -43,7 +43,7 @@
 }
 
 .tree-cell{
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #FAF7E2;
     -fx-background-color: #1F1F2A;
     -fx-border-color: #313142;
     -fx-border-width: 1; 
@@ -56,13 +56,13 @@
 }
 
 .tree-cell > .tree-disclosure-node > .arrow{
-    -fx-background-color: #ffffff;
+    -fx-background-color: #FAF7E2;
 }
 
 
 .check-box .box {
 
-    -fx-background-color: white;
+    -fx-background-color: #FAF7E2;
     
 }
 
@@ -71,7 +71,7 @@
 }
 
 .check-box:selected .mark{
-    -fx-background-color: #ffffff;
+    -fx-background-color: #FAF7E2;
 }
 
 
@@ -80,9 +80,24 @@
     -fx-background-color: #15151C, #313142, #313142, #078CBB;
 }
 
+.combo-box .arrow {
+    -fx-background-color: #FAF7E2;
+}
+.combo-box .arrow-button:hover {
+    -fx-color: #4d4d69;
+}
+
+.combo-box .list-cell{
+    -fx-background-color:#FAF7E2;
+}
+
+.combo-box {
+    -fx-control-inner-background: #FAF7E2;
+}
+
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
-    -fx-background-color :#f2f2ff;
+    -fx-background-color :#FAF7E2;
     -fx-border-color :transparent;
     -fx-background-radius : 0.0em; /*Size from element size (Element = em)*/
     -fx-border-radius :2.0em;
@@ -112,7 +127,7 @@
 
 .blue-button {    
     -fx-background-color: #5E7CE2;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #FAF7E2;
 }
 
 .blue-button:hover {
@@ -121,15 +136,23 @@
 
 .red-button {
     -fx-background-color: #E4572E;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #FAF7E2;
 }
 
 .red-button:hover{
     -fx-background-color:  #872d12;
+    -fx-text-fill: #FAF7E2;
+}
+
+.text {
+    -fx-fill: #FAF7E2;
+}
+
+.text-field {
+    -fx-control-inner-background: #FAF7E2;
 }
 
 
 
 
-
-/** dark: #1F1F2A very dark: #15151C light: #313142 GREEN:  #00A676 RED: #E4572E BLUE: #5E7CE2*/
+/** dark: #1F1F2A very dark: #15151C light: #313142 GREEN:  #00A676 RED: #E4572E BLUE: #5E7CE2 Eggshell: #FFFFFA   */
