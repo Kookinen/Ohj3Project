@@ -11,13 +11,13 @@
    <children>
       <TextField fx:id="studentNumber" layoutX="226.0" layoutY="154.0" prefHeight="25.0" prefWidth="180.0" promptText="Opiskelijanumero" stylesheets="@mainGuiStyleSheet.css" />
       <TextField fx:id="name" layoutX="226.0" layoutY="117.0" prefHeight="25.0" prefWidth="180.0" promptText="Nimi" stylesheets="@mainGuiStyleSheet.css" />
-      <Label layoutX="183.0" layoutY="121.0" stylesheets="@mainGuiStyleSheet.css" text="Nimi:" textFill="WHITE">
+      <Label layoutX="183.0" layoutY="121.0" stylesheets="@mainGuiStyleSheet.css" text="Nimi:" textFill="#faf7e2">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Label>
-      <Label layoutX="111.0" layoutY="158.0" style="-fx-font-weight: bold;" stylesheets="@mainGuiStyleSheet.css" text="Opiskelijanumero:" textFill="WHITE" />
-      <ComboBox fx:id="degreePicker" editable="true" layoutX="225.0" layoutY="194.0" prefHeight="25.0" prefWidth="180.0" promptText="Hae tutkinnon nimellä" stylesheets="@mainGuiStyleSheet.css" />
-      <Label layoutX="123.0" layoutY="198.0" style="-fx-font-weight: bold;" stylesheets="@mainGuiStyleSheet.css" text="Valitse tutkinto:" textFill="WHITE" />
+      <Label layoutX="111.0" layoutY="158.0" style="-fx-font-weight: bold;" stylesheets="@mainGuiStyleSheet.css" text="Opiskelijanumero:" textFill="#faf7e2" />
+      <ComboBox fx:id="degreePicker" editable="true" layoutX="225.0" layoutY="194.0" prefHeight="25.0" prefWidth="180.0" promptText="Hae tutkinnon nimellä" stylesheets="@comboBoxStyleSheet.css" />
+      <Label layoutX="123.0" layoutY="198.0" style="-fx-font-weight: bold;" stylesheets="@mainGuiStyleSheet.css" text="Valitse tutkinto:" textFill="#faf7e2" />
       <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Rekisteröidy" textFill="WHITE" />
       <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" styleClass="red-button" stylesheets="@mainGuiStyleSheet.css" text="Sulje" textFill="WHITE" />
    </children>

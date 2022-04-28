@@ -23,7 +23,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="866.0" prefWidth="1110.0" styleClass="anchor-pane">
                      <children>
-                        <Text fill="WHITE" layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="SISU Alpha v1.0" wrappingWidth="410.13671875" />
+                        <Text fill="#faf7e2" layoutX="35.0" layoutY="802.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="SISU Alpha v1.0" wrappingWidth="410.13671875" />
                         <Button layoutX="1034.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" styleClass="red-button" stylesheets="@mainGuiStyleSheet.css" text="Lopeta" textFill="WHITE" />
                         <VBox layoutX="358.0" layoutY="342.0" prefHeight="117.0" prefWidth="236.0">
                            <children>
@@ -46,17 +46,17 @@
                         </VBox>
                         <VBox layoutX="558.0" layoutY="342.0" prefHeight="93.0" prefWidth="404.0">
                            <children>
-                              <Text fx:id="studentName" fill="#fffffa" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentName" fill="#faf7e2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="studentNumber" fill="#fffffa" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentNumber" fill="#faf7e2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Text>
-                              <Text fx:id="studentCredits" fill="#fffffa" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
+                              <Text fx:id="studentCredits" fill="#faf7e2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" wrappingWidth="403.13671875">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -75,15 +75,15 @@
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="344.0" layoutX="610.0" layoutY="52.0" stroke="BLACK" strokeType="INSIDE" width="477.0" />
                         <TreeView fx:id="mainView" layoutX="14.0" layoutY="54.0" onContextMenuRequested="#selectItem" onMouseClicked="#selectItem" prefHeight="732.0" prefWidth="572.0" stylesheets="@mainGuiStyleSheet.css" />
-                        <Label layoutX="14.0" layoutY="17.0" prefHeight="20.0" prefWidth="52.0" text="Haku:" textFill="WHITE">
+                        <Label layoutX="14.0" layoutY="17.0" prefHeight="20.0" prefWidth="52.0" text="Haku:" textFill="#faf7e2">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="521.0" promptText="Hae tutkinnon nimellä..." stylesheets="@mainGuiStyleSheet.css" />
+                        <ComboBox fx:id="searchBar" editable="true" layoutX="66.0" layoutY="14.0" prefHeight="25.0" prefWidth="521.0" promptText="Hae tutkinnon nimellä..." stylesheets="@comboBoxStyleSheet.css" />
                         <VBox fx:id="selectableCourseList" layoutX="613.0" layoutY="415.0" prefHeight="31.0" prefWidth="468.0">
                            <children>
-                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" stylesheets="@mainGuiStyleSheet.css" text="Olen suorittanut tämän kurssin">
+                              <CheckBox fx:id="courseCheckBox" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkBoxOnClick" prefHeight="24.0" prefWidth="207.0" stylesheets="@mainGuiStyleSheet.css" text="Olen suorittanut tämän kurssin" textFill="#faf7e2">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -91,18 +91,18 @@
                            </children>
                         </VBox>
                         <WebView fx:id="courseInfo" layoutX="612.0" layoutY="54.0" prefHeight="340.0" prefWidth="473.0" />
-                        <Text fill="#fffffa" layoutX="610.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Omat opinnot" wrappingWidth="164.13671875">
+                        <Text fill="#faf7e2" layoutX="610.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Omat opinnot" wrappingWidth="164.13671875">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
                         <Button fx:id="switchButton" layoutX="610.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#switchDegree" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Vaihda tutkintoa" />
-                        <Text fill="WHITE" layoutX="613.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Yhteensä:">
+                        <Text fill="#faf7e2" layoutX="613.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Yhteensä:">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Text>
-                        <Text fx:id="allCredits" fill="WHITE" layoutX="681.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                        <Text fx:id="allCredits" fill="#faf7e2" layoutX="681.0" layoutY="789.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

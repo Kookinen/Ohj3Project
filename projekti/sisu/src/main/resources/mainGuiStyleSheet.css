@@ -1,5 +1,6 @@
 /** file mainGuiStyleSheet.css*/
 
+
 .tab-pane .tab-header-area .tab-header-background {
     -fx-opacity: 1;
     -fx-background-color: #15151C;
@@ -74,27 +75,6 @@
     -fx-background-color: #FAF7E2;
 }
 
-
-.combo-box-base {
-    -fx-color: #313142;
-    -fx-background-color: #15151C, #313142, #313142, #078CBB;
-}
-
-.combo-box .arrow {
-    -fx-background-color: #FAF7E2;
-}
-.combo-box .arrow-button:hover {
-    -fx-color: #4d4d69;
-}
-
-.combo-box .list-cell{
-    -fx-background-color:#FAF7E2;
-}
-
-.combo-box {
-    -fx-control-inner-background: #FAF7E2;
-}
-
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color :#FAF7E2;
@@ -144,9 +124,6 @@
     -fx-text-fill: #FAF7E2;
 }
 
-.text {
-    -fx-fill: #FAF7E2;
-}
 
 .text-field {
     -fx-control-inner-background: #FAF7E2;
