@@ -3,7 +3,13 @@ package fi.tuni.prog3.sisu;
 
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxAssert;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationTest;
+import org.testfx.matcher.control.LabeledMatchers;
+
+import javafx.stage.Stage;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -11,11 +17,11 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class SisuTest extends ApplicationTest{
 
-    /*@Override
+    @Override
     public void start(Stage stage){
         System.out.println("Testiviesti");
         new sisu().start(stage);
-    }*/
+    }
     
     /**
      * Checks student objects get-methods
@@ -112,11 +118,11 @@ public class SisuTest extends ApplicationTest{
     }*/
     
     
-    /*@Test
+    @Test
     public void testButtons(FxRobot robot, Stage stage){
         FxAssert.verifyThat("#regButt", LabeledMatchers.hasText("Rekisteröi"));
         FxAssert.verifyThat("#loadButt", LabeledMatchers.hasText("Lataa"));
-    }*/
+    }
     
     
     

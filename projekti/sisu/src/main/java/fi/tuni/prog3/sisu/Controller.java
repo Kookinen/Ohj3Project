@@ -16,7 +16,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
@@ -35,7 +34,6 @@ public class Controller implements Initializable {
     private static Student student;
     private static Degree degree;
     private static String selectedItemName;
-    // private static HashMap<String, Boolean> coursesDone;
 
     @FXML
     private TreeView<String> mainView = new TreeView<>();

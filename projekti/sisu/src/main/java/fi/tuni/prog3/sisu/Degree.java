@@ -17,13 +17,13 @@ public class Degree {
     private String id;
     private String code;
     private String lang;
-    private String groupId; // DegreeModule löytyy tällä?
+    private String groupId;
     private String name;
     private int credits;
     private String outcomes;
     HashMap<String, DegreeModule> modules;
 
-    // private StringBuilder sb; //Rakentimeen? ei kai
+    
 
     /**
      * Constructor for a new Degree.
