@@ -34,7 +34,6 @@ public class Controller implements Initializable {
     private static Student student;
     private static Degree degree;
     private static String selectedItemName;
-    // private static HashMap<String, Boolean> coursesDone;
 
     @FXML
     private TreeView<String> mainView = new TreeView<>();

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
+<testsuite tests="4" failures="0" name="fi.tuni.prog3.sisu.SisuTest" time="9.55" errors="0" skipped="0">
+||||||| 02c27c0
+<<<<<<< HEAD
+<testsuite tests="5" failures="1" name="fi.tuni.prog3.sisu.SisuTest" time="10.065" errors="0" skipped="0">
+=======
+<testsuite tests="4" failures="0" name="fi.tuni.prog3.sisu.SisuTest" time="8.883" errors="0" skipped="0">
+>>>>>>> f241007bf10ce0d54bba7f224266396cb639b9fb
+=======
 <testsuite tests="5" failures="1" name="fi.tuni.prog3.sisu.SisuTest" time="9.658" errors="0" skipped="0">
+>>>>>>> c07b36229e9d6535d1f35b48ef4d93106d2c6f65
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="java.vm.version" value="17.0.1+12-LTS-39"/>
@@ -14,6 +24,7 @@
     <property name="user.script" value=""/>
     <property name="user.country" value="FI"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="test" value="fi.tuni.prog3.sisu.**.*Test"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="user.dir" value="C:\Users\Joni\projektikansio\projektikansio\projekti\sisu"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
@@ -44,7 +55,13 @@
     <property name="java.class.path" value="C:\Program Files\NetBeans-12.5\netbeans\java\maven\bin\..\boot\plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.arch.data.model" value="64"/>
+<<<<<<< HEAD
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=fi.tuni.prog3.sisu.**.*Test -Dmaven.ext.class.path=C:\Program Files\NetBeans-13\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 surefire:test"/>
+||||||| 02c27c0
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-13\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 test"/>
+=======
     <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans-12.5\netbeans\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 test"/>
+>>>>>>> c07b36229e9d6535d1f35b48ef4d93106d2c6f65
     <property name="java.home" value="C:\Program Files\Java\jdk-17.0.1"/>
     <property name="user.language" value="fi"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -60,8 +77,34 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
+<<<<<<< HEAD
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testDegree" time="8.382"/>
+||||||| 02c27c0
+<<<<<<< HEAD
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testModule" time="1.725"/>
+=======
   <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testDegree" time="8.424"/>
+>>>>>>> c07b36229e9d6535d1f35b48ef4d93106d2c6f65
   <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testStudent" time="0"/>
+<<<<<<< HEAD
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testModule" time="1.151"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testCourse" time="0.017"/>
+||||||| 02c27c0
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testDegree" time="8.296"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testCourse" time="0.017"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testController" time="0.027">
+    <failure message="Cannot invoke &quot;java.util.HashMap.put(Object, Object)&quot; because &quot;fi.tuni.prog3.sisu.Controller.allCourses&quot; is null" type="java.lang.NullPointerException">java.lang.NullPointerException: Cannot invoke &quot;java.util.HashMap.put(Object, Object)&quot; because &quot;fi.tuni.prog3.sisu.Controller.allCourses&quot; is null
+	at fi.tuni.prog3.sisu.Controller.addCourses(Controller.java:321)
+	at fi.tuni.prog3.sisu.SisuTest.testController(SisuTest.java:91)
+</failure>
+  </testcase>
+=======
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testStudent" time="0.006"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testCourse" time="0.366"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testDegree" time="7.438"/>
+  <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testModule" time="1.073"/>
+>>>>>>> f241007bf10ce0d54bba7f224266396cb639b9fb
+=======
   <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testCourse" time="0.018"/>
   <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testModule" time="1.192"/>
   <testcase classname="fi.tuni.prog3.sisu.SisuTest" name="fi.tuni.prog3.sisu.SisuTest.testController" time="0.024">
@@ -70,4 +113,5 @@
 	at fi.tuni.prog3.sisu.SisuTest.testController(SisuTest.java:104)
 </failure>
   </testcase>
+>>>>>>> c07b36229e9d6535d1f35b48ef4d93106d2c6f65
 </testsuite>

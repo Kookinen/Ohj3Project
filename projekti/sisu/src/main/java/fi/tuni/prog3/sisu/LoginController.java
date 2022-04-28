@@ -15,7 +15,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 
 /**
  * Controls the start and registration windows. Responsible for GUI
