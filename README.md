@@ -4,7 +4,7 @@ __Lyhyesti:__
 Projekti toteuttaa ohjelman, jolla voi tutkia SISU:sta löytyviä tutkinto-ohjelmia. 
 
 __Kuvaus:__
-Ohjelma mahdollistaa oman tutkinto-ohjelman seuraamisen. Ohjelmasta voi valita oman tutkinto-ohjelman, tallentaa käydyt kurssit ja tarkastella oman tutkinto-ohjelman sisältöä. Ohjelma kysyy aloittaessa perustietoja ja sitä voi käyttää graafisen käyttöliittymän kautta.
+Ohjelma mahdollistaa oman tutkinnon seuraamisen. Ohjelmasta voi valita oman tutkinnon, tallentaa käydyt kurssit ja tarkastella oman tutkinnon sisältöä. Ohjelma kysyy aloittaessa perustietoja ja sitä voi käyttää graafisen käyttöliittymän kautta.
 
 __Toiminnallisuus:__
 Ohjelma hakee käynnistyessään tiedot SISU:n API:sta. Käyttäjä pääsee käynnistyessä joko rekisteröimään uuden, tai lataamaan tallennetun asetustiedoston.
