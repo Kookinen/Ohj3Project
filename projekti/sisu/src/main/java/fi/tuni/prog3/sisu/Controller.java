@@ -16,7 +16,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
@@ -264,15 +263,21 @@ public class Controller implements Initializable {
     @FXML
     public void load() {
         System.out.println("Loading...");
-
-        // Refresh-metodi?
         try {
-            Controller.student = SaveProgress.loadStudent();
-            GUITools.setStudent(student);
-            studentNumber.setText(student.getNumber());
-            studentName.setText(student.getName());
-            TreeItem<String> rootItem = GUITools.initializeTree(degrees.get(student.getDegree()));
-            mainView.setRoot(rootItem);
+            Student studentPlaceholder = SaveProgress.loadStudent();
+            if(studentPlaceholder != null){
+                Controller.student = studentPlaceholder;
+                GUITools.setStudent(student);
+                studentNumber.setText(student.getNumber());
+                studentName.setText(student.getName());
+                TreeItem<String> rootItem = GUITools.initializeTree(degrees.get(student.getDegree()));
+                degree = degrees.get(student.getDegree());
+                courseInfo.getEngine().loadContent("");
+                searchBar.setValue("");
+                courseCheckBox.setVisible(false);
+                mainView.setRoot(rootItem);
+            }
+            
             
 
         } catch (FileNotFoundException e2) {
@@ -288,10 +293,14 @@ public class Controller implements Initializable {
      * Lastly refreshes the completed studies part of the UI view.
      * 
      */
+    // Precondition: Given degree must be found in the database
+    // Postcondition: sets up new degree in the tree and updates student
     @FXML
     public void switchDegree() {
         if (!searchBar.getEditor().getText().isEmpty() && degrees.containsKey(searchBar.getEditor().getText())) {
             Degree degree = degrees.get(searchBar.getEditor().getText());
+            this.degree = degree;
+            courseInfo.getEngine().loadContent("");
             String s = degree.getName();
             student.setDegree(s);
             TreeItem<String> rootItem = GUITools.initializeTree(degree);

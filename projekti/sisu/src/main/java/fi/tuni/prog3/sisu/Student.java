@@ -94,7 +94,6 @@ public class Student {
      * @param course course to be added.
      * @param status added courses status.
      */
-    // Tarvitaanko delete vai voiko opiskelija vain lisätä kursseja
     public void addCoursesDone(String course, Boolean status) {
         this.coursesDone.put(course, status);
 

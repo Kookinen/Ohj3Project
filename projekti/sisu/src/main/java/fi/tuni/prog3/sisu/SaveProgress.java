@@ -38,7 +38,9 @@ public class SaveProgress {
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(null);
-
+        while(file==null){
+            file = fileChooser.showSaveDialog(null);
+        }
         FileWriter writer = new FileWriter(file);
         gson.toJson(student, writer);
         writer.close();
@@ -62,7 +64,11 @@ public class SaveProgress {
         File file = fileChooser.showOpenDialog(null);      
         
         //! JSON formatting is not checked
-        Student student = gson.fromJson(new FileReader(file), Student.class);
+        Student student = null;
+        if(file != null){
+           student = gson.fromJson(new FileReader(file), Student.class); 
+        }
+        
         return student;
  
     }

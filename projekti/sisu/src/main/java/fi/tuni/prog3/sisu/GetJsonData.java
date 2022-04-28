@@ -37,14 +37,11 @@ public class GetJsonData {
      * @return StringBuilder Returns the fetched jsondata in a stringbuilder
      * @throws MalformedURLException throws exception when url is not correct form
      * @throws IOException throws exception when data is not correct form
-     */
+     */ 
     public StringBuilder getJsonDataFromURL() throws MalformedURLException, IOException {
         URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"
                 + "-root-id&moduleType=DegreeProgramme&limit=1000");
-
-        // Vaikuttaa siltä, että nämä kaksi palauttavat toisiaan miltein vastaavat
-        // tietovarastot. No jaa.
         URL urlTwo = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/" + moduleGroupId));
         URL urlThree = new URL(String.format("https://sis-tuni.funidata.fi/kori/api/modules/by-group-id?groupId="
                 + moduleGroupId + "&universityId=tuni-university-root-id"));

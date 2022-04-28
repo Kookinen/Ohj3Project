@@ -59,13 +59,16 @@ public class LoginController implements Initializable {
     public void loadStudentData() {
 
         try {
-            Student student = SaveProgress.loadStudent();
-
-            Controller.setStudent(student);
-            GUITools.setStudent(student);
-            Parent parent = loadFXMLsettings("/mainGUI.fxml");
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
+            Student studentPlaceholder = SaveProgress.loadStudent();
+            if(studentPlaceholder != null){
+                Student student = studentPlaceholder;
+                Controller.setStudent(student);
+                GUITools.setStudent(student);
+                Parent parent = loadFXMLsettings("/mainGUI.fxml");
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+            }
+            
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -97,13 +100,17 @@ public class LoginController implements Initializable {
      * Registers new student and opens the main window.
      * Initialized new Student object and passes it on to main Controller.
      */
+    // Precondition: Given name can't be empty
+    // Precondition: Given number can't be empty
+    // Precondition: Given degree must be found in the database
+    // Postcondition: sets up the program main view
     @FXML
     void registerStudent() {
 
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
-        if(newDegree != null){
+        if(newDegree != null && !"".equals(newStudentNumber) && !"".equals(newName)){
             Student student = new Student(newName, newStudentNumber);
             student.setDegree(newDegree);
 
