@@ -291,7 +291,7 @@ public class Controller implements Initializable {
     public void switchDegree() {
         if (!searchBar.getEditor().getText().isEmpty() && degrees.containsKey(searchBar.getEditor().getText())) {
             Degree degree = degrees.get(searchBar.getEditor().getText());
-            this.degree = degree;
+            Controller.degree = degree;
             courseInfo.getEngine().loadContent("");
             String s = degree.getName();
             student.setDegree(s);
