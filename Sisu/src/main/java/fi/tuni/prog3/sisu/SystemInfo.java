@@ -1,6 +1,7 @@
 package fi.tuni.prog3.sisu;
+
 /**
- * Is used to return current java and javafx versions. 
+ * Is used to return current java and javafx versions.
  */
 public class SystemInfo {
 

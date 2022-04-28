@@ -28,9 +28,9 @@ import javafx.scene.input.KeyEvent;
  * @author Julius Juutilainen
  */
 public class GUITools {
-    
+
     private static Student student;
-    
+
     public GUITools() {
     }
 
@@ -98,12 +98,12 @@ public class GUITools {
         printTree(deg.getModules(), rootItem);
         return rootItem;
     }
-    
+
     /**
      * Prints the treeview containing courses, modules and credits.
      * 
      * @param modules HashMap contains all the modules under the degree/module
-     * @param root TreeItem that functions as the base for the tree
+     * @param root    TreeItem that functions as the base for the tree
      */
     private static void printTree(HashMap<String, DegreeModule> modules, TreeItem<String> root) {
         TreeItem<String> moduleItem;
@@ -121,11 +121,11 @@ public class GUITools {
             root.getChildren().add(moduleItem);
             HashMap<String, Course> cors = m.getCourses();
             // Go through courses under the module ( if there are any )
-            for (Course c : cors.values()){
+            for (Course c : cors.values()) {
                 Controller.addCourses(c);
                 courseItem = new TreeItem<>(c.getName() + " " + c.getTargetCredits() + "op");
                 moduleItem.getChildren().add(courseItem);
-                if(student.getCoursesDone().containsKey(c.getName()) && student.getCoursesDone().get(c.getName())){
+                if (student.getCoursesDone().containsKey(c.getName()) && student.getCoursesDone().get(c.getName())) {
                     Controller.addCreditsToTree(courseItem, c.getTargetCredits(), true);
                 }
             }
@@ -139,7 +139,8 @@ public class GUITools {
     /**
      * Sets up the degree search box. When key is typed, automatically searches
      * degrees that match typed chars.
-     * @param cb ComboBox that is being set up
+     * 
+     * @param cb      ComboBox that is being set up
      * @param degrees HashMap containing all the degrees
      */
     public static void setUpDegreeBox(ComboBox<String> cb, HashMap<String, Degree> degrees) {
@@ -167,23 +168,27 @@ public class GUITools {
             }
         });
     }
+
     /**
      * Splits given string by space
+     * 
      * @param string String to be split
      * @return returns name as an array
      */
-    public static String[] splitString(String string){
+    public static String[] splitString(String string) {
         String[] splitValue = string.split(" ");
         int length = splitValue.length;
         String[] name = Arrays.copyOf(splitValue, length - 1);
         return name;
     }
+
     /**
      * Combines given array to string with spaces
+     * 
      * @param nameArray Array to be combined
      * @return returns stringbuilder element with the name
      */
-    public static StringBuilder combineString(String[] nameArray){
+    public static StringBuilder combineString(String[] nameArray) {
         StringBuilder sb = new StringBuilder();
         for (String s : nameArray) {
             sb.append(s).append(" ");
@@ -191,9 +196,11 @@ public class GUITools {
         sb.setLength(sb.length() - 1);
         return sb;
     }
+
     /**
      * Adds the student object to GUITools
-     * @param student Student object to be added 
+     * 
+     * @param student Student object to be added
      */
     public static void setStudent(Student student) {
         GUITools.student = student;

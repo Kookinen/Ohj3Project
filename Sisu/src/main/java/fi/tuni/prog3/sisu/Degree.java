@@ -23,8 +23,6 @@ public class Degree {
     private String outcomes;
     HashMap<String, DegreeModule> modules;
 
-    
-
     /**
      * Constructor for a new Degree.
      * 
@@ -43,7 +41,6 @@ public class Degree {
         this.name = name;
         this.credits = credits;
         modules = new HashMap<>();
-        
 
     }
 
@@ -105,10 +102,10 @@ public class Degree {
     }
 
     /**
-     * Extracts information from the json text by iterating through it 
+     * Extracts information from the json text by iterating through it
      * Extracts also modules and courses under it and calls compositeRule to
      * create them
-     */ 
+     */
     public void decodeJson() {
         try {
             GetJsonData getJson_Module = new GetJsonData(2, id);
@@ -141,11 +138,12 @@ public class Degree {
 
     /**
      * Extracts rules from jsonArray and creates module/course objects
+     * 
      * @param arr, JsonArray containing the rules
      */
     private void compositeRule(JsonArray arr) {
-        Iterator<JsonElement> it = arr.iterator();     
-        while(it.hasNext()){
+        Iterator<JsonElement> it = arr.iterator();
+        while (it.hasNext()) {
 
             JsonObject jObject = it.next().getAsJsonObject();
             String type = jObject.get("type").getAsString();

@@ -11,7 +11,8 @@ import java.util.Iterator;
 
 /**
  * 
- * DegreeModule represents a module in the Sisu API. It is used to store and fetch
+ * DegreeModule represents a module in the Sisu API. It is used to store and
+ * fetch
  * data.
  * 
  */
@@ -57,23 +58,25 @@ public class DegreeModule {
     public String getOutcomes() {
         return outcomes;
     }
+
     /**
-     * @return degreeModules content description 
+     * @return degreeModules content description
      */
-    public String getContentDescription(){
+    public String getContentDescription() {
         return contentDescription;
     }
 
     /**
-     * @return HashMap<String, DegreeModule> Returns hashmap containing 
-     * child modules.
+     * @return HashMap<String, DegreeModule> Returns hashmap containing
+     *         child modules.
      */
     public HashMap<String, DegreeModule> getModules() {
         return modules;
     }
 
     /**
-     * @return this degreeModules HashMap<String, Course> containing this modules courses.
+     * @return this degreeModules HashMap<String, Course> containing this modules
+     *         courses.
      */
     public HashMap<String, Course> getCourses() {
         return courses;
@@ -87,7 +90,7 @@ public class DegreeModule {
     }
 
     /**
-     * Extracts information from the json text by iterating through it 
+     * Extracts information from the json text by iterating through it
      * Extracts also modules and courses under it and calls compositeRule to
      * create them
      */
@@ -107,11 +110,10 @@ public class DegreeModule {
 
             if (obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null) {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
-            }
-            else {
+            } else {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
-            
+
             this.type = obj.get("type").getAsString();
 
             switch (obj.getAsJsonPrimitive("type").getAsString()) {
@@ -130,12 +132,13 @@ public class DegreeModule {
                     }
                     if (!obj.get("contentDescription").isJsonNull()) {
                         if (obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("fi") == null) {
-                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("en").getAsString();
+                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("en")
+                                    .getAsString();
                         } else {
-                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("fi").getAsString();
+                            this.contentDescription = obj.getAsJsonObject("contentDescription").getAsJsonPrimitive("fi")
+                                    .getAsString();
                         }
                     }
-                    
 
                     break;
             }
@@ -155,7 +158,8 @@ public class DegreeModule {
     }
 
     /**
-     * Extracts  rules from jsonArray and creates module/course objects
+     * Extracts rules from jsonArray and creates module/course objects
+     * 
      * @param arr JsonArray containing the rules
      */
     private void compositeRule(JsonArray arr) {

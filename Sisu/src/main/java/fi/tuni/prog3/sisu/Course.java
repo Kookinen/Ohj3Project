@@ -58,18 +58,19 @@ public class Course {
      * @return This Courses target credits (minCredits).
      */
     public int getTargetCredits() {
-        if(maxCredits != 0){
+        if (maxCredits != 0) {
             return maxCredits;
         }
         return minCredits;
     }
+
     /**
      * @return This Courses outcomes.
      */
-    public String getOutcomes(){
+    public String getOutcomes() {
         return outcomes;
     }
-        
+
     /**
      * @return This Courses description/info.
      */

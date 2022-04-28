@@ -5,4 +5,3 @@ package fi.tuni.prog3.sisu;
  * @author Joni Koskinen
  * @author Julius Juutilainen
  */
-

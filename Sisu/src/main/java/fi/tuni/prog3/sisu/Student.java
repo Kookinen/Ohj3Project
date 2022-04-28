@@ -64,7 +64,7 @@ public class Student {
         return credits;
     }
 
-    public String getCreditsAsString(){
+    public String getCreditsAsString() {
         return Integer.toString(this.credits);
     }
 

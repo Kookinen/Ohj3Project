@@ -11,11 +11,11 @@ import com.google.gson.Gson;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-
 /**
  * Is used to save and load Student-objects.
  * 
  * <@author Joni Koskinen
+ * 
  * @author Julius Juutilainen
  */
 public class SaveProgress {
@@ -38,7 +38,7 @@ public class SaveProgress {
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
         File file = fileChooser.showSaveDialog(null);
-        while(file==null){
+        while (file == null) {
             file = fileChooser.showSaveDialog(null);
         }
         FileWriter writer = new FileWriter(file);
@@ -60,16 +60,16 @@ public class SaveProgress {
         fileChooser.getExtensionFilters().addAll(
                 new ExtensionFilter("JSON Files", "*.json"));
 
-        //Note: only files saved by the program should be opened
-        File file = fileChooser.showOpenDialog(null);      
-        
-        //! JSON formatting is not checked
+        // Note: only files saved by the program should be opened
+        File file = fileChooser.showOpenDialog(null);
+
+        // ! JSON formatting is not checked
         Student student = null;
-        if(file != null){
-           student = gson.fromJson(new FileReader(file), Student.class); 
+        if (file != null) {
+            student = gson.fromJson(new FileReader(file), Student.class);
         }
-        
+
         return student;
- 
+
     }
 }

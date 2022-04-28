@@ -12,9 +12,11 @@
 .combo-box .arrow {
     -fx-background-color: #FAF7E2;
 }
+
 .combo-box .arrow-button:hover {
     -fx-color: #4d4d69;
 }
+
 /* Arrow button goes grey when selected*/
 
 /**.combo-box .list-cell{

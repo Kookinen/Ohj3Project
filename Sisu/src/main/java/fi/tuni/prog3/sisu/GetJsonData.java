@@ -17,12 +17,14 @@ public class GetJsonData {
 
     private int urlId;
     private String moduleGroupId;
+
     /**
      * Constructor for GetJsonData. Saves urlId and moduleGroupId
-     * @param urlId Id used to select correct url format
+     * 
+     * @param urlId         Id used to select correct url format
      * @param moduleGroupId Id used to select correct Degree
      */
-    public GetJsonData(int urlId, String moduleGroupId){
+    public GetJsonData(int urlId, String moduleGroupId) {
         if (urlId > 4 || urlId < 1) {
             throw new IllegalArgumentException("Illegal urlID " + urlId + "! \n");
         } else {
@@ -36,8 +38,8 @@ public class GetJsonData {
      * 
      * @return StringBuilder Returns the fetched jsondata in a stringbuilder
      * @throws MalformedURLException throws exception when url is not correct form
-     * @throws IOException throws exception when data is not correct form
-     */ 
+     * @throws IOException           throws exception when data is not correct form
+     */
     public StringBuilder getJsonDataFromURL() throws MalformedURLException, IOException {
         URL urlOne = new URL("https://sis-tuni.funidata.fi/kori/api/module-search?"
                 + "curriculumPeriodId=uta-lvv-2021&universityId=tuni-university"

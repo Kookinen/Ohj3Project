@@ -64,7 +64,6 @@ public class Controller implements Initializable {
     @FXML
     private WebView motivation = new WebView();
 
-
     /**
      * Initializes the UI and performs necessary actions.
      * 
@@ -93,7 +92,7 @@ public class Controller implements Initializable {
         refreshStudiesCompleted();
 
         courseInfo.getEngine().setUserStyleSheetLocation(getClass().getResource("/webViewStyleSheet.css").toString());
-        
+
     }
 
     /**
@@ -105,13 +104,13 @@ public class Controller implements Initializable {
     @FXML
     public void selectItem() {
         TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-        
+
         if (item != null) {
             String courseHeader = item.getValue();
             String[] splitString = courseHeader.split(" ");
             String[] courseName = splitString;
-            if(splitString.length > 1 && courseHeader.endsWith("op")){
-                courseName = Arrays.copyOf(splitString, splitString.length-1);
+            if (splitString.length > 1 && courseHeader.endsWith("op")) {
+                courseName = Arrays.copyOf(splitString, splitString.length - 1);
             }
 
             StringBuilder sb = new StringBuilder();
@@ -121,40 +120,40 @@ public class Controller implements Initializable {
             }
             sb.setLength(sb.length() - 1);
             String name = sb.toString();
-            
+
             setSelectedElement(name);
 
             Course c = searchCourse(name);
             StringBuilder infoData = new StringBuilder();
             courseInfo.getEngine().loadContent("");
-            
+
             if (c != null) {
                 infoData.append("<p><h2>").append(c.getName()).append("</h2></p>");
-                if (c.getContent() != null){
-                    infoData.append("<p><h3>Sisältö: </h3></p>").append(c.getContent());   
+                if (c.getContent() != null) {
+                    infoData.append("<p><h3>Sisältö: </h3></p>").append(c.getContent());
                 }
                 if (c.getOutcomes() != null) {
-                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(c.getOutcomes());  
+                    infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(c.getOutcomes());
                 }
                 if (c.getAdditional() != null) {
                     infoData.append("<p><h3>Lisätiedot: </h3></p>").append(c.getAdditional());
                 }
             }
-            
+
             DegreeModule m = searchModule(name);
             if (m != null) {
                 infoData.append("<p><h2>").append(m.getName()).append("</h2></p>");
-                if(m.getContentDescription() != null){
+                if (m.getContentDescription() != null) {
                     infoData.append("<p><h3>Sisältö: </h3></p>").append(m.getContentDescription());
                 }
-                if(m.getOutcomes() != null){
+                if (m.getOutcomes() != null) {
                     infoData.append("<p><h3>Osaamistavoitteet: </h3></p>").append(m.getOutcomes());
                 }
             }
-            
+
             if (name.equals(degree.getName())) {
                 infoData.append("<p><h2>").append(degree.getName()).append("</h2></p>");
-                if(degree.getOutcomes() != null){
+                if (degree.getOutcomes() != null) {
                     infoData.append(degree.getOutcomes());
                 }
             }
@@ -182,30 +181,27 @@ public class Controller implements Initializable {
      * Lastly refreshes the completed studies part of the UI view.
      */
     @FXML
-    public void checkBoxOnClick(){
-        
-        if(Controller.selectedItemName != null){
-            
-            
+    public void checkBoxOnClick() {
 
-           student.addCoursesDone(Controller.selectedItemName,courseCheckBox.isSelected());
+        if (Controller.selectedItemName != null) {
+
+            student.addCoursesDone(Controller.selectedItemName, courseCheckBox.isSelected());
 
             TreeItem<String> item = mainView.getSelectionModel().getSelectedItem();
-            if(item != null){
+            if (item != null) {
                 Course c = searchCourse(GUITools.combineString(GUITools.splitString(item.getValue())).toString());
 
-                if(courseCheckBox.isSelected()){
+                if (courseCheckBox.isSelected()) {
                     student.addCredits(c.getTargetCredits());
                     addCreditsToTree(item, c.getTargetCredits(), true);
-                }
-                else{
+                } else {
                     student.subtractCredits(c.getTargetCredits());
                     addCreditsToTree(item, c.getTargetCredits(), false);
                 }
-                //? tarpeellinen
+                // ? tarpeellinen
                 courseCheckBox.setSelected(student.getCoursesDone().get(Controller.selectedItemName));
                 refreshStudiesCompleted();
-            }    
+            }
         }
     }
 
@@ -218,10 +214,9 @@ public class Controller implements Initializable {
     public void refreshStudiesCompleted() {
         completedCourses.getChildren().clear();
 
-
-        for(String key : student.getCoursesDone().keySet()){
-            if(student.getCoursesDone().get(key)){
-                //Muutos maxCreditistä getTargetCreditsiin
+        for (String key : student.getCoursesDone().keySet()) {
+            if (student.getCoursesDone().get(key)) {
+                // Muutos maxCreditistä getTargetCreditsiin
                 String credits = String.valueOf(allCourses.get(key).getTargetCredits());
 
                 StringBuilder sb = new StringBuilder();
@@ -264,7 +259,7 @@ public class Controller implements Initializable {
         System.out.println("Loading...");
         try {
             Student studentPlaceholder = SaveProgress.loadStudent();
-            if(studentPlaceholder != null){
+            if (studentPlaceholder != null) {
                 Controller.student = studentPlaceholder;
                 GUITools.setStudent(student);
                 studentNumber.setText(student.getNumber());
@@ -276,8 +271,6 @@ public class Controller implements Initializable {
                 courseCheckBox.setVisible(false);
                 mainView.setRoot(rootItem);
             }
-            
-            
 
         } catch (FileNotFoundException e2) {
             System.out.println("File not found :(");
@@ -361,23 +354,25 @@ public class Controller implements Initializable {
     public static void addModules(DegreeModule m) {
         allModules.put(m.getName(), m);
     }
-    
+
     /**
      * Getter method for unit tests
+     * 
      * @return all courses under the degree
      */
-    public static HashMap<String, Course> getCourses(){
+    public static HashMap<String, Course> getCourses() {
         return allCourses;
     }
-    
+
     /**
      * Getter method for unit tests
+     * 
      * @return all modules under the degree
      */
-    public static HashMap<String, DegreeModule> getModules(){
+    public static HashMap<String, DegreeModule> getModules() {
         return allModules;
     }
-    
+
     /**
      * Clears the allCourses and allModules HashMaps.
      */
@@ -405,7 +400,8 @@ public class Controller implements Initializable {
 
     /**
      * @param name A String containing the search key.
-     * @return DegreeModule The DegreeModule object corresponding with the search key.
+     * @return DegreeModule The DegreeModule object corresponding with the search
+     *         key.
      */
     public static DegreeModule searchModule(String name) {
         if (allModules.containsKey(name)) {
@@ -425,14 +421,17 @@ public class Controller implements Initializable {
     }
 
     /**
-     * Shows credits in the TreeView in the format of "n/m op" where m is the max amount of credits
+     * Shows credits in the TreeView in the format of "n/m op" where m is the max
+     * amount of credits
      * and n is the current amount of credits earned by the student.
      * 
-     * This method is unique to Controller and is not made to be used in other contexts.
+     * This method is unique to Controller and is not made to be used in other
+     * contexts.
      * 
-     * @param item TreeItem to add the functionality to
-     * @param credits int, courses credits
-     * @param coursePassed boolean, determines whether the user has completed the course
+     * @param item         TreeItem to add the functionality to
+     * @param credits      int, courses credits
+     * @param coursePassed boolean, determines whether the user has completed the
+     *                     course
      */
     public static void addCreditsToTree(TreeItem<String> item, int credits, boolean coursePassed) {
         if (item.getParent().getParent() != null) {
@@ -450,18 +449,16 @@ public class Controller implements Initializable {
                 if (coursePassed) {
                     sb.append(" ").append(credits + prevPointsNumb).append("op/")
                             .append(last.split("/")[1]);
-                    item.getParent().setValue(sb.toString());  
-                }
-                else{
+                    item.getParent().setValue(sb.toString());
+                } else {
                     DegreeModule m = searchModule(sb.toString());
                     sb.append(" ").append(prevPointsNumb - credits).append("op/")
                             .append(m.getTargetCredits()).append("op");
                     item.getParent().setValue(sb.toString());
-                    
+
                 }
             }
         }
     }
-
 
 }

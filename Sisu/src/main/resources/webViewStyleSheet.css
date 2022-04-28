@@ -2,12 +2,13 @@
 /** dark: 1F1F2A very dark: 15151C light: 313142 */
 
 body {
-	font-family: 'Arial', sans-serif; /*Most compatible? Maybe? */
+	font-family: 'Arial', sans-serif;
+	/*Most compatible? Maybe? */
 	line-height: 1.75em;
 	font-size: 16px;
 	background-color: #313142;
 	color: #FAF7E2;
-    overflow-x: hidden;
+	overflow-x: hidden;
 
 	/*border-style: solid;
 	border-color: #ffffff;
@@ -19,15 +20,17 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 16px;
+	width: 16px;
 }
-::-webkit-scrollbar-track  {
-    background-color: #FAF7E2;
+
+::-webkit-scrollbar-track {
+	background-color: #FAF7E2;
 }
+
 ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    box-shadow: inset 0 0 4px rgba(0,0,0,0.5); 
-    background: #303041;
+	border-radius: 4px;
+	box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+	background: #303041;
 }
 
 p {
