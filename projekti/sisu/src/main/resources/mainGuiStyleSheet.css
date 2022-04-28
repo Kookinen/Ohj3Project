@@ -110,5 +110,26 @@
     -fx-background-color: transparent;
 }
 
+.blue-button {    
+    -fx-background-color: #5E7CE2;
+    -fx-text-fill: #fff;
+}
+
+.blue-button:hover {
+    -fx-background-color: #172f7e;
+}
+
+.red-button {
+    -fx-background-color: #E4572E;
+    -fx-text-fill: #fff;
+}
+
+.red-button:hover{
+    -fx-background-color:  #872d12;
+}
+
+
+
+
 
 /** dark: #1F1F2A very dark: #15151C light: #313142 GREEN:  #00A676 RED: #E4572E BLUE: #5E7CE2*/

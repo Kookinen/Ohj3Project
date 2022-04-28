@@ -18,7 +18,7 @@
       <Label layoutX="111.0" layoutY="158.0" style="-fx-font-weight: bold;" text="Opiskelijanumero:" textFill="WHITE" />
       <ComboBox fx:id="degreePicker" editable="true" layoutX="225.0" layoutY="194.0" prefHeight="25.0" prefWidth="180.0" promptText="Hae tutkinnon nimellä" />
       <Label layoutX="123.0" layoutY="198.0" style="-fx-font-weight: bold;" text="Valitse tutkinto:" textFill="WHITE" />
-      <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" style="-fx-background-color: #5E7CE2;" text="Rekisteröidy" textFill="WHITE" />
-      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" style="-fx-background-color: #E4572E;" text="Sulje" textFill="WHITE" />
+      <Button layoutX="225.0" layoutY="229.0" mnemonicParsing="false" onMouseClicked="#registerStudent" prefHeight="25.0" prefWidth="180.0" styleClass="blue-button" stylesheets="@mainGuiStyleSheet.css" text="Rekisteröidy" textFill="WHITE" />
+      <Button layoutX="544.0" layoutY="14.0" mnemonicParsing="false" onAction="#closeProgram" onMouseClicked="#closeProgram" styleClass="red-button" stylesheets="@mainGuiStyleSheet.css" text="Sulje" textFill="WHITE" />
    </children>
 </AnchorPane>
