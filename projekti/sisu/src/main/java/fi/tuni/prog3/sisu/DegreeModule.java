@@ -22,8 +22,6 @@ public class DegreeModule {
     String outcomes;
     String type;
     String contentDescription;
-    // String curriculumPeriodIds;
-    // String validityPeriod;
     HashMap<String, DegreeModule> modules;
     HashMap<String, Course> courses;
 
@@ -110,10 +108,10 @@ public class DegreeModule {
             if (obj.getAsJsonObject("name").getAsJsonPrimitive("fi") == null) {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("en").getAsString();
             }
-
             else {
                 this.name = obj.getAsJsonObject("name").getAsJsonPrimitive("fi").getAsString();
             }
+            
             this.type = obj.get("type").getAsString();
 
             switch (obj.getAsJsonPrimitive("type").getAsString()) {
@@ -123,7 +121,6 @@ public class DegreeModule {
                     if (!obj.get("targetCredits").isJsonNull()) {
                         this.targetCredits = obj.getAsJsonObject("targetCredits").getAsJsonPrimitive("min").getAsInt();
                     }
-
                     if (!obj.get("outcomes").isJsonNull()) {
                         if (obj.getAsJsonObject("outcomes").getAsJsonPrimitive("fi") == null) {
                             this.outcomes = obj.getAsJsonObject("outcomes").getAsJsonPrimitive("en").getAsString();
@@ -158,9 +155,8 @@ public class DegreeModule {
     }
 
     /**
-     * Extracts module/course information from jsonArray and creates 
-     * module/course objects
-     * @param arr JsonArray containing the information
+     * Extracts  rules from jsonArray and creates module/course objects
+     * @param arr JsonArray containing the rules
      */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();

@@ -332,7 +332,7 @@ public class Controller implements Initializable {
     }
 
     /**
-     * @param element String element to be set onto the Controller.
+     * @param itemName String element to be set onto the Controller.
      */
     public static void setSelectedElement(String itemName) {
         Controller.selectedItemName = itemName;
@@ -440,9 +440,7 @@ public class Controller implements Initializable {
                 if (coursePassed) {
                     sb.append(" ").append(credits + prevPointsNumb).append("op/")
                             .append(last.split("/")[1]);
-                    item.getParent().setValue(sb.toString());
-                    
-                    
+                    item.getParent().setValue(sb.toString());  
                 }
                 else{
                     DegreeModule m = searchModule(sb.toString());
