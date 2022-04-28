@@ -140,9 +140,8 @@ public class Degree {
     }
 
     /**
-     * TODO:Dokumentoi
-     * 
-     * @param arr
+     * Extracts rules from jsonArray and creates module/course objects
+     * @param arr, JsonArray containing the rules
      */
     private void compositeRule(JsonArray arr) {
         Iterator<JsonElement> it = arr.iterator();     
