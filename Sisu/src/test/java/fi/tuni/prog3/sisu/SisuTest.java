@@ -118,6 +118,10 @@ public class SisuTest extends ApplicationTest{
     }*/
     
     
+    /**
+     * Tests Login UI buttons
+     * ! Does not work
+     */
     @Test
     public void testButtons(FxRobot robot, Stage stage){
         FxAssert.verifyThat("#regButt", LabeledMatchers.hasText("Rekisteröi"));

@@ -37,7 +37,7 @@ public class sisu extends Application {
 
         try {
 
-            // Haetaan data API:sta
+            // Get the data from the API
             GetJsonData getJson_Degree = new GetJsonData(1, "");
             StringBuilder sb = getJson_Degree.getJsonDataFromURL();
             decodeJson(sb);
@@ -47,7 +47,6 @@ public class sisu extends Application {
             e2.printStackTrace();
         }
 
-        // Ikoni ikkunaan
         try {
             Image icon = GUITools.getImage("sisuTrans.PNG");
             stage.getIcons().add(icon);
@@ -74,9 +73,6 @@ public class sisu extends Application {
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
-
-        // Parent mainWindow = loadFXMLsettings("/mainGUI.fxml");
-        // Parent registerWindow = loadFXMLsettings("/registerGUI.fxml");
 
         stage.setTitle("Sisu");
         stage.show();

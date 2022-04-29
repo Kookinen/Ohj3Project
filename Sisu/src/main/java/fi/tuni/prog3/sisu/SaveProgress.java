@@ -14,7 +14,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 /**
  * Is used to save and load Student-objects.
  * 
- * <@author Joni Koskinen
+ * @author Joni Koskinen
  * 
  * @author Julius Juutilainen
  */
