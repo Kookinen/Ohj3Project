@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
@@ -30,11 +31,13 @@ public class LoginController implements Initializable {
     private Stage stage = new Stage();
 
     @FXML
-    TextField name = new TextField();
+    private TextField name = new TextField();
     @FXML
-    TextField studentNumber = new TextField();
+    private TextField studentNumber = new TextField();
     @FXML
     private ComboBox<String> degreePicker = new ComboBox<>();
+    @FXML
+    private Text errorMessage = new Text();
 
     /**
      * Initializes the UI and performs necessary actions.
@@ -45,7 +48,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         GUITools.setUpDegreeBox(degreePicker, degrees);
-
+        errorMessage.setVisible(false);
     }
 
     /**
@@ -106,21 +109,34 @@ public class LoginController implements Initializable {
     @FXML
     void registerStudent() {
 
+        errorMessage.setVisible(false);
         String newName = name.getText();
         String newStudentNumber = studentNumber.getText();
         String newDegree = getPickedDegree();
         if (newDegree != null && !"".equals(newStudentNumber) && !"".equals(newName)) {
-            Student student = new Student(newName, newStudentNumber);
-            student.setDegree(newDegree);
+            
+            if(newStudentNumber.length() >= 15){
+                errorMessage.setText("Liian pitkä opiskelijanumero!");
+                errorMessage.setVisible(true);
+            }
+            else if(newName.length() >= 15){
+                errorMessage.setText("Liian pitkä nimi!");
+                errorMessage.setVisible(true);
+            }
+            else{
+                Student student = new Student(newName, newStudentNumber);
+                student.setDegree(newDegree);
 
-            Controller.setStudent(student);
-            GUITools.setStudent(student);
+                Controller.setStudent(student);
+                GUITools.setStudent(student);
 
-            Parent parent = loadFXMLsettings("/mainGUI.fxml");
-            Scene scene = new Scene(parent);
+                Parent parent = loadFXMLsettings("/mainGUI.fxml");
+                Scene scene = new Scene(parent);
 
-            stage.setScene(scene);
-            stage.show();
+                stage.setScene(scene);
+                stage.show();
+            }
+            
         }
     }
 
